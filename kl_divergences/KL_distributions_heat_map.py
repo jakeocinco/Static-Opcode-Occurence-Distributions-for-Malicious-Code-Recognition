@@ -87,6 +87,7 @@ def distributions_heat_map(
     distribution,
     bins,
     sample_size,
+    op_sample
 ):
 
     differences = get_difference_matrix(
@@ -97,7 +98,7 @@ def distributions_heat_map(
     )['differences']
 
     plt.imshow(differences, cmap='hot', interpolation=None)
-    plt.title(f"{distribution}, bins: {bins}, samples: {sample_size}")
+    plt.title(f"{op_sample}, {distribution}, bins: {bins}, samples: {sample_size}")
     plt.show()
 
 
@@ -136,16 +137,18 @@ def distribution_efficacy(
 
 
 if __name__ == "__main__":
-    op_code_samples = ['ratio_a75']
+    METHOD = "share"
+    op_code_samples = ['benign', 'infected', 'union', 'mov']
     for op_code_sample in op_code_samples:
-        for distributions in ['linear', 'log10']: #, 'log100', 'threshold']:
+        for distributions in ['linear']: #log10, 'log100', 'threshold']:
             for bins in [25, 100]:
                 distributions_heat_map(
                     op_code_distribution_path=f"/Volumes/MALWARE/pe_machine_learning_set/pe-machine-learning-dataset/"
-                                              f"op_code_distributions_samples/{op_code_sample}/op_codes",
+                                              f"op_code_distributions_samples/{METHOD}/{op_code_sample}/op_codes",
                     distribution=distributions,
                     bins=bins,
-                    sample_size=500
+                    sample_size=500,
+                    op_sample=op_code_sample
                 )
 
     # distributions = ['ration'] # , 'log100', 'threshold'

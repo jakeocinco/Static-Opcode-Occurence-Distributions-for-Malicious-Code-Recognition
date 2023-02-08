@@ -85,10 +85,12 @@ def compare_distribution_data(
         op_codes,
         training_size,
         kl_funcs,
+        method,
         random_seed=-1,
-        is_jump=True
 ):
 
+    if method not in ['jump', 'cumulative_share', 'share']:
+        raise Exception(f'Unknown Method | {method}')
 
     if random_seed > 0:
         random.seed(random_seed)
@@ -166,7 +168,7 @@ def compare_distribution_data(
                 )
 
                 for i, op in enumerate(op_codes):
-                    if is_jump:
+                    if method == 'jump':
                         number_of_operation_instances = len(file_operations[op])
                         if number_of_operation_instances > 1:
                             for jump_index in range(number_of_operation_instances - 1):
@@ -182,7 +184,7 @@ def compare_distribution_data(
                             for b in variants[d]['bins']:
                                 current_images[d][b][i, :] += 1
                                 current_images[d][b][i, :] *= 1 / (sum(current_images[d][b][i, :]))
-                    else:
+                    elif method == 'cumulative_share':
                         for op_line in file_operations[op]:
                             value = op_line / line_index
 
@@ -190,14 +192,25 @@ def compare_distribution_data(
                                 for b in variants[d]['bins']:
                                     if value < 1:
                                         key = int(value * b)
-                                        variants[d]['bins'][b]['image_data'][i, key:] += 1
-                if not is_jump:
+                                        current_images[d][b][i, key:] += 1
+                    elif method == 'share':
+                        for op_line in file_operations[op]:
+                            value = op_line / line_index
+
+                            for d in variants:
+                                for b in variants[d]['bins']:
+                                    if value < 1:
+                                        key = int(value * b)
+                                        current_images[d][b][i, key] += 1
+
+                if method == 'cumulative_share' or method == 'share':
                     for d in variants:
                         for b in variants[d]['bins']:
                             for i in range(b):
                                 current_images[d][b][:, i] *= (1 / max(sum(current_images[d][b][:, i]), 1))
                             for i in range(length):
-                                current_images[d][b][i, :] *= (1 / max(max(current_images[d][b][i, :]), 1))
+                                value = max(current_images[d][b][i, :])
+                                current_images[d][b][i, :] *= 1 / (value if value > 0 else .001)
 
                 for d in variants:
                     for b in variants[d]['bins']:
@@ -300,20 +313,22 @@ if __name__ == "__main__":
     kls = {
         'two_sided': [(lambda a, b: (KL(a, b) + KL(b, a)) / 2) for _ in range(2)],
         'x||dist': [(lambda a, b: KL(a, b)) for _ in range(2)],
-        'dist||x': [(lambda a, b: KL(b, a)) for _ in range(2)],
-        'x||dist_clean': [(lambda a, b: KL(a, b)), lambda a, b: 0],
-        'dist||x_clean': [(lambda a, b: KL(b, a)), lambda a, b: 0],
+        # 'dist||x': [(lambda a, b: KL(b, a)) for _ in range(2)],
+        # 'x||dist_clean': [(lambda a, b: KL(a, b)), lambda a, b: 0],
+        # 'dist||x_clean': [(lambda a, b: KL(b, a)), lambda a, b: 0],
         'x||dist_infected': [lambda a, b: 0, (lambda a, b: KL(a, b))],
         'dist||x_infected': [lambda a, b: 0, (lambda a, b: KL(b, a))]
     }
 
     results = {}
 
-    # custom_op = ['ratio', 'ratio_a25', 'ratio_a75']
+    custom_op = OP_CODE_DICT
 
-    for t in OP_CODE_DICT:
+    for i, t in enumerate(custom_op):
         results.update({t: {}})
-        print(f"\n\n{t}")
+        if i > 0:
+            print(f"\n\n")
+        print(f" -- {t.upper()} --")
         temp_results = compare_distribution_data(
             op_code_directory="/Volumes/MALWARE/pe_machine_learning_set/pe-machine-learning-dataset/",
             path=f"/Volumes/MALWARE/pe_machine_learning_set/pe-machine-learning-dataset"
@@ -326,7 +341,7 @@ if __name__ == "__main__":
             op_codes=OP_CODE_DICT[t],
             training_size=500,
             kl_funcs=kls,
-            is_jump=False
+            method='share'
         )
 
         results[t].update(temp_results)

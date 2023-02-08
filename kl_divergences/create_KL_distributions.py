@@ -86,11 +86,15 @@ def write_jumps_bins_sample(
     funcs_dictionary,
     path,
     op_code_options,
+    method,
     bins=None,
     sample_sizes=None,
     iterations=1,
-    is_jump=True
 ):
+
+    if method not in ['jump', 'cumulative_share', 'share']:
+        raise Exception(f'Unknown Method | {method}')
+
     if bins is None:
         bins = [100]
 
@@ -159,7 +163,7 @@ def write_jumps_bins_sample(
                     for option, data_ in file_operations.items():
                         for i, op in enumerate(data_):
                             number_of_operation_instances = len(file_operations[option][op])
-                            if is_jump:
+                            if method == 'jump':
                                 if number_of_operation_instances > 1:
                                     for jump_index in range(number_of_operation_instances - 1):
                                         jump = file_operations[option][op][jump_index + 1] - file_operations[option][op][jump_index]
@@ -172,52 +176,51 @@ def write_jumps_bins_sample(
                                                     key = int((mapped_jump * b) // 1)
 
                                                     variants[d]['options'][option]['bins'][b]['image_data'][i, key] += 1
-                            else:
+                            elif method == 'cumulative_share':
                                 for op_line in file_operations[option][op]:
                                     value = op_line / line_index
 
                                     for d in variants:
                                         for b in variants[d]['options'][option]['bins']:
-                                            # TODO make this a function we pass in
                                             if value < 1:
                                                 key = int(value * b)
                                                 variants[d]['options'][option]['bins'][b]['image_data'][i, key:] += 1
+                            elif method == 'share':
+                                for op_line in file_operations[option][op]:
+                                    value = op_line / line_index
 
-                                # for d in variants:
-                                #     for b in variants[d]['options'][option]['bins']:
-                                #         variants[d]['options'][option]['bins'][b]['image_data'][i] *= \
-                                #             (1 / max(variants[d]['options'][option]['bins'][b]['image_data'][i]))
-                                #         for k in range(1, b + 1):
-                                #             # Divides cell by the number of lines traversed through each bin
-                                #             variants[d]['options'][option]['bins'][b]['image_data'][i, k] /= \
-                                #                 ((k / b) * line_index)
+                                    for d in variants:
+                                        for b in variants[d]['options'][option]['bins']:
+                                            if value < 1:
+                                                key = int(value * b)
+                                                variants[d]['options'][option]['bins'][b]['image_data'][i, key] += 1
 
                 for d in variants:
                     for option in variants[d]['options']:
                         for b in variants[d]['options'][option]['bins']:
-                            if is_jump:
+                            if method == 'jump':
                                 for i in range(variants[d]['options'][option]['length']):
                                     variants[d]['options'][option]['bins'][b]['image_data'][i, :] \
                                         *= 1 / (sum(variants[d]['options'][option]['bins'][b]['image_data'][i, :]) + 1)
-                            else:
+                            elif method == 'cumulative_share' or method == 'share':
                                 for i in range(b):
                                     variants[d]['options'][option]['bins'][b]['image_data'][:, i] \
                                         *= 1 / max(sum(variants[d]['options'][option]['bins'][b]['image_data'][:, i]), 1)
                                 for i in range(variants[d]['options'][option]['length']):
+                                    value = max(variants[d]['options'][option]['bins'][b]['image_data'][i, :])
                                     variants[d]['options'][option]['bins'][b]['image_data'][i, :] \
-                                        *= 1 / max(max(variants[d]['options'][option]['bins'][b]['image_data'][i, :]), 0.001)
+                                        *= 1 / (value if value > 0 else .001)
 
                             # plt.imshow(variants[d]['options'][option]['bins'][b]['image_data'])
                             # plt.show()
                             with open(variants[d]['options'][option]['bins'][b]['path'], 'wb') as file:
                                 np.save(file, variants[d]['options'][option]['bins'][b]['image_data'])
 
-        print(f"{iteration}, {datetime.now().strftime('%H:%M')} ,{datetime.now() - dt}")
+        print(f"{iteration}, {datetime.now().strftime('%H:%M')}, {datetime.now() - dt}")
         dt = datetime.now()
 
 
 if __name__ == "__main__":
-
 
     distributions = {
         'linear': lambda a, b: a / 1000,
@@ -228,32 +231,36 @@ if __name__ == "__main__":
 
     for t in [
         {
-            'folder': 'share',
-            'if': False,
+            'method': 'share',
             'distributions':{
                 'linear': lambda a, b: a / 1000,
             }
         },
-        {
-            'folder': 'jump',
-            'if': True,
-            'distributions': {
-                'linear': lambda a, b: a / 1000,
-                'log10': lambda a, b: math.log(1 + ((a / 1000) * 9), 10),
-                'log100': lambda a, b: math.log(1 + ((a / 1000) * 99), 100),
-                'threshold': lambda a, b: a / b
-            }
-        }
+        # {
+        #     'method': 'cumulative_share',
+        #     'distributions': {
+        #         'linear': lambda a, b: a / 1000,
+        #     }
+        # },
+        # {
+        #     'method': 'jump',
+        #     'distributions': {
+        #         'linear': lambda a, b: a / 1000,
+        #         'log10': lambda a, b: math.log(1 + ((a / 1000) * 9), 10),
+        #         'log100': lambda a, b: math.log(1 + ((a / 1000) * 99), 100),
+        #         'threshold': lambda a, b: a / b
+        #     }
+        # }
     ]:
         write_jumps_bins_sample(
             op_code_directory="/Volumes/MALWARE/pe_machine_learning_set/pe-machine-learning-dataset/",
             sample_sizes=[500],
             path=f"/Volumes/MALWARE/pe_machine_learning_set/pe-machine-learning-dataset/"
-                 f"op_code_distributions_samples/{t['folder']}",
+                 f"op_code_distributions_samples/{t['method']}",
             op_code_options=OP_CODE_DICT,
             bins=[25, 100],
             iterations=10,
             funcs_dictionary=t['distributions'],
-            is_jump=t['if']
+            method=t['method']
         )
 
