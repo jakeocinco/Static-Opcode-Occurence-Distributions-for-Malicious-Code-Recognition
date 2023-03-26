@@ -2,7 +2,7 @@ import numpy as np
 from PIL import Image
 import matplotlib.pyplot as plt
 import os
-
+from op_codes import OP_CODE_DICT, OP_CODE_CLUSTER
 
 def KL(a, b):
     a = np.asarray(a, dtype=np.float)
@@ -15,6 +15,8 @@ def get_difference_matrix(
     distribution,
     bins,
     sample_size,
+    method,
+    rows=None
 ):
     clean_path = f"{op_code_distribution_path}/{distribution}/{bins}_bins/{sample_size}_samples/clean"
     infected_path = f"{op_code_distribution_path}/{distribution}/{bins}_bins/{sample_size}_samples/infected"
@@ -41,10 +43,11 @@ def get_difference_matrix(
     )
 
     sample_image_data = np.load(f"{clean_path}/{clean_arr[0]}")
-
+    print(sample_image_data.shape)
     combined_length = len(clean_arr) + len(infected_arr)
     data = np.zeros((combined_length, sample_image_data.shape[0], sample_image_data.shape[1]))
 
+    _rows = rows if rows is not None else range(sample_image_data.shape[0])
     index = 0
     for temporary_data in [
         {
@@ -61,7 +64,8 @@ def get_difference_matrix(
 
                 image_data = np.load(f"{temporary_data['path']}/{image_path}")
                 # print(image_data)
-                for row in range(sample_image_data.shape[0]):
+                for row in _rows:
+                    # if sorted(list(OP_CODE_CLUSTER['malware_cluster'].values())) == 'mov':
                     image_data[row, :] += 1.0
                     image_data[row, :] *= 1.0 / sum(image_data[row, :])
 
@@ -71,11 +75,14 @@ def get_difference_matrix(
     differences = np.zeros((combined_length, combined_length))
     for i in range(combined_length):
         for j in range(combined_length):
-            for row in range(sample_image_data.shape[0]):
-                value = KL(data[i, row], data[j, row])
-                # print(value)
-                differences[i, j] += value
-
+            if method in ['jump']:
+                for row in _rows:
+                    value = KL(data[i, row], data[j, row])
+                    differences[i, j] += value
+            elif method in ['share', 'cumulative_share', 'inverse_jump']:
+                for row in range(sample_image_data.shape[1]):
+                    value = KL(data[i, :, row], data[j, :, row])
+                    differences[i, j] += value
     return {
         'differences': differences / differences.max(),
         'split_index': len(clean_arr)
@@ -87,18 +94,27 @@ def distributions_heat_map(
     distribution,
     bins,
     sample_size,
-    op_sample
+    op_sample,
+    method,
+    pruned=False
 ):
+    prune_path = 'base' if not pruned else 'pruned'
+    op_code_distribution_path = f"{op_code_distribution_path}/{METHOD}/{prune_path}/{op_code_sample}/op_codes"
 
+    _keys = sorted(list(set(OP_CODE_CLUSTER[op_sample].values())))
+    # for i in range(len(_keys)):
     differences = get_difference_matrix(
         op_code_distribution_path=op_code_distribution_path,
         distribution=distribution,
         bins=bins,
-        sample_size=sample_size
+        sample_size=sample_size,
+        method=method,
+        # rows=[i]
     )['differences']
 
     plt.imshow(differences, cmap='hot', interpolation=None)
-    plt.title(f"{op_sample}, {distribution}, bins: {bins}, samples: {sample_size}")
+    #{_keys[i]}
+    plt.title(f"- {op_sample}, {distribution}, bins: {bins}, samples: {sample_size}")
     plt.show()
 
 
@@ -137,18 +153,20 @@ def distribution_efficacy(
 
 
 if __name__ == "__main__":
-    METHOD = "share"
-    op_code_samples = ['benign', 'infected', 'union', 'mov']
+    METHOD = "jump"
+    op_code_samples = ['common_cluster'] #, 'infected', 'union', 'intersection', 'disjoint', 'ratio', 'ratio_a75']
     for op_code_sample in op_code_samples:
-        for distributions in ['linear']: #log10, 'log100', 'threshold']:
+        for distributions in ['linear']: #, 'log10', 'log100', 'threshold']:
             for bins in [25, 100]:
                 distributions_heat_map(
-                    op_code_distribution_path=f"/Volumes/MALWARE/pe_machine_learning_set/pe-machine-learning-dataset/"
-                                              f"op_code_distributions_samples/{METHOD}/{op_code_sample}/op_codes",
+                    op_code_distribution_path=f"/Volumes/T7/pe_machine_learning_set/pe-machine-learning-dataset/"
+                                              f"op_code_distributions_samples/",
                     distribution=distributions,
                     bins=bins,
                     sample_size=500,
-                    op_sample=op_code_sample
+                    op_sample=op_code_sample,
+                    method=METHOD,
+                    pruned=False
                 )
 
     # distributions = ['ration'] # , 'log100', 'threshold'

@@ -37,6 +37,12 @@ def _create_all_possible_sub_directories(base_path, variants):
         make_directory(base_path + "/" + directory)
 
 
+def get_len(op_code_options, option):
+    if option in OP_CODE_CLUSTER:
+        return len(list(set(OP_CODE_CLUSTER[option].values())))
+    return len(op_code_options[option])
+
+
 def _get_variant_base_func(base_path, funcs_dictionary, bins, op_code_options):
     def func(sample_size, image_path, iteration):
         return {
@@ -45,14 +51,14 @@ def _get_variant_base_func(base_path, funcs_dictionary, bins, op_code_options):
                     op_code_option: {
                         'bins': {
                             bin_size: {
-                                'image_data': np.zeros((len(op_code_options[op_code_option]), bin_size)),
+                                'image_data': np.zeros((get_len(op_code_options, op_code_option), bin_size)),
                                 'sub_path': f"{op_code_option}/op_codes/{dist}/{bin_size}_bins/"
                                             f"{sample_size}_samples/{image_path}/{iteration}.npy",
                                 'path': f"{base_path}/{op_code_option}/op_codes/{dist}/{bin_size}_bins/"
                                         f"{sample_size}_samples/{image_path}/{iteration}.npy"
                             } for bin_size in bins
                         },
-                        'length': len(op_code_options[op_code_option])
+                        'length': get_len(op_code_options, op_code_option)
                     } for op_code_option in op_code_options
                 },
                 'distribution_func': funcs_dictionary[dist],
@@ -90,10 +96,13 @@ def write_jumps_bins_sample(
     bins=None,
     sample_sizes=None,
     iterations=1,
+    pruned=False
 ):
 
-    if method not in ['jump', 'cumulative_share', 'share']:
+    if method not in ['jump', 'cumulative_share', 'share', 'inverse_jump']:
         raise Exception(f'Unknown Method | {method}')
+
+    path = f"{path}/{method}/{'pruned' if pruned else 'base'}"
 
     if bins is None:
         bins = [100]
@@ -101,7 +110,12 @@ def write_jumps_bins_sample(
     if sample_sizes is None:
         sample_sizes = [-1]
 
-    variant_func = _get_variant_base_func(path, funcs_dictionary, bins, op_code_options)
+    variant_func = _get_variant_base_func(
+        path,
+        funcs_dictionary,
+        bins,
+        op_code_options
+    )
 
     op_code_list, clean_all, infected_all = _get_split_file_lists(op_code_directory)
     len_op_code_list = len(op_code_list)
@@ -158,12 +172,15 @@ def write_jumps_bins_sample(
                         file_data,
                         op_code_options
                     )
+
                     # TODO - use the index of the op and count how many we have seen
                     #   track bins by line_index which I believe to be the last line number of a file
                     for option, data_ in file_operations.items():
-                        for i, op in enumerate(data_):
+                        op_keys = sorted(list(data_.keys()))
+                        for i, op in enumerate(op_keys):
                             number_of_operation_instances = len(file_operations[option][op])
-                            if method == 'jump':
+                            file_operations[option][op] = sorted(file_operations[option][op])
+                            if method == 'jump' or method == 'inverse_jump':
                                 if number_of_operation_instances > 1:
                                     for jump_index in range(number_of_operation_instances - 1):
                                         jump = file_operations[option][op][jump_index + 1] - file_operations[option][op][jump_index]
@@ -202,65 +219,75 @@ def write_jumps_bins_sample(
                                 for i in range(variants[d]['options'][option]['length']):
                                     variants[d]['options'][option]['bins'][b]['image_data'][i, :] \
                                         *= 1 / (sum(variants[d]['options'][option]['bins'][b]['image_data'][i, :]) + 1)
-                            elif method == 'cumulative_share' or method == 'share':
+                            elif method in ['cumulative_share', 'share', 'inverse_jump']:
                                 for i in range(b):
                                     variants[d]['options'][option]['bins'][b]['image_data'][:, i] \
                                         *= 1 / max(sum(variants[d]['options'][option]['bins'][b]['image_data'][:, i]), 1)
-                                for i in range(variants[d]['options'][option]['length']):
-                                    value = max(variants[d]['options'][option]['bins'][b]['image_data'][i, :])
-                                    variants[d]['options'][option]['bins'][b]['image_data'][i, :] \
-                                        *= 1 / (value if value > 0 else .001)
+                                # for i in range(variants[d]['options'][option]['length']):
+                                #     value = sum(variants[d]['options'][option]['bins'][b]['image_data'][i, :])
+                                #     variants[d]['options'][option]['bins'][b]['image_data'][i, :] \
+                                #         *= 1 / (value if value > 0 else .001)
 
+                            # for i in range(4):
+                            #     print(sum(variants[d]['options'][option]['bins'][b]['image_data'][i]))
+                            #     print(variants[d]['options'][option]['bins'][b]['image_data'][i])
                             # plt.imshow(variants[d]['options'][option]['bins'][b]['image_data'])
                             # plt.show()
+
                             with open(variants[d]['options'][option]['bins'][b]['path'], 'wb') as file:
                                 np.save(file, variants[d]['options'][option]['bins'][b]['image_data'])
 
-        print(f"{iteration}, {datetime.now().strftime('%H:%M')}, {datetime.now() - dt}")
+        print(f"{iteration}, {datetime.now().strftime('%I:%M %p')}, {datetime.now() - dt}")
         dt = datetime.now()
 
 
 if __name__ == "__main__":
 
-    distributions = {
-        'linear': lambda a, b: a / 1000,
-        # 'log10': lambda a, b: math.log(1 + ((a / 1000) * 9), 10),
-        # 'log100': lambda a, b: math.log(1 + ((a / 1000) * 99), 100),
-        # 'threshold': lambda a, b: a / b
-    }
+    pruned = False
+
+    # ops = ['benign', 'infected', 'union', 'intersection', 'disjoint', 'ratio', 'ratio_a75']
+    ops = ['common_cluster']
 
     for t in [
-        {
-            'method': 'share',
-            'distributions':{
-                'linear': lambda a, b: a / 1000,
-            }
-        },
+        # {
+        #     'method': 'inverse_jump',
+        #     'distributions': {
+        #         'linear': lambda a, b: a / 1000,
+        #     }
+        # },
         # {
         #     'method': 'cumulative_share',
         #     'distributions': {
         #         'linear': lambda a, b: a / 1000,
         #     }
         # },
-        # {
-        #     'method': 'jump',
-        #     'distributions': {
-        #         'linear': lambda a, b: a / 1000,
-        #         'log10': lambda a, b: math.log(1 + ((a / 1000) * 9), 10),
-        #         'log100': lambda a, b: math.log(1 + ((a / 1000) * 99), 100),
-        #         'threshold': lambda a, b: a / b
-        #     }
-        # }
+        {
+            'method': 'jump',
+            'distributions': {
+                'linear': lambda a, b: a / 1000,
+                # 'log10': lambda a, b: math.log(1 + ((a / 1000) * 9), 10),
+                # 'log100': lambda a, b: math.log(1 + ((a / 1000) * 99), 100),
+                # 'threshold': lambda a, b: a / b
+            }
+        },
+        {
+            'method': 'share',
+            'distributions': {
+                'linear': lambda a, b: a / 1000,
+            }
+        },
     ]:
+        temp_ops = {x: OP_CODE_DICT[t['method'] if pruned else 'base'][x] for x in ops}
         write_jumps_bins_sample(
-            op_code_directory="/Volumes/MALWARE/pe_machine_learning_set/pe-machine-learning-dataset/",
+            op_code_directory="/Volumes/T7/pe_machine_learning_set/pe-machine-learning-dataset/",
             sample_sizes=[500],
-            path=f"/Volumes/MALWARE/pe_machine_learning_set/pe-machine-learning-dataset/"
-                 f"op_code_distributions_samples/{t['method']}",
-            op_code_options=OP_CODE_DICT,
+            path=f"/Volumes/T7/pe_machine_learning_set/pe-machine-learning-dataset/"
+                 f"op_code_distributions_samples/",
+            op_code_options=temp_ops,
             bins=[25, 100],
             iterations=10,
             funcs_dictionary=t['distributions'],
-            method=t['method']
+            method=t['method'],
+            pruned=pruned
         )
 

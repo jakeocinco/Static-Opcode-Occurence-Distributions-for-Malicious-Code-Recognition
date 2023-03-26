@@ -2,6 +2,8 @@
 
 **/win10-64/
 **/.idea/
+**/__pycache__/
 
 *.dll
 *.exe
+*.pyc

@@ -158,7 +158,7 @@ def get_top_k_keys(
         k,
         size=1000
 ):
-    arr = os.listdir("/Volumes/MALWARE/pe_machine_learning_set/pe-machine-learning-dataset/op_code_samples/")
+    arr = os.listdir("/Volumes/T7/pe_machine_learning_set/pe-machine-learning-dataset/op_code_samples/")
     if '.DS_Store' in arr:
         arr.remove('.DS_Store')
 
@@ -196,7 +196,7 @@ def get_top_k_keys(
     for s in sets:
         for i, file_name in enumerate(s['data']):
             with open(
-                    f"/Volumes/MALWARE/pe_machine_learning_set/pe-machine-learning-dataset/op_code_samples/{file_name}") as file:
+                    f"/Volumes/T7/pe_machine_learning_set/pe-machine-learning-dataset/op_code_samples/{file_name}") as file:
                 try:
                     file_data = str(file.read()).split()
                 except:
@@ -336,18 +336,23 @@ def get_ratio(
 if __name__ == "__main__":
 
     ks = [50, 100]
-    clean, infected = get_top_k_keys(max(ks), 500)
-    print('ratio, log 10, a - 0.1')
-    get_ratio(50, True, clean, infected, alpha=0.1)
-    print('ratio, log 10, a - 0.25')
-    get_ratio(50, True, clean, infected, alpha=0.25)
-    print('ratio, log 10, a - 0.5')
-    get_ratio(50, True, clean, infected)
-    print('ratio, log 10, a - 0.75')
-    get_ratio(50, True, clean, infected, alpha=0.75)
-    print('ratio, log 10, a - 0.9')
-    get_ratio(50, True, clean, infected, alpha=0.9)
-    raise Exception('')
+    clean, infected = get_top_k_keys(max(ks), 250)
+    op = ['mov', 'push', 'call', 'cmp', 'test', 'jmp', 'add', 'sub']
+    for o in op:
+        new = {}
+        for k in clean['dict']:
+            if o in k:
+                if k not in new:
+                    new.update({k: 0})
+                new[k] += clean['dict'][k]
+        for k in infected['dict']:
+            if o in k:
+                if k not in new:
+                    new.update({k: 0})
+                new[k] += infected['dict'][k]
+
+        print([k for k in new if new[k] > 150])
+    raise Exception
     for k in ks:
 
         _clean = clean[:k]

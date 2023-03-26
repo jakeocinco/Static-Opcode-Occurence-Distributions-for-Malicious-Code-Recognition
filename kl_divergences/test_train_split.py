@@ -229,12 +229,10 @@ def get_op_code_array(source):
 
     try:
         result = subprocess.run([cmd], shell=True, check=True, stdout=subprocess.PIPE)  # , stderr=subprocess.PIPE)
-
     except subprocess.CalledProcessError as e:
         raise Exception("Failed to obj dump")
 
     if result is not None and result.stdout is not None:
-
         def func(a):
             b = a
             a = a[a.find(':')+1:].strip()
@@ -247,6 +245,8 @@ def get_op_code_array(source):
 
         result = result.stdout
         result = result.decode('ascii')
+        with open('./test.txt', 'w') as f:
+            f.write(result)
         result = result[result.find('<.text>:') + len('<.text>:'):].strip()
 
         result_lines = result.split('\n')
@@ -255,10 +255,10 @@ def get_op_code_array(source):
 
 
 def write_files_from_external_collection_to_external_ops(
-        samples=7000
+        samples=7000,
 ):
 
-    with open("/Volumes/MALWARE/pe_machine_learning_set/pe-machine-learning-dataset/samples.csv") as f:
+    with open("/Volumes/T7/pe_machine_learning_set/pe-machine-learning-dataset/samples.csv") as f:
         reader = csv.DictReader(f)
 
         files = list(reader)
@@ -285,11 +285,11 @@ def write_files_from_external_collection_to_external_ops(
             print(f"{i + 1} Clean")
         try:
             arr = get_op_code_array(
-                f"/Volumes/MALWARE/pe_machine_learning_set/pe-machine-learning-dataset/samples/{f['id']}"
+                f"/Volumes/T7/pe_machine_learning_set/pe-machine-learning-dataset/samples/{f['id']}"
             )
             with open(
-                    f"/Volumes/MALWARE/pe_machine_learning_set/pe-machine-learning-dataset/op_code_samples/clean_{f['id']}.txt", "w") \
-                    as f:
+                    f"/Volumes/MALWARE/pe_machine_learning_set/pe-machine-learning-dataset/op_code_samples/clean_{f['id']}.txt", "w"
+            ) as f:
                 f.write("\n".join(arr))
         except:
             pass
@@ -299,13 +299,37 @@ def write_files_from_external_collection_to_external_ops(
             print(f"{i + 1} Infected")
         try:
             arr = get_op_code_array(
-                f"/Volumes/MALWARE/pe_machine_learning_set/pe-machine-learning-dataset/samples/{f['id']}"
+                f"/Volumes/T7/pe_machine_learning_set/pe-machine-learning-dataset/samples/{f['id']}"
             )
-            with open(f"/Volumes/MALWARE/pe_machine_learning_set/pe-machine-learning-dataset/op_code_samples/infected_{f['id']}.txt", "w") as f:
+            with open(
+                    f"/Volumes/MALWARE/pe_machine_learning_set/pe-machine-learning-dataset/op_code_samples/infected_{f['id']}.txt", "w"
+            ) as f:
                 f.write("\n".join(arr))
         except:
             pass
 
+
+def write_virus_share_test_files(
+        samples
+):
+    path = "/Volumes/T7/VirusShare/VirusShare_00000"
+
+    destination = f"/Volumes/T7/VirusShare/op_code_samples"
+    files = os.listdir(path)[:samples]
+    for i, f_name in enumerate(files):
+        if (i + 1) % 1000 == 0:
+            print(f"{i + 1} Infected")
+        try:
+            arr = get_op_code_array(
+                f"{path}/{f_name}"
+            )
+
+            with open(
+                    f"{destination}/infected_{f_name.replace('VirusShare_', '')}.txt", "w+"
+            ) as f:
+                f.write("\n".join(arr))
+        except Exception as e:
+            pass
 
 if __name__ == "__main__":
 
@@ -318,8 +342,8 @@ if __name__ == "__main__":
     # write_op_code_data_to_json("testing")
     # write_op_code_data_to_json("benford")
 
-    write_files_from_external_collection_to_external_ops()
-
+    # write_files_from_external_collection_to_external_ops(samples=1)
+    write_virus_share_test_files(2400)
     # dir_path = os.path.dirname(os.path.realpath(__file__))
     # arr = os.listdir("/Volumes/MALWARE/pe_machine_learning_set/pe-machine-learning-dataset/op_code_samples/")
     # arr = sorted(arr)
