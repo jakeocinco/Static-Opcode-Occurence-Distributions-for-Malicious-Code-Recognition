@@ -1,7 +1,7 @@
 import sys
 import subprocess
 
-from test_train_split import get_op_code_array
+from write_opcode_lists import get_op_code_array
 
 # '.bfd',
 EXTENSIONS = ['.bundle', '.dylib', '.so']
