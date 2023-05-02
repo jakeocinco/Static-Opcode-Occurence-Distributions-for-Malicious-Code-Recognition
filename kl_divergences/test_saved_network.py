@@ -20,12 +20,16 @@ distributions = {
     'linear': lambda a, b: a / 1000,
 }
 
-SAMPLE_SIZE = 1470
+SAMPLE_SIZE = 250
 METHOD = "jump"
-OP_CODE_TYPE = "common_cluster"
-MALICIOUS_TEST_PATH = "/Volumes/T7/VirusShare/"
+MALICIOUS_TRAIN_PATH = "/Volumes/T7/pe_machine_learning_set/pe-machine-learning-dataset/"
+VIRUS_SHARE_000 = "/Volumes/T7/VirusShare/VirusShare_00000"
+VIRUS_SHARE_005= "/Volumes/T7/VirusShare/VirusShare_00005"
+VIRUS_SHARE_451= "/Volumes/T7/VirusShare/VirusShare_00451"
+MAC_OS_PATH = "/Volumes/T7/MacOS/"
 DISTRIBUTION_PATH = f"/Volumes/T7/pe_machine_learning_set/pe-machine-learning-dataset/op_code_distributions_samples" \
-                    f"/{METHOD}/base/{OP_CODE_TYPE}/op_codes"
+                    f"/{METHOD}/base"
+BINS = [100]
 
 kls = {
     # 'two_sided': [(lambda a, b: (KL(a, b) + KL(b, a)) / 2) for _ in range(2)],
@@ -35,9 +39,9 @@ kls = {
     # 'dist||x_clean': [(lambda a, b: KL(b, a)), lambda a, b: 0],
     # 'x||dist_infected': [lambda a, b: 0, (lambda a, b: KL(a, b))],
     # 'dist||x_infected': [lambda a, b: 0, (lambda a, b: math.log(KL(b, a), 10))],
-    'two_sided_log': [(lambda a, b: (math.log(KL(a, b), 10) + math.log(KL(a, b), 10)) / 2) for _ in range(2)],
+    # 'two_sided_log': [(lambda a, b: (math.log(KL(a, b), 10) + math.log(KL(a, b), 10)) / 2) for _ in range(2)],
     # 'x||dist_log': [(lambda a, b: math.log(KL(a, b), 10)) for _ in range(2)],
-    # 'dist||x_log': [(lambda a, b: math.log(KL(b, a), 10)) for _ in range(2)],
+    'dist||x_log': [(lambda a, b: math.log(KL(b, a), 10)) for _ in range(2)],
     # 'dist||x_clean_log': [(lambda a, b: math.log(KL(b, a), 10)), lambda a, b: 0],
     # 'x||dist_infected_log': [lambda a, b: 0, (lambda a, b: math.log(KL(a, b), 10))],
     # 'dist||x_infected_log': [lambda a, b: 0, (lambda a, b: math.log(KL(b, a), 10))]
@@ -45,56 +49,75 @@ kls = {
 
 temp = None
 
-results = {}
-for i in range(1):
+for op_code_type in ['common_cluster']:
 
-    data = get_distribution_data(
-        op_code_directory=MALICIOUS_TEST_PATH,
-        path=DISTRIBUTION_PATH,
-        iteration=5,  # random.randint(0, 9),
-        distribution_funcs=distributions,
-        sample_size=SAMPLE_SIZE,
-        bins=[100],
-        op_code_type=OP_CODE_TYPE,
-        training_size=500,
-        kl_funcs=kls,
-        method=METHOD,
-        pruned=False,
-        random_seed=SEEDS[i],
-        update_text_prefix=f"{i} - "
-    )
+    results = {}
+    for test_key, test_path in {
+        # 'TRAIN': MALICIOUS_TRAIN_PATH,
+        # 'VS_000': VIRUS_SHARE_000,
+        # 'VS_005': VIRUS_SHARE_005,
+        'VS_451': VIRUS_SHARE_451,
+        # 'MAC_OS': MAC_OS_PATH,
+        # 'WIN_OS': '/Volumes/T7/Windows/'
+    }.items():
+        for seed in [1, 9, 83, 85]:
+            for i in range(10):
 
-    # TODO - run for all KLs and models
-    # TODO - create giant heat map plot, with training data
-    for training_method in ['mlp']:
-        for d in data:
-            for b in data[d]['bins']:
-                for kl_func in data[d]['bins'][b]['kl_funcs']:
-                    f = f"{training_method}_{b}_{kl_func}"
-                    if f not in results:
-                        results.update({f: []})
-                    loaded_model = pickle.load(
-                        open(f'./models/{f}.pickle', "rb")
-                    )
-                    # print(loaded_model.coefs_)
+                data = get_distribution_data(
+                    op_code_directory=test_path,
+                    path=DISTRIBUTION_PATH,
+                    iteration=i,
+                    distribution_funcs=distributions,
+                    sample_size=SAMPLE_SIZE,
+                    bins=BINS,
+                    op_code_types=[op_code_type],
+                    training_size=500,
+                    kl_funcs=kls,
+                    method=METHOD,
+                    pruned=False,
+                    random_seed=SEEDS[i] * seed,
+                    update_text_prefix=f"{test_key}/{seed}/{i} - ",
+                    exclude_files=False
+                )
 
-                    X_test = data[d]['bins'][b]['kl_funcs'][kl_func]['X']
-                    y_test = data[d]['bins'][b]['kl_funcs'][kl_func]['y'].reshape(-1)
-                    # X_test = np.load(f'./Example_{SAMPLE_SIZE}.npy')
-                    # y_test = np.zeros(SAMPLE_SIZE)
+                # TODO - run for all KLs and models
+                # TODO - create giant heat map plot, with training data
+                for training_method in ['mlp_scaled']:
+                    for d in data:
+                        for b in BINS:
+                            for kl_func in data[d]['op_code_types'][op_code_type]['bins'][b]['kl_funcs']:
 
-                    ss = X_test.shape[0]
-                    # if temp is None:
-                    #     temp = X_test[0]
-                    # else:
-                    #     print(temp == X_test[0])
+                                f = f"{op_code_type}_{training_method}_{b}_{kl_func}_{i}"
+                                k = test_key + '_' + f"{op_code_type}_{training_method}_{b}_{kl_func}"
+                                if k not in results:
+                                    results.update({k: []})
+                                loaded_model = pickle.load(
+                                    open(f'./models/{f}.pickle', "rb")
+                                )
+                                # print(loaded_model.coefs_)
+                                # print('\n\n')
+                                # print(data[d]['op_code_types'][OP_CODE_TYPE]['bins'][b]['kl_funcs'][kl_func]['X'].shape)
+                                # print(data[d]['op_code_types'][OP_CODE_TYPE]['bins'][b]['kl_funcs'][kl_func]['y'].shape)
+                                X_test = data[d]['op_code_types'][op_code_type]['bins'][b]['kl_funcs'][kl_func]['X']
+                                y_test = data[d]['op_code_types'][op_code_type]['bins'][b]['kl_funcs'][kl_func]['y'].reshape(-1)
+                                # X_test = np.load(f'./Example_{SAMPLE_SIZE}.npy')
+                                # y_test = np.zeros(SAMPLE_SIZE)
 
-                    y_test = y_test.astype(int)
+                                ss = X_test.shape[0]
+                                # if temp is None:
+                                #     temp = X_test[0]
+                                # else:
+                                #     print(temp == X_test[0])
 
-                    prediction = loaded_model.predict(X_test)
-                    # print(prediction)
-                    # print(f, '-', )
-                    results[f] += [sum(prediction == y_test) / ss]
+                                y_test = y_test.astype(int)
+                                # print(y_test)
+                                prediction = loaded_model.predict(X_test)
 
-for f in results:
-    print(f, results[f])
+                                # print(f, '-', )
+                                results[k] += [sum(prediction == y_test) / ss]
+
+    for f in results:
+        mean = sum(results[f]) / len(results[f])
+        var = ((sum([((z - mean) ** 2) for z in results[f]]) / len(results[f])) ** .5) * 100
+        print(f"{f}, mean: {mean * 100:.3f}, var: {var:.3f}")
+        print(results[f])

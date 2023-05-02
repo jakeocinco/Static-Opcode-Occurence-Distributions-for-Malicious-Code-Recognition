@@ -28,11 +28,10 @@ OP_CODE_DICT = {
                   'cvtsi2sdl', 'data16', 'decl', 'ds', 'es', 'fs', 'gs', 'imull', 'incl', 'iretq', 'ja', 'jae', 'jb', 'jbe',
                   'je', 'jl', 'jle', 'jmp', 'jne', 'js', 'leal', 'lretq', 'movb', 'movl', 'movw', 'nop', 'orl', 'rex64',
                   'sbbl', 'scasq', 'sgdtq', 'shldw', 'ss', 'subl', 'testb', 'testl', 'xorb', 'xorl'],
-        'ratio_a25': ['add', 'adds', 'and', 'b', 'bic', 'bl', 'bsrw', 'bswapw', 'btcw', 'btrw', 'btsw', 'cbnz', 'cbz',
-                      'cmovbw', 'cmovnsq', 'cmp', 'cmpsq', 'cvtsi2sdl', 'cvtsi2ssl', 'data16', 'dmb', 'ds', 'es', 'fs',
-                      'gs', 'iretq', 'ldr', 'ldrb', 'ldrh', 'lodsq', 'lretq', 'mov', 'movsq', 'movzww', 'mvn', 'orr',
-                      'rex64', 'scasq', 'sgdtq', 'shldw', 'shrdw', 'ss', 'stosq', 'str', 'strb', 'strh', 'sub', 'udf',
-                      'uxth', 'xaddw'],
+        'ratio_a25': ['adcs', 'add', 'adds', 'adr', 'and', 'ands', 'asrs', 'b', 'beq', 'bgt', 'bhs', 'bl', 'ble', 'bls',
+                      'blx', 'bne', 'bx', 'cbnz', 'cbz', 'cmp', 'dmb', 'ldm', 'ldr', 'ldrb', 'ldrh', 'ldrsb', 'ldrsh',
+                      'lgdtq', 'lidtq', 'lsls', 'lsrs', 'mov', 'movs', 'movzww', 'mvn', 'mvns', 'orrs', 'pop', 'shldw',
+                      'shrdw', 'sidtq', 'stm', 'str', 'strb', 'strd', 'strh', 'sub', 'subs', 'tst', 'udf'],
         'ratio_a75': ['adcl', 'addb', 'addl', 'andb', 'andl', 'calll', 'cltd', 'cmpb', 'cmpl', 'cmpw', 'decl', 'imull',
                       'incl', 'int3', 'ja', 'jae', 'jb', 'jbe', 'je', 'jg', 'jge', 'jl', 'jle', 'jmp', 'jne', 'jns', 'js',
                       'leal', 'movb', 'movl', 'movw', 'negl', 'nop', 'orb', 'orl', 'popl', 'pushl', 'rep', 'retl', 'sbbb',
@@ -322,11 +321,11 @@ def reduce_op_code_list_to_counts(op_code_occurence_list, file_operations=None):
 def reduce_op_code_list_to_index_list(
         op_code_occurence_list,
         op_codes,
-        cluster_map=None
+        # cluster_map=None
 ):
-    not_clustered = cluster_map is None
-    keys = op_codes if not_clustered else list(set(cluster_map.values()))
-    file_operations = get_op_code_dictionary(op_codes=keys)
+    not_clustered = True #cluster_map is None
+    # keys = op_codes if not_clustered else list(set(cluster_map.values()))
+    file_operations = get_op_code_dictionary(op_codes=op_codes)
     # print(keys)
     line_index = 0
 
@@ -335,12 +334,12 @@ def reduce_op_code_list_to_index_list(
         if len(operation.split()) > 1:
             operation = operation.split()[0]
         # print(operation)
-        if not_clustered:
-            if operation in file_operations:
-                file_operations[operation] += [line_index]
-        else:
-            if operation in op_codes:
-                file_operations[cluster_map[operation]] += [line_index]
+        # if not_clustered:
+        if operation in file_operations:
+            file_operations[operation] += [line_index]
+        # else:
+        #     if operation in op_codes:
+        #         file_operations[cluster_map[operation]] += [line_index]
             # file_operations[REVERSED_MAP[operation]] += [line_index]
 
     return file_operations, len(op_code_occurence_list)
@@ -425,7 +424,7 @@ def cluster_by_op():
 
 
 if __name__ == "__main__":
-    cluster_by_op()
+    # cluster_by_op()
     pass
 
 

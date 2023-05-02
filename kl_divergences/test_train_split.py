@@ -5,7 +5,7 @@ from payloads import *
 import subprocess
 import json
 import csv
-
+import math
 
 def to_string(x, min_length=4):
     x = str(x)
@@ -223,9 +223,9 @@ def remove_invalid_files():
     print(f'{len(failed)} files removed.')
 
 
-def get_op_code_array(source):
+def get_op_code_array(source, prefix=''):
 
-    cmd = f"objdump -d {source}"
+    cmd = f"objdump -d {prefix}{source}"
 
     try:
         result = subprocess.run([cmd], shell=True, check=True, stdout=subprocess.PIPE)  # , stderr=subprocess.PIPE)
@@ -242,6 +242,8 @@ def get_op_code_array(source):
                 a.find('\t') if a.find('\t') > 0 else 999)
             operation = a[:operation_index].strip()
             return operation
+        def filt(a):
+            return len(a) > 0 and not a.isnumeric()
 
         result = result.stdout
         result = result.decode('ascii')
@@ -310,11 +312,16 @@ def write_files_from_external_collection_to_external_ops(
 
 
 def write_virus_share_test_files(
-        samples
+        samples, index
 ):
-    path = "/Volumes/T7/VirusShare/VirusShare_00000"
+    if index == 0:
+        index_str = '00000'
+    else:
+        index_str = '0' * (4 - int(math.log10(index))) + str(index)
 
-    destination = f"/Volumes/T7/VirusShare/op_code_samples"
+    path = f"/Volumes/T7/VirusShare/VirusShare_{index_str}"
+    # print(path)
+    destination = f"/Volumes/T7/VirusShare/op_code_samples_{index_str}"
     files = os.listdir(path)[:samples]
     for i, f_name in enumerate(files):
         if (i + 1) % 1000 == 0:
@@ -331,6 +338,29 @@ def write_virus_share_test_files(
         except Exception as e:
             pass
 
+
+def write_windows_test_files_from_shared(
+        samples,
+):
+    path = f"/Volumes/T7/Machines/compiled/executables"
+
+    destination = f"/Volumes/T7/Windows/op_code_samples/"
+    files = os.listdir(path)[:samples]
+    for i, f_name in enumerate(files):
+        if (i + 1) % 1000 == 0:
+            print(f"{i + 1} Infected")
+        try:
+            arr = get_op_code_array(
+                f"{path}/{f_name}"
+            )
+
+            with open(
+                    f"{destination}/clean_{f_name.replace('exe_', '')}.txt", "w+"
+            ) as f:
+                f.write("\n".join(arr))
+        except Exception as e:
+            pass
+#
 if __name__ == "__main__":
 
     random.seed(9)
@@ -343,7 +373,10 @@ if __name__ == "__main__":
     # write_op_code_data_to_json("benford")
 
     # write_files_from_external_collection_to_external_ops(samples=1)
-    write_virus_share_test_files(2400)
+    # write_virus_share_test_files(15000, index=0)
+    # write_virus_share_test_files(15000, index=5)
+    write_virus_share_test_files(15000, index=451)
+    # write_windows_test_files_from_shared(7000)
     # dir_path = os.path.dirname(os.path.realpath(__file__))
     # arr = os.listdir("/Volumes/MALWARE/pe_machine_learning_set/pe-machine-learning-dataset/op_code_samples/")
     # arr = sorted(arr)

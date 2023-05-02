@@ -2,6 +2,7 @@ from op_codes import *
 import math
 from sklearn.cluster import DBSCAN
 import numpy as np
+import sys
 
 def embedding(x):
 
@@ -154,6 +155,7 @@ DATA = {
 REVERSED_MAP = {'lretl': 0, 'retl': 0, 'iretl': 0, 'lretw': 0, 'lretq': 0, 'sbbb': 1, 'subl': 1, 'sbbl': 1, 'subb': 1, 'sbbq': 1, 'fsubl': 1, 'fsubs': 1, 'fsubp': 1, 'fsub': 1, 'fsubr': 1, 'fisubrs': 1, 'subw': 1, 'fisubrl': 1, 'fisubl': 1, 'sbbw': 1, 'fsubrs': 1, 'psubsb': 1, 'fisubs': 1, 'fsubrl': 1, 'psubb': 1, 'bsfl': 1, 'ss': 1, 'vsubsd': 1, 'subsd': 1, 'subss': 1, 'fsubrp': 1, 'psubw': 1, 'psubsw': 1, 'psubusb': 1, 'subps': 1, 'psubusw': 1, 'sub': 1, 'b': 1, 'subs': 1, 'pfsub': 1, 'pshufb': 1, 'pfsubr': 1, 'subls': 1, 'vfmsubps': 1, 'vpsubusw': 1, 'vsubss': 1, 'vsubps': 1, 'movl': 2, 'movsb': 2, 'movb': 2, 'movw': 2, 'movsl': 2, 'movaps': 2, 'movsd': 2, 'movsbq': 2, 'cmovneq': 2, 'movq': 2, 'movswl': 2, 'movabsq': 2, 'movslq': 2, 'cmovll': 2, 'movswq': 2, 'movsbl': 2, 'movsbw': 2, 'movsw': 2, 'movdqa': 2, 'cmovnel': 2, 'movhps': 2, 'movlps': 2, 'movdqu': 2, 'cmovsq': 2, 'movd': 2, 'cmovsl': 2, 'cmovoq': 2, 'cmovsw': 2, 'movabsb': 2, 'movlhps': 2, 'movapd': 2, 'movss': 2, 'cmovol': 2, 'cmovnol': 2, 'cmovnsl': 2, 'vmovsd': 2, 'vmovq': 2, 'vmovdqa': 2, 'cmovnsq': 2, 'cmovnpl': 2, 'movabsl': 2, 'vmovdqu': 2, 'movlt': 2, 'movhs': 2, 'moveq': 2, 'movs': 2, 'movlo': 2, 'movls': 2, 'vmov': 2, 'movle': 2, 'vmovaps': 2, 'vmovups': 2, 'movsq': 2, 'movhlps': 2, 'vmovapd': 2, 'cmovnoq': 2, 'movabsw': 2, 'vmovd': 2, 'vmovlps': 2, 'daa': 3, 'aaa': 3, 'aas': 3, 'aad': 3, 'aam': 3, 'lcalll': 4, 'shll': 4, 'calll': 4, 'shrl': 4, 'callq': 4, 'shrdl': 4, 'lesl': 4, 'lodsl': 4, 'ldsl': 4, 'lsll': 4, 'shldl': 4, 'psllq': 4, 'sldtl': 4, 'pslld': 4, 'callw': 4, 'lsls': 4, 'ldrhlo': 4, 'lsrs': 4, 'lsr': 4, 'lsrls': 4, 'ldrsh': 4, 'lsl': 4, 'lslls': 4, 'lslvs': 4, 'lsrpl': 4, 'lslhs': 4, 'lslhi': 4, 'ldrhvs': 4, 'lsrlo': 4, 'ldrh': 4, 'lfsl': 4, 'lcallq': 4, 'lssl': 4, 'lcallw': 4, 'lgsl': 4, 'lslq': 4, 'ldrhls': 4, 'lsrhi': 4, 'fdivr': 5, 'fdivl': 5, 'divl': 5, 'idivl': 5, 'fidivrs': 5, 'fdivrs': 5, 'fdivrp': 5, 'fidivl': 5, 'fidivrl': 5, 'fdiv': 5, 'fidivs': 5, 'fdivs': 5, 'fdivrl': 5, 'fdivp': 5, 'sete': 6, 'setne': 6, 'setge': 6, 'setle': 6, 'setbe': 6, 'setae': 6, 'imull': 7, 'mull': 7, 'fmul': 7, 'fmuls': 7, 'fmulp': 7, 'fimull': 7, 'fmull': 7, 'mul': 7, 'umlal': 7, 'smull': 7, 'umull': 7, 'pfmul': 7, 'cmoveq': 8, 'cmovel': 8, 'cmovaeq': 8, 'cmovbel': 8, 'cmovlq': 8, 'cmovlel': 8, 'cmovgel': 8, 'cmovael': 8, 'cmovgeq': 8, 'cmovbeq': 8, 'cmovleq': 8, 'prefetchnta': 9, 'prefetchw': 9, 'prefetch': 9, 'prefetcht0': 9, 'prefetchwt1': 9, 'prefetcht2': 9, 'prefetcht1': 9, 'addl': 10, 'addb': 10, 'das': 10, 'addq': 10, 'addw': 10, 'fadds': 10, 'faddp': 10, 'fadd': 10, 'fiadds': 10, 'faddl': 10, 'paddw': 10, 'addps': 10, 'addpd': 10, 'subpd': 10, 'addsd': 10, 'andpd': 10, 'paddd': 10, 'vaddsd': 10, 'pand': 10, 'vpand': 10, 'paddusb': 10, 'addss': 10, 'paddusw': 10, 'vhsubpd': 10, 'paddsb': 10, 'andps': 10, 'psubd': 10, 'ds': 10, 'pandn': 10, 'paddsw': 10, 'vpaddd': 10, 'pmaddwd': 10, 'paddb': 10, 'andnps': 10, 'vpaddusb': 10, 'phaddsw': 10, 'paddq': 10, 'andnpd': 10, 'adds': 10, 'and': 10, 'add': 10, 'ands': 10, 'vaddss': 10, 'vaddpd': 10, 'pfadd': 10, 'vpaddq': 10, 'vandpd': 10, 'vhaddps': 10, 'vaddsubpd': 10, 'vpaddw': 10, 'pmaddubsw': 10, 'vandnpd': 10, 'vandnps': 10, 'vpsubd': 10, 'vpaddusw': 10, 'vaddps': 10, 'pswapd': 10, 'vfmaddps': 10, 'vsubpd': 10, 'haddps': 10, 'vandps': 10, 'ficoml': 11, 'fucomp': 11, 'fcomp': 11, 'fcom': 11, 'fcompl': 11, 'fucomi': 11, 'fucom': 11, 'fcomps': 11, 'fcoml': 11, 'fcoms': 11, 'ficoms': 11, 'fcmovu': 11, 'ficomps': 11, 'ficompl': 11, 'fucompp': 11, 'fcompp': 11, 'fcompi': 11, 'fcos': 11, 'fucompi': 11, 'fcomi': 11, 'fstps': 12, 'fstp': 12, 'fstpl': 12, 'fstpt': 12, 'fistl': 12, 'fsts': 12, 'ftst': 12, 'fisttpll': 12, 'fstl': 12, 'fistps': 12, 'fistpl': 12, 'fisttps': 12, 'fistpll': 12, 'fisttpl': 12, 'fists': 12, 'fbstp': 12, 'cmpl': 13, 'cmpsl': 13, 'pcmpeqw': 13, 'pcmpeqb': 13, 'cmpeqsd': 13, 'pcmpeqd': 13, 'cmpsq': 13, 'cmpltpd': 13, 'cmpps': 13, 'cmpeqps': 13, 'cmpltss': 13, 'cmpnltps': 13, 'cmpltps': 13, 'pfcmpge': 13, 'cmpneqps': 13, 'cmpleps': 13, 'pfcmpeq': 13, 'vpcmpeqw': 13, 'cmpss': 13, 'cmpless': 13, 'cmpnltsd': 13, 'cmplesd': 13, 'cmpltsd': 13, 'stmpl': 13, 'vcmpps': 13, 'pushl': 14, 'pushfl': 14, 'pushq': 14, 'pushw': 14, 'shufps': 14, 'pshuflw': 14, 'pshufhw': 14, 'pushfw': 14, 'pshufw': 14, 'push': 14, 'vpush': 14, 'pushaw': 14, 'vpshufhw': 14, 'vpshuflw': 14, 'punpckhwd': 15, 'unpcklps': 15, 'unpckhpd': 15, 'punpcklwd': 15, 'unpcklpd': 15, 'punpckldq': 15, 'punpckhbw': 15, 'punpcklbw': 15, 'punpckhdq': 15, 'unpckhps': 15, 'punpcklqdq': 15, 'punpckhqdq': 15, 'vpunpcklqdq': 15, 'vpunpcklwd': 15, 'vunpckhpd': 15, 'vpunpckhwd': 15, 'vpunpckhdq': 15, 'fldln2': 16, 'fldt': 16, 'fldl2t': 16, 'fldl2e': 16, 'fldlg2': 16, 'cvttps2pi': 17, 'cvtdq2ps': 17, 'cvtps2pd': 17, 'cvtdq2pd': 17, 'vcvtdq2pd': 17, 'cvtpd2ps': 17, 'cvtps2dq': 17, 'cvtps2pi': 17, 'cvtpi2ps': 17, 'cvttpd2dq': 17, 'cvttps2dq': 17, 'cvtpi2pd': 17, 'vcvtdq2ps': 17, 'vcvtpd2dq': 17, 'cvtpd2dq': 17, 'cmovew': 18, 'cmovnew': 18, 'cmovaew': 18, 'cmovgew': 18, 'cmovbew': 18, 'pcmpgtb': 19, 'pcmpgtd': 19, 'pcmpgtw': 19, 'pfcmpgt': 19, 'vpcmpgtb': 19, 'vfmadd213sd': 20, 'vfmadd231sd': 20, 'vfnmadd132sd': 20, 'vfnmadd231sd': 20, 'vfmadd213ss': 20, 'cvtsi2sd': 21, 'cvtss2sd': 21, 'cvtsi2ss': 21, 'cvttsd2si': 21, 'cvtsd2ss': 21, 'cvttss2si': 21, 'cvtsi2sdl': 21, 'cvtsd2si': 21, 'cvtsi2ssl': 21, 'cvtsi2sdq': 21, 'cvtsi2ssq': 21, 'cvtss2si': 21, 'vcvtsd2ss': 21, 'vcvtsi2ssl': 21, 'vcvtss2sd': 21, 'sqrtps': 22, 'rsqrtps': 22, 'sqrtsd': 22, 'str': 22, 'strd': 22, 'vrsqrtps': 22, 'pfrsqrt': 22, 'rsqrtss': 22, 'sqrtss': 22, 'pxor': 23, 'vpor': 23, 'vxorps': 23, 'vpxor': 23, 'vxorpd': 23, 'cmpxchgl': 24, 'cmpxchgq': 24, 'cmpxchgb': 24, 'cmpxchg8b': 24, 'cmpxchg16b': 24, 'itett': 25, 'ittee': 25, 'itte': 25, 'iteet': 25, 'itt': 25, 'ite': 25, 'iteee': 25, 'it': 25, 'itete': 25, 'ittte': 25, 'ittt': 25, 'itee': 25, 'ittet': 25, 'itet': 25, 'mcr2': 26, 'mcr': 26, 'mrrc2': 26, 'mrc': 26, 'mrc2': 26, 'mcrr': 26, 'mcrr2': 26, 'vldr': 27, 'ldrvs': 27, 'vpsrld': 27, 'vpsrlvd': 27, 'mulsd': 28, 'mulps': 28, 'mulss': 28, 'muls': 28, 'vmulss': 28, 'rorb': 29, 'rorl': 29, 'rorw': 29, 'rorq': 29, 'rors': 29, 'orr': 29, 'orrs': 29, 'popl': 30, 'popq': 30, 'popw': 30, 'vpop': 30, 'pop': 30, 'pshufd': 31, 'shufpd': 31, 'vshufps': 31, 'vshufpd': 31, 'vpshufb': 31, 'vpshufd': 31, 'ucomiss': 32, 'vcomisd': 32, 'comiss': 32, 'vcomiss': 32}
 
 
+x = {0.0: ['shldw', 'shrdw', 'lgdtq', 'sidtq', 'strh', 'ldrb', 'strb', 'adds', 'str', 'ldr', 'cmp', 'ldrh', 'movs', 'lsls', 'asrs', 'b', 'adr', 'mov', 'add', 'cbnz', 'subs', 'lsrs', 'cbz', 'lidtq', 'bx', 'ldrsb', 'ldrsh', 'ands', 'sub', 'bl', 'mvn', 'stm', 'ldm', 'ble', 'tst', 'dmb', 'adcs', 'orrs', 'udf', 'and', 'bhs', 'bgt', 'bls', 'mvns', 'beq', 'bne', 'strd', 'movzww', 'blx', 'pop'], 0.05: ['shldw', 'shrdw', 'lgdtq', 'sidtq', 'strh', 'ldrb', 'strb', 'adds', 'str', 'ldr', 'cmp', 'ldrh', 'movs', 'lsls', 'asrs', 'b', 'adr', 'mov', 'add', 'cbnz', 'subs', 'lsrs', 'cbz', 'lidtq', 'bx', 'ldrsb', 'ldrsh', 'ands', 'sub', 'bl', 'mvn', 'stm', 'ldm', 'ble', 'tst', 'dmb', 'adcs', 'orrs', 'udf', 'and', 'bhs', 'bgt', 'bls', 'mvns', 'beq', 'bne', 'strd', 'movzww', 'blx', 'pop'], 0.1: ['shldw', 'shrdw', 'lgdtq', 'sidtq', 'strh', 'ldrb', 'strb', 'adds', 'str', 'ldr', 'cmp', 'ldrh', 'movs', 'lsls', 'asrs', 'b', 'adr', 'mov', 'add', 'cbnz', 'subs', 'lsrs', 'cbz', 'lidtq', 'bx', 'ldrsb', 'ldrsh', 'ands', 'sub', 'bl', 'mvn', 'stm', 'ldm', 'ble', 'tst', 'dmb', 'adcs', 'orrs', 'udf', 'and', 'bhs', 'bgt', 'bls', 'mvns', 'beq', 'bne', 'strd', 'movzww', 'blx', 'pop'], 0.15: ['shldw', 'shrdw', 'lgdtq', 'sidtq', 'strh', 'ldrb', 'strb', 'adds', 'str', 'ldr', 'cmp', 'ldrh', 'movs', 'lsls', 'asrs', 'b', 'adr', 'mov', 'add', 'cbnz', 'subs', 'lsrs', 'cbz', 'lidtq', 'bx', 'ldrsb', 'ldrsh', 'ands', 'sub', 'bl', 'mvn', 'stm', 'ldm', 'ble', 'tst', 'dmb', 'adcs', 'orrs', 'udf', 'and', 'bhs', 'bgt', 'bls', 'mvns', 'beq', 'bne', 'strd', 'movzww', 'blx', 'pop'], 0.2: ['shldw', 'shrdw', 'lgdtq', 'sidtq', 'strh', 'ldrb', 'strb', 'adds', 'str', 'ldr', 'cmp', 'ldrh', 'movs', 'lsls', 'asrs', 'b', 'adr', 'mov', 'add', 'cbnz', 'subs', 'lsrs', 'cbz', 'lidtq', 'bx', 'ldrsb', 'ldrsh', 'ands', 'sub', 'bl', 'mvn', 'stm', 'ldm', 'ble', 'tst', 'dmb', 'adcs', 'orrs', 'udf', 'and', 'bhs', 'bgt', 'bls', 'mvns', 'beq', 'bne', 'strd', 'movzww', 'blx', 'pop'], 0.25: ['shldw', 'shrdw', 'lgdtq', 'sidtq', 'strh', 'ldrb', 'strb', 'adds', 'str', 'ldr', 'cmp', 'ldrh', 'movs', 'lsls', 'asrs', 'b', 'adr', 'mov', 'add', 'cbnz', 'subs', 'lsrs', 'cbz', 'lidtq', 'bx', 'ldrsb', 'ldrsh', 'ands', 'sub', 'bl', 'mvn', 'stm', 'ldm', 'ble', 'tst', 'dmb', 'adcs', 'orrs', 'udf', 'and', 'bhs', 'bgt', 'bls', 'mvns', 'beq', 'bne', 'strd', 'movzww', 'blx', 'pop'], 0.3: ['shldw', 'shrdw', 'lgdtq', 'sidtq', 'strh', 'ldrb', 'strb', 'adds', 'str', 'ldr', 'cmp', 'ldrh', 'movs', 'lsls', 'asrs', 'b', 'adr', 'mov', 'add', 'cbnz', 'subs', 'lsrs', 'cbz', 'lidtq', 'bx', 'ldrsb', 'ldrsh', 'ands', 'sub', 'bl', 'mvn', 'stm', 'ldm', 'ble', 'tst', 'dmb', 'adcs', 'orrs', 'udf', 'and', 'bhs', 'bgt', 'bls', 'mvns', 'beq', 'bne', 'strd', 'movzww', 'blx', 'pop'], 0.35: ['shldw', 'shrdw', 'lgdtq', 'sidtq', 'strh', 'ldrb', 'strb', 'adds', 'str', 'ldr', 'cmp', 'ldrh', 'movs', 'lsls', 'asrs', 'b', 'adr', 'mov', 'add', 'cbnz', 'subs', 'lsrs', 'cbz', 'lidtq', 'bx', 'ldrsb', 'ldrsh', 'ands', 'sub', 'bl', 'mvn', 'stm', 'ldm', 'ble', 'tst', 'dmb', 'adcs', 'orrs', 'udf', 'and', 'bhs', 'bgt', 'bls', 'mvns', 'beq', 'bne', 'strd', 'movzww', 'blx', 'pop'], 0.4: ['shldw', 'shrdw', 'lgdtq', 'sidtq', 'strh', 'ldrb', 'strb', 'adds', 'str', 'ldr', 'cmp', 'ldrh', 'movs', 'lsls', 'asrs', 'b', 'adr', 'mov', 'add', 'cbnz', 'subs', 'lsrs', 'cbz', 'lidtq', 'bx', 'ldrsb', 'ldrsh', 'ands', 'sub', 'bl', 'mvn', 'stm', 'ldm', 'ble', 'tst', 'dmb', 'adcs', 'orrs', 'udf', 'and', 'bhs', 'bgt', 'bls', 'mvns', 'beq', 'bne', 'strd', 'movzww', 'blx', 'pop'], 0.45: ['shldw', 'shrdw', 'lgdtq', 'sidtq', 'strh', 'ldrb', 'strb', 'adds', 'str', 'ldr', 'cmp', 'ldrh', 'movs', 'lsls', 'asrs', 'b', 'adr', 'mov', 'add', 'cbnz', 'subs', 'lsrs', 'cbz', 'lidtq', 'bx', 'ldrsb', 'ldrsh', 'ands', 'sub', 'bl', 'mvn', 'stm', 'ldm', 'ble', 'tst', 'dmb', 'adcs', 'orrs', 'udf', 'and', 'bhs', 'bgt', 'bls', 'mvns', 'beq', 'bne', 'strd', 'movzww', 'blx', 'pop'], 0.5: ['xorl', 'je', 'movl', 'shldw', 'jne', 'addl', 'cmpl', 'jb', 'andl', 'movb', 'subl', 'jae', 'orl', 'incl', 'jbe', 'cmpb', 'shrdw', 'testl', 'ja', 'jmp', 'decl', 'lgdtq', 'sbbl', 'testb', 'sidtq', 'addb', 'strh', 'ldrb', 'strb', 'adds', 'str', 'ldr', 'cmp', 'leal', 'imull', 'ldrh', 'movs', 'lsls', 'asrs', 'b', 'adr', 'mov', 'add', 'xorb', 'movw', 'cbnz', 'subs', 'js', 'lsrs', 'cbz'], 0.55: ['xorl', 'movl', 'je', 'jne', 'addl', 'cmpl', 'jb', 'andl', 'movb', 'subl', 'jae', 'orl', 'incl', 'jbe', 'cmpb', 'testl', 'ja', 'jmp', 'decl', 'sbbl', 'testb', 'addb', 'leal', 'imull', 'xorb', 'movw', 'js', 'andb', 'jle', 'orb', 'jge', 'jns', 'jl', 'int3', 'nop', 'pushl', 'subb', 'popl', 'jg', 'shldw', 'xchgl', 'rep', 'retl', 'adcl', 'shrl', 'calll', 'shrdw', 'sbbb', 'lgdtq', 'cltd'], 0.6: ['xorl', 'movl', 'je', 'jne', 'addl', 'cmpl', 'jb', 'andl', 'movb', 'subl', 'jae', 'orl', 'incl', 'jbe', 'cmpb', 'testl', 'jmp', 'ja', 'decl', 'sbbl', 'addb', 'testb', 'leal', 'imull', 'movw', 'xorb', 'js', 'andb', 'jle', 'orb', 'jge', 'jl', 'jns', 'int3', 'nop', 'subb', 'jg', 'pushl', 'popl', 'xchgl', 'rep', 'retl', 'adcl', 'shrl', 'calll', 'sbbb', 'cltd', 'cmpw', 'shll', 'negl'], 0.65: ['xorl', 'movl', 'je', 'jne', 'addl', 'cmpl', 'jb', 'andl', 'movb', 'subl', 'jae', 'orl', 'incl', 'jbe', 'cmpb', 'testl', 'jmp', 'ja', 'decl', 'sbbl', 'addb', 'testb', 'leal', 'imull', 'movw', 'xorb', 'js', 'andb', 'jle', 'jge', 'orb', 'jl', 'jns', 'int3', 'nop', 'subb', 'jg', 'pushl', 'popl', 'xchgl', 'rep', 'adcl', 'retl', 'shrl', 'sbbb', 'calll', 'cltd', 'cmpw', 'shll', 'negl'], 0.7: ['xorl', 'movl', 'je', 'jne', 'addl', 'cmpl', 'jb', 'andl', 'movb', 'subl', 'jae', 'orl', 'incl', 'jbe', 'cmpb', 'testl', 'jmp', 'ja', 'decl', 'sbbl', 'addb', 'testb', 'leal', 'imull', 'movw', 'xorb', 'js', 'andb', 'jle', 'jge', 'orb', 'jl', 'jns', 'nop', 'int3', 'subb', 'jg', 'pushl', 'popl', 'xchgl', 'rep', 'adcl', 'retl', 'shrl', 'sbbb', 'calll', 'cltd', 'cmpw', 'negl', 'shll'], 0.75: ['xorl', 'movl', 'je', 'jne', 'addl', 'cmpl', 'andl', 'jb', 'movb', 'subl', 'jae', 'orl', 'incl', 'jbe', 'cmpb', 'testl', 'jmp', 'ja', 'decl', 'sbbl', 'addb', 'testb', 'leal', 'imull', 'movw', 'xorb', 'js', 'andb', 'jle', 'jge', 'orb', 'jl', 'jns', 'nop', 'int3', 'subb', 'jg', 'pushl', 'popl', 'xchgl', 'rep', 'adcl', 'shrl', 'retl', 'sbbb', 'calll', 'cltd', 'cmpw', 'negl', 'shll'], 0.8: ['xorl', 'movl', 'je', 'jne', 'addl', 'cmpl', 'andl', 'jb', 'movb', 'subl', 'jae', 'orl', 'incl', 'jbe', 'cmpb', 'testl', 'jmp', 'ja', 'decl', 'sbbl', 'addb', 'testb', 'leal', 'imull', 'movw', 'xorb', 'js', 'andb', 'jle', 'jge', 'orb', 'jl', 'jns', 'nop', 'int3', 'subb', 'jg', 'pushl', 'xchgl', 'popl', 'rep', 'adcl', 'shrl', 'retl', 'sbbb', 'cltd', 'calll', 'cmpw', 'negl', 'shll'], 0.85: ['xorl', 'movl', 'je', 'jne', 'addl', 'cmpl', 'andl', 'movb', 'jb', 'subl', 'jae', 'orl', 'incl', 'jbe', 'cmpb', 'testl', 'jmp', 'ja', 'decl', 'sbbl', 'addb', 'testb', 'leal', 'imull', 'movw', 'xorb', 'js', 'andb', 'jle', 'jge', 'orb', 'jl', 'jns', 'nop', 'int3', 'subb', 'jg', 'pushl', 'xchgl', 'popl', 'rep', 'adcl', 'shrl', 'retl', 'sbbb', 'cltd', 'cmpw', 'calll', 'negl', 'shll'], 0.9: ['xorl', 'movl', 'je', 'jne', 'addl', 'cmpl', 'andl', 'movb', 'jb', 'subl', 'jae', 'orl', 'incl', 'jbe', 'cmpb', 'testl', 'jmp', 'ja', 'decl', 'sbbl', 'addb', 'testb', 'leal', 'imull', 'movw', 'xorb', 'js', 'andb', 'jle', 'jge', 'orb', 'jl', 'jns', 'nop', 'int3', 'subb', 'jg', 'xchgl', 'pushl', 'popl', 'rep', 'adcl', 'shrl', 'retl', 'sbbb', 'cltd', 'cmpw', 'calll', 'negl', 'shll'], 0.95: ['xorl', 'movl', 'je', 'jne', 'addl', 'cmpl', 'andl', 'movb', 'jb', 'subl', 'jae', 'orl', 'incl', 'jbe', 'cmpb', 'testl', 'jmp', 'ja', 'decl', 'sbbl', 'addb', 'testb', 'leal', 'imull', 'movw', 'xorb', 'js', 'andb', 'jle', 'jge', 'orb', 'jl', 'jns', 'nop', 'int3', 'subb', 'jg', 'xchgl', 'pushl', 'popl', 'rep', 'adcl', 'shrl', 'sbbb', 'retl', 'cltd', 'cmpw', 'calll', 'negl', 'shll'], 1.0: ['xorl', 'movl', 'je', 'jne', 'addl', 'cmpl', 'andl', 'movb', 'jb', 'subl', 'jae', 'orl', 'incl', 'jbe', 'cmpb', 'testl', 'jmp', 'ja', 'decl', 'sbbl', 'addb', 'testb', 'leal', 'imull', 'movw', 'xorb', 'js', 'andb', 'jle', 'jge', 'orb', 'jl', 'jns', 'nop', 'int3', 'subb', 'jg', 'xchgl', 'pushl', 'popl', 'rep', 'adcl', 'shrl', 'sbbb', 'retl', 'cltd', 'cmpw', 'calll', 'negl', 'shll']}
 def get_top_k_keys(
         k,
         size=1000
@@ -185,22 +187,36 @@ def get_top_k_keys(
         {
             'data': clean,
             'dict': {},
-            'keys': []
+            'counts': {},
+            'keys': [],
+            'num_files': 0
         },
         {
             'data': infected,
             'dict': {},
-            'keys': []
+            'counts': {},
+            'keys': [],
+            'num_files': 0
         }
     ]
-    for s in sets:
+    print()
+    for si, s in enumerate(sets):
+        counts = {}
         for i, file_name in enumerate(s['data']):
+            sys.stdout.write("\033[F")
+            print(f"[{i + 1 + (si * size)}/{2 * size}]")
+            s['num_files'] += 1
             with open(
                     f"/Volumes/T7/pe_machine_learning_set/pe-machine-learning-dataset/op_code_samples/{file_name}") as file:
                 try:
                     file_data = str(file.read()).split()
                 except:
                     print(file_name)
+
+            for op in list(set(file_data)):
+                if op not in counts:
+                    counts.update({op: 0})
+                counts[op] += file_data.count(op)
 
             reduce_op_code_list_to_counts(file_data, s['dict'])
 
@@ -213,12 +229,14 @@ def get_top_k_keys(
             )
         )#[:k]
 
+        s['counts'] = counts
         temp = s['dict'].copy().keys()
 
         for z in temp:
             if z not in s['keys']:
                 s['dict'].pop(z)
 
+    sys.stdout.write("\033[F")
     return sets[0], sets[1]
 
 
@@ -243,7 +261,7 @@ def get_union(
     return union
 
 
-def get_intersection(
+def get_common(
         k,
         verbose=False,
         clean=None,
@@ -257,11 +275,38 @@ def get_intersection(
     intersection = list(filter(lambda x: x in clean, infected))
 
     if verbose:
-        print(f'Intersection - {k}')
+        print(f'Common - {k}')
         print(sorted(intersection))
         print(len(intersection))
 
     return intersection
+
+
+def get_intersection(
+        k,
+        verbose=False,
+        clean=None,
+        infected=None
+):
+    if clean is None or infected is None:
+        clean, infected = get_top_k_keys(k)
+    elif (clean is None or infected is None) and k is None:
+        raise Exception("Either Clean and Infected or k must not be None")
+
+    common = {}
+    for k, v in clean['dict'].items():
+        common.update({k: v})
+    for k, v in infected['dict'].items():
+        if k not in common:
+            common.update({k: 0})
+        common[k] += v
+
+    if verbose:
+        print(f'Intersection - {k}')
+        print(sorted(common))
+        print(len(common))
+
+    return common
 
 
 def get_disjoint(
@@ -326,7 +371,7 @@ def get_ratio(
     keys = list(ratio_dict.keys())[:k]
 
     if verbose:
-        print(f'Ratio - {k}')
+        print(f'Ratio - {k} - alpha: {alpha}')
         print(sorted(keys))
         print(len(keys))
 
@@ -335,40 +380,41 @@ def get_ratio(
 
 if __name__ == "__main__":
 
-    ks = [50, 100]
-    clean, infected = get_top_k_keys(max(ks), 250)
-    op = ['mov', 'push', 'call', 'cmp', 'test', 'jmp', 'add', 'sub']
-    for o in op:
-        new = {}
-        for k in clean['dict']:
-            if o in k:
-                if k not in new:
-                    new.update({k: 0})
-                new[k] += clean['dict'][k]
-        for k in infected['dict']:
-            if o in k:
-                if k not in new:
-                    new.update({k: 0})
-                new[k] += infected['dict'][k]
+    ks = [50]
+    # just returns percent of files it happens in, get total count
+    clean, infected = get_top_k_keys(10000, 6000)
+    # print(clean)
+    # raise Exception
 
-        print([k for k in new if new[k] > 150])
-    raise Exception
-    for k in ks:
+    num_files = clean['num_files'] + infected['num_files']
 
-        _clean = clean[:k]
-        _infected = infected[:k]
+    op_clusters = ['malware_cluster', 'common_cluster']
+    for op_cluster in op_clusters:
+        print()
+        file_count = {}
+        op_percent = {}
 
-        print(f"Clean only - {k}")
-        print(sorted(_clean))
-        print()
-        print(f"Infected only - {k}")
-        print(sorted(_infected))
-        print()
+        for k, v in clean['counts'].items():
+            if k in OP_CODE_CLUSTER[op_cluster]:
+                c = OP_CODE_CLUSTER[op_cluster][k]
+            else:
+                c = 'other'
+            if c not in op_percent:
+                op_percent.update({c: v})
+            else:
+                op_percent[c] += v
+        for k, v in infected['counts'].items():
+            if k in OP_CODE_CLUSTER[op_cluster]:
+                c = OP_CODE_CLUSTER[op_cluster][k]
+            else:
+                c = 'other'
+            if c not in op_percent:
+                op_percent.update({c: v})
+            else:
+                op_percent[c] += v
+        print(op_cluster)
+        for k in op_percent:
+            print(k, op_percent[k])
+        print(sum(op_percent.values()))
 
-        get_union(k, verbose=True, clean=_clean, infected=_infected)
-        print()
-        get_intersection(k, verbose=True, clean=_clean, infected=_infected)
-        print()
-        get_disjoint(k, verbose=True, clean=_clean, infected=_infected)
-        print()
 

@@ -38,7 +38,7 @@ class MultiLayerClassifier(nn.Module):
     def fit(self, X, y, X_test=None, y_test=None, training_stages=None):
 
         if training_stages is None:
-            training_stages = [(0.0001, 250)]
+            training_stages = [(0.0002, 100), (0.0001, 500)]
 
         if not torch.is_tensor(X):
             _X = torch.tensor(X).float()

@@ -246,7 +246,7 @@ if __name__ == "__main__":
     pruned = False
 
     # ops = ['benign', 'infected', 'union', 'intersection', 'disjoint', 'ratio', 'ratio_a75']
-    ops = ['common_cluster']
+    ops = ['benign', 'infected', 'common_cluster', 'malware_cluster']
 
     for t in [
         # {
@@ -270,12 +270,12 @@ if __name__ == "__main__":
                 # 'threshold': lambda a, b: a / b
             }
         },
-        {
-            'method': 'share',
-            'distributions': {
-                'linear': lambda a, b: a / 1000,
-            }
-        },
+        # {
+        #     'method': 'share',
+        #     'distributions': {
+        #         'linear': lambda a, b: a / 1000,
+        #     }
+        # },
     ]:
         temp_ops = {x: OP_CODE_DICT[t['method'] if pruned else 'base'][x] for x in ops}
         write_jumps_bins_sample(
@@ -284,7 +284,7 @@ if __name__ == "__main__":
             path=f"/Volumes/T7/pe_machine_learning_set/pe-machine-learning-dataset/"
                  f"op_code_distributions_samples/",
             op_code_options=temp_ops,
-            bins=[25, 100],
+            bins=[250],
             iterations=10,
             funcs_dictionary=t['distributions'],
             method=t['method'],

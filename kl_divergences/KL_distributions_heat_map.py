@@ -84,7 +84,7 @@ def get_difference_matrix(
                     value = KL(data[i, :, row], data[j, :, row])
                     differences[i, j] += value
     return {
-        'differences': differences / differences.max(),
+        'differences': differences,
         'split_index': len(clean_arr)
     }
 
@@ -99,12 +99,12 @@ def distributions_heat_map(
     pruned=False
 ):
     prune_path = 'base' if not pruned else 'pruned'
-    op_code_distribution_path = f"{op_code_distribution_path}/{METHOD}/{prune_path}/{op_code_sample}/op_codes"
+    _op_code_distribution_path = f"{op_code_distribution_path}/{METHOD}/{prune_path}/{op_sample}/op_codes"
 
-    _keys = sorted(list(set(OP_CODE_CLUSTER[op_sample].values())))
+    # _keys = sorted(list(set(OP_CODE_CLUSTER[op_sample].values())))
     # for i in range(len(_keys)):
     differences = get_difference_matrix(
-        op_code_distribution_path=op_code_distribution_path,
+        op_code_distribution_path=_op_code_distribution_path,
         distribution=distribution,
         bins=bins,
         sample_size=sample_size,
@@ -114,7 +114,7 @@ def distributions_heat_map(
 
     plt.imshow(differences, cmap='hot', interpolation=None)
     #{_keys[i]}
-    plt.title(f"- {op_sample}, {distribution}, bins: {bins}, samples: {sample_size}")
+    plt.title(f"{op_sample.capitalize()} - bins: {bins}, samples: {sample_size}")
     plt.show()
 
 
@@ -153,11 +153,11 @@ def distribution_efficacy(
 
 
 if __name__ == "__main__":
-    METHOD = "jump"
-    op_code_samples = ['common_cluster'] #, 'infected', 'union', 'intersection', 'disjoint', 'ratio', 'ratio_a75']
+    METHOD = "share"
+    op_code_samples = ['benign', 'infected', 'union', 'intersection', 'disjoint']
     for op_code_sample in op_code_samples:
         for distributions in ['linear']: #, 'log10', 'log100', 'threshold']:
-            for bins in [25, 100]:
+            for bins in [100]:
                 distributions_heat_map(
                     op_code_distribution_path=f"/Volumes/T7/pe_machine_learning_set/pe-machine-learning-dataset/"
                                               f"op_code_distributions_samples/",
