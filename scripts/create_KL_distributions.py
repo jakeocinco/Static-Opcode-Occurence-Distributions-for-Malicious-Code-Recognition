@@ -5,9 +5,12 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 from op_codes import *
+from config import *
 
 
 def make_directory(path):
+    # This is just a safe make directory function
+    # In this case it does not matter if it already exists
     try:
         os.mkdir(path)
     except FileExistsError:
@@ -15,6 +18,8 @@ def make_directory(path):
 
 
 def _find_all_sub_paths(path):
+    # Split a long destionation down into a list of all paths between the end and root.
+    # This is just used to make sure all folders are made if needed
     index = path.rfind("/")
     if index > 0:
         temp = path[:index]
@@ -33,17 +38,20 @@ def _create_all_possible_sub_directories(base_path, variants):
     )
     directories = list(set([item for sublist in directories for item in sublist]))
     directories.sort(key=len)
+
     for directory in directories:
         make_directory(base_path + "/" + directory)
 
 
-def get_len(op_code_options, option):
+def _get_number_of_opcodes_tracked(op_code_options, option):
+    # The size of the distribution changes depending on which method is used
     if option in OP_CODE_CLUSTER:
         return len(list(set(OP_CODE_CLUSTER[option].values())))
     return len(op_code_options[option])
 
 
 def _get_variant_base_func(base_path, funcs_dictionary, bins, op_code_options):
+    # returns a function used to allocate the vectors and variables for each bin version
     def func(sample_size, image_path, iteration):
         return {
             dist: {
@@ -51,14 +59,16 @@ def _get_variant_base_func(base_path, funcs_dictionary, bins, op_code_options):
                     op_code_option: {
                         'bins': {
                             bin_size: {
-                                'image_data': np.zeros((get_len(op_code_options, op_code_option), bin_size)),
+                                'image_data': np.zeros((
+                                    _get_number_of_opcodes_tracked(op_code_options, op_code_option),
+                                    bin_size)),
                                 'sub_path': f"{op_code_option}/op_codes/{dist}/{bin_size}_bins/"
                                             f"{sample_size}_samples/{image_path}/{iteration}.npy",
                                 'path': f"{base_path}/{op_code_option}/op_codes/{dist}/{bin_size}_bins/"
                                         f"{sample_size}_samples/{image_path}/{iteration}.npy"
                             } for bin_size in bins
                         },
-                        'length': get_len(op_code_options, op_code_option)
+                        'length': _get_number_of_opcodes_tracked(op_code_options, op_code_option)
                     } for op_code_option in op_code_options
                 },
                 'distribution_func': funcs_dictionary[dist],
@@ -67,71 +77,89 @@ def _get_variant_base_func(base_path, funcs_dictionary, bins, op_code_options):
     return func
 
 
-def _get_split_file_lists(op_code_directory):
-    op_code_list = os.listdir(f"{op_code_directory}/op_code_samples/")
-    if '.DS_Store' in op_code_list:
-        op_code_list.remove('.DS_Store')
+def _get_split_file_lists():
+    # This functions gets all of the training sample op code lists and splits them into
+    # two lists
+    op_code_list = []
+    clean_all = []
+    infected_all = []
 
-    clean_all = list(
-        filter(
-            lambda x: 'clean' in x,
-            op_code_list
+    for training_set in TRAINING_SAMPLES:
+        _op_code_list = os.listdir(training_set['op_code_list_directory'])
+        _op_code_list = list(
+            map(
+                lambda x: f"{training_set['op_code_list_directory']}/{x}",
+                _op_code_list
+            )
         )
-    )
-    infected_all = list(
-        filter(
-            lambda x: 'infect' in x,
-            op_code_list
+        if '.DS_Store' in _op_code_list:
+            _op_code_list.remove('.DS_Store')
+
+        clean_all += list(
+            filter(
+                lambda x: 'clean' in x,
+                _op_code_list
+            )
         )
-    )
+        infected_all += list(
+            filter(
+                lambda x: 'infect' in x,
+                _op_code_list
+            )
+        )
+        op_code_list += _op_code_list
     return op_code_list, clean_all, infected_all
 
 
-def write_jumps_bins_sample(
-    op_code_directory,
-    funcs_dictionary,
-    path,
-    op_code_options,
-    method,
-    bins=None,
-    sample_sizes=None,
-    iterations=1,
+def write_aggregated_distribution_sets(
+    op_code_sets,
+    bins,
+    sample_sizes,
+    number_of_distributions=1,
+    method='jump',
     pruned=False
 ):
+    # This function creates aggregated distribution sets over a number of different parameters
+    #   op_code_sets - this function can take in multiple opcode sets to minimize amount of files that need reread
+    #   bins - the number of bins in the distribution, array of ints
+    #   sample_sizes - number of samples used to create each bin, array of ints
+    #   number_of_distributions - number of distributions to create, int
+    #   method - the distribution method, should be jump but others can be tested
+    #   pruned - whether or not the pruned version of each opcode should be tested (ignore stick with False)
 
-    if method not in ['jump', 'cumulative_share', 'share', 'inverse_jump']:
+    # At one point different distributions were tested but this just muddied the test and added extra params
+    # Leaving this here since it is still implemented and could be tested further but it is probably not worth it
+    funcs_dictionary = {'linear': lambda a, b: a / 1000}
+
+    # Currently the only methods used. Others can be added this is just a safety check
+    if method not in ['jump', 'cumulative_share', 'share']:
         raise Exception(f'Unknown Method | {method}')
 
-    path = f"{path}/{method}/{'pruned' if pruned else 'base'}"
+    distribution_path = f"{DISTRIBUTION_SAMPLE_PATH}/{method}/{'pruned' if pruned else 'base'}"
 
-    if bins is None:
-        bins = [100]
-
-    if sample_sizes is None:
-        sample_sizes = [-1]
-
+    # returns a function used to allocate the vectors and variables for each bin version
+    # this will be used for distribution
     variant_func = _get_variant_base_func(
-        path,
+        distribution_path,
         funcs_dictionary,
         bins,
-        op_code_options
+        op_code_sets
     )
 
-    op_code_list, clean_all, infected_all = _get_split_file_lists(op_code_directory)
+    # get all files
+    op_code_list, clean_all, infected_all = _get_split_file_lists()
     len_op_code_list = len(op_code_list)
     del op_code_list
 
     dt = datetime.now()
-    for iteration in range(iterations):
-
+    for iteration in range(number_of_distributions):
         for sample_size in sample_sizes:
-
             if sample_size < 0:
                 raise Exception(f'Cannot use negative sample size | sample size: {len_op_code_list}')
 
+            # Different files are selected for different iterations, this ensures that they do not overlap
             clean = clean_all[(sample_size * iteration):(sample_size * (iteration + 1))]
             infected = infected_all[(sample_size * iteration):(sample_size * (iteration + 1))]
-
             print(f"Ops: {len_op_code_list}, "
                   f"clean: {len(clean_all)}/{len(clean)}, "
                   f"infected: {len(infected_all)}/{len(infected)}")
@@ -149,6 +177,7 @@ def write_jumps_bins_sample(
 
                 arr = sets['data']
 
+                # getting empty distributions for this iteration
                 variants = variant_func(
                     sample_size=sample_size,
                     image_path=sets['image_path'],
@@ -156,13 +185,13 @@ def write_jumps_bins_sample(
                 )
 
                 _create_all_possible_sub_directories(
-                    base_path=path,
+                    base_path=distribution_path,
                     variants=variants
                 )
 
                 for _, file_name in enumerate(arr):
 
-                    with open(f'{op_code_directory}/op_code_samples/{file_name}') as file:
+                    with open(file_name) as file:
                         try:
                             file_data = str(file.read()).split()
                         except:
@@ -170,24 +199,25 @@ def write_jumps_bins_sample(
 
                     file_operations, line_index = reduce_multiple_op_code_lists_to_index_lists(
                         file_data,
-                        op_code_options
+                        op_code_sets
                     )
 
-                    # TODO - use the index of the op and count how many we have seen
-                    #   track bins by line_index which I believe to be the last line number of a file
-                    for option, data_ in file_operations.items():
+                    #for each opcode set
+                    for opcode_option, data_ in file_operations.items():
                         op_keys = sorted(list(data_.keys()))
+                        # then for each op code in each set
                         for i, op in enumerate(op_keys):
-                            number_of_operation_instances = len(file_operations[option][op])
-                            file_operations[option][op] = sorted(file_operations[option][op])
-                            if method == 'jump' or method == 'inverse_jump':
+                            number_of_operation_instances = len(file_operations[opcode_option][op])
+                            file_operations[opcode_option][op] = sorted(file_operations[opcode_option][op])
+
+                            # iterate the correct bin (or bins) based on the method being used
+                            if method == 'jump':
                                 if number_of_operation_instances > 1:
                                     for jump_index in range(number_of_operation_instances - 1):
-                                        jump = file_operations[option][op][jump_index + 1] - file_operations[option][op][jump_index]
+                                        jump = file_operations[opcode_option][op][jump_index + 1] - file_operations[option][op][jump_index]
 
                                         for d in variants:
                                             for b in variants[d]['options'][option]['bins']:
-                                                # TODO make this a function we pass in
                                                 mapped_jump = variants[d]['distribution_func'](jump, b)
                                                 if mapped_jump < 1:
                                                     key = int((mapped_jump * b) // 1)
@@ -215,24 +245,15 @@ def write_jumps_bins_sample(
                 for d in variants:
                     for option in variants[d]['options']:
                         for b in variants[d]['options'][option]['bins']:
+                            # for each op and bin, divide on the correct axis to create the distribution
                             if method == 'jump':
                                 for i in range(variants[d]['options'][option]['length']):
                                     variants[d]['options'][option]['bins'][b]['image_data'][i, :] \
                                         *= 1 / (sum(variants[d]['options'][option]['bins'][b]['image_data'][i, :]) + 1)
-                            elif method in ['cumulative_share', 'share', 'inverse_jump']:
+                            elif method in ['cumulative_share', 'share']:
                                 for i in range(b):
                                     variants[d]['options'][option]['bins'][b]['image_data'][:, i] \
                                         *= 1 / max(sum(variants[d]['options'][option]['bins'][b]['image_data'][:, i]), 1)
-                                # for i in range(variants[d]['options'][option]['length']):
-                                #     value = sum(variants[d]['options'][option]['bins'][b]['image_data'][i, :])
-                                #     variants[d]['options'][option]['bins'][b]['image_data'][i, :] \
-                                #         *= 1 / (value if value > 0 else .001)
-
-                            # for i in range(4):
-                            #     print(sum(variants[d]['options'][option]['bins'][b]['image_data'][i]))
-                            #     print(variants[d]['options'][option]['bins'][b]['image_data'][i])
-                            # plt.imshow(variants[d]['options'][option]['bins'][b]['image_data'])
-                            # plt.show()
 
                             with open(variants[d]['options'][option]['bins'][b]['path'], 'wb') as file:
                                 np.save(file, variants[d]['options'][option]['bins'][b]['image_data'])
@@ -243,51 +264,24 @@ def write_jumps_bins_sample(
 
 if __name__ == "__main__":
 
+    # Parameters of script
     pruned = False
+    ops = ['benign'] #, 'infected', 'union', 'intersection', 'disjoint', 'ratio', 'ratio_a75']
+    method = 'jump'
+    num_bins = [25, 100]
+    number_of_distributions = 10
+    num_samples = [500]
 
-    # ops = ['benign', 'infected', 'union', 'intersection', 'disjoint', 'ratio', 'ratio_a75']
-    ops = ['benign', 'infected', 'common_cluster', 'malware_cluster']
+    # The ops change if the data is pruned, so this gets the correct opcode sets
+    temp_ops = {x: OP_CODE_DICT[method if pruned else 'base'][x] for x in ops}
 
-    for t in [
-        # {
-        #     'method': 'inverse_jump',
-        #     'distributions': {
-        #         'linear': lambda a, b: a / 1000,
-        #     }
-        # },
-        # {
-        #     'method': 'cumulative_share',
-        #     'distributions': {
-        #         'linear': lambda a, b: a / 1000,
-        #     }
-        # },
-        {
-            'method': 'jump',
-            'distributions': {
-                'linear': lambda a, b: a / 1000,
-                # 'log10': lambda a, b: math.log(1 + ((a / 1000) * 9), 10),
-                # 'log100': lambda a, b: math.log(1 + ((a / 1000) * 99), 100),
-                # 'threshold': lambda a, b: a / b
-            }
-        },
-        # {
-        #     'method': 'share',
-        #     'distributions': {
-        #         'linear': lambda a, b: a / 1000,
-        #     }
-        # },
-    ]:
-        temp_ops = {x: OP_CODE_DICT[t['method'] if pruned else 'base'][x] for x in ops}
-        write_jumps_bins_sample(
-            op_code_directory="/Volumes/T7/pe_machine_learning_set/pe-machine-learning-dataset/",
-            sample_sizes=[500],
-            path=f"/Volumes/T7/pe_machine_learning_set/pe-machine-learning-dataset/"
-                 f"op_code_distributions_samples/",
-            op_code_options=temp_ops,
-            bins=[250],
-            iterations=10,
-            funcs_dictionary=t['distributions'],
-            method=t['method'],
-            pruned=pruned
-        )
+    write_aggregated_distribution_sets(
+        sample_sizes=num_samples,
+        op_code_sets=temp_ops,
+        bins=num_bins,
+        number_of_distributions=number_of_distributions,
+        method=method,
+        pruned=pruned
+    )
+
 
