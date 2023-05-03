@@ -2,7 +2,7 @@ import numpy as np
 import random
 from PIL import Image
 from time import time
-from op_codes import *
+
 import math
 import matplotlib.pyplot as plt
 import sys
@@ -11,6 +11,7 @@ from datetime import datetime
 from copy import deepcopy
 import pickle
 
+from base_functions import *
 
 
 import json

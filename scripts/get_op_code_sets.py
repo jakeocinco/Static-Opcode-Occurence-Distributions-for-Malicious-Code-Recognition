@@ -7,6 +7,28 @@ from base_functions import *
 
 # This script is used to get new opcode sets
 
+def reduce_op_code_list_to_counts(op_code_occurrence_list, file_operations=None):
+
+    temp = {}
+    for line_index, line in enumerate(op_code_occurrence_list):
+        operation = line
+        if len(operation.split()) > 1:
+            operation = operation.split()[0]
+
+        if operation not in temp:
+            temp.update({operation: 0})
+        temp[operation] += 1
+
+    if file_operations is None:
+        file_operations = {}
+    else:
+        for x in list(set(list(file_operations.keys()) + list(temp.keys()))):
+            if x in temp and temp[x] >= 2 and x in file_operations:
+                file_operations[x] += 1
+            elif x in temp and temp[x] >= 2 and x not in file_operations:
+                file_operations.update({x: 1})
+
+
 def get_top_k_keys(
         k,
         num_files=1000
@@ -89,7 +111,7 @@ def get_union(
         print(sorted(union))
         print(len(union))
 
-    return union
+    return sorted(union)
 
 
 def get_intersection(
@@ -110,7 +132,7 @@ def get_intersection(
         print(sorted(intersection))
         print(len(intersection))
 
-    return intersection
+    return sorted(intersection)
 
 
 def get_disjoint(
@@ -134,7 +156,7 @@ def get_disjoint(
         print(sorted(disjoint))
         print(len(disjoint))
 
-    return disjoint
+    return sorted(disjoint)
 
 
 def get_ratio(

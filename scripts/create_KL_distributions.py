@@ -4,9 +4,7 @@ from datetime import datetime
 import numpy as np
 import matplotlib.pyplot as plt
 
-from op_codes import *
 from base_functions import *
-from config import *
 
 
 def make_directory(path):
