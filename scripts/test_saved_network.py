@@ -1,4 +1,4 @@
-from KL_models import get_distribution_data, KL
+from train_models import get_distribution_data, KL
 
 import numpy as np
 import math

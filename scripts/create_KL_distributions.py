@@ -42,13 +42,6 @@ def _create_all_possible_sub_directories(base_path, variants):
         make_directory(base_path + "/" + directory)
 
 
-def _get_number_of_opcodes_tracked(op_code_options, option):
-    # The size of the distribution changes depending on which method is used
-    if option in OP_CODE_CLUSTER:
-        return len(list(set(OP_CODE_CLUSTER[option].values())))
-    return len(op_code_options[option])
-
-
 def _get_variant_base_func(base_path, funcs_dictionary, bins, op_code_options):
     # returns a function used to allocate the vectors and variables for each bin version
     def func(sample_size, image_path, iteration):
@@ -59,7 +52,7 @@ def _get_variant_base_func(base_path, funcs_dictionary, bins, op_code_options):
                         'bins': {
                             bin_size: {
                                 'image_data': np.zeros((
-                                    _get_number_of_opcodes_tracked(op_code_options, op_code_option),
+                                    get_number_of_opcodes_tracked(op_code_options, op_code_option),
                                     bin_size)),
                                 'sub_path': f"{op_code_option}/op_codes/{dist}/{bin_size}_bins/"
                                             f"{sample_size}_samples/{image_path}/{iteration}.npy",
@@ -67,7 +60,7 @@ def _get_variant_base_func(base_path, funcs_dictionary, bins, op_code_options):
                                         f"{sample_size}_samples/{image_path}/{iteration}.npy"
                             } for bin_size in bins
                         },
-                        'length': _get_number_of_opcodes_tracked(op_code_options, op_code_option)
+                        'length': get_number_of_opcodes_tracked(op_code_options, op_code_option)
                     } for op_code_option in op_code_options
                 },
                 'distribution_func': funcs_dictionary[dist],

@@ -1,70 +1,29 @@
-import numpy as np
 import random
-from PIL import Image
-from time import time
-
-import math
-import matplotlib.pyplot as plt
 import sys
-
-from datetime import datetime
-from copy import deepcopy
 import pickle
+
+from time import time
+from copy import deepcopy
+
+import numpy as np
 
 from base_functions import *
 
 
-import json
-from sklearn import svm
-from sklearn.linear_model import RidgeClassifier, SGDClassifier, LogisticRegression
-from sklearn.preprocessing import StandardScaler
-from sklearn.neural_network import MLPClassifier
-from sklearn.cluster import KMeans
-from sklearn.decomposition import PCA
-from overwrite_dict import overwrite_dictionary_entries
-
-from classifiers.MultiLayerClassifier import MultiLayerClassifier
-from scipy.stats import mannwhitneyu, ranksums
-
-
-def get_len(op_code_options, option):
-    if option in OP_CODE_CLUSTER:
-        return len(list(set(OP_CODE_CLUSTER[option].values())))
-    return len(op_code_options[option])
-
-
-def Mann_Whitney_U(a, b):
-    _a = (a * 1000).astype(int)
-    _b = (b * 1000).astype(int)
-
-    a_expanded_counts = []
-    b_expanded_counts = []
-    for i in range(a.shape[0]):
-        a_expanded_counts += [i + random.random() for _ in range(_a[i])]
-        b_expanded_counts += [i + random.random() for _ in range(_b[i])]
-    a_expanded_counts = (np.array(a_expanded_counts))
-    b_expanded_counts = (np.array(b_expanded_counts))
-    # print(a_expanded_counts.shape)
-    # print(b_expanded_counts.shape)
-    U, p = mannwhitneyu(a_expanded_counts, b_expanded_counts)
-    return p
-
-
-def KL(a, b):
-    a = np.asarray(a, dtype=np.float) + .000001
-    b = np.asarray(b, dtype=np.float) + .000001
-    return max(.1, np.sum(a * np.log(a / b), 0))
-
-
-def _get_image_to_distribution(path, method):
-    # print(path)
+def _get_image_to_distribution(path):
     _image_data = np.load(path)
-    # print(_image_data[0])
-    # print(sum(_image_data[0]))
     return _image_data
 
 
-def _get_variant_base_func(base_path, funcs_dictionary, bins, op_code_types, kl_func_dict, training_size, method, pruned_path):
+def _get_variant_base_func(
+        funcs_dictionary,
+        bins,
+        op_code_types,
+        kl_func_dict,
+        cumulative_distribution_samples_used,
+        method,
+        pruned_path
+):
     def func(sample_size, iteration):
         return {
             dist: {
@@ -73,19 +32,19 @@ def _get_variant_base_func(base_path, funcs_dictionary, bins, op_code_types, kl_
                         'bins': {
                             bin_size: {
                                 'image_data': np.zeros(
-                                    (get_len(OP_CODE_DICT[pruned_path], op_code_type), bin_size)
+                                    (get_number_of_opcodes_tracked(OP_CODE_DICT[pruned_path], op_code_type), bin_size)
                                 ),
                                 'clean_data': _get_image_to_distribution(
-                                    f"{base_path}/{op_code_type}/op_codes/{dist}/{bin_size}_bins/{training_size}_samples/clean/{iteration}.npy",
-                                    method
+                                    f"{DISTRIBUTION_SAMPLE_PATH}/{method}/{pruned_path}/{op_code_type}/op_codes/{dist}/"
+                                    f"{bin_size}_bins/{cumulative_distribution_samples_used}_samples/clean/{iteration}.npy"
                                 ),
                                 'infected_data': _get_image_to_distribution(
-                                    f"{base_path}/{op_code_type}/op_codes/{dist}/{bin_size}_bins/{training_size}_samples/infected/{iteration}.npy",
-                                    method
+                                    f"{DISTRIBUTION_SAMPLE_PATH}/{method}/{pruned_path}/{op_code_type}/op_codes/{dist}/"
+                                    f"{bin_size}_bins/{cumulative_distribution_samples_used}_samples/infected/{iteration}.npy"
                                 ),
                                 'kl_funcs': {
                                     kl_func: {
-                                        'X': np.zeros((sample_size, 2 * get_len(OP_CODE_DICT[pruned_path], op_code_type) if method == 'jump' else bin_size * 2)),
+                                        'X': np.zeros((sample_size, 2 * get_number_of_opcodes_tracked(OP_CODE_DICT[pruned_path], op_code_type) if method == 'jump' else bin_size * 2)),
                                         # 'X': np.zeros((sample_size, 2 * length)),
                                         'y': np.zeros(sample_size),
                                         'clean': kl_func_dict[kl_func][0],
@@ -112,14 +71,12 @@ def _get_empty_data_sets(funcs_dictionary, bins, length):
 
 
 def get_distribution_data(
-        op_code_directory,
-        path,
         iteration,
         distribution_funcs,
         sample_size,
         bins,
         op_code_types,
-        training_size,
+        cumulative_distribution_samples_used,
         kl_funcs,
         method,
         pruned=False,
@@ -127,7 +84,7 @@ def get_distribution_data(
         update_text_prefix='',
         exclude_files=True
 ):
-    if method not in ['jump', 'cumulative_share', 'share', 'inverse_jump']:
+    if method not in ['jump', 'cumulative_share', 'share']:
         raise Exception(f'Unknown Method | {method}')
 
     if random_seed > 0:
@@ -140,45 +97,32 @@ def get_distribution_data(
         op_codes += OP_CODE_DICT[pruned_path][op_code_type]
     op_codes = sorted(list(set(op_codes)))
 
-    # length = get_len(OP_CODE_DICT[pruned_path], method)
-
     variant_func = _get_variant_base_func(
-        path,
         distribution_funcs,
         bins,
         op_code_types=op_code_types,
         kl_func_dict=kl_funcs,
-        training_size=training_size,
+        cumulative_distribution_samples_used=cumulative_distribution_samples_used,
         method=method,
         pruned_path=pruned_path
     )
 
-    arr = os.listdir(f"{op_code_directory}/op_code_samples/")
-    if '.DS_Store' in arr:
-        arr.remove('.DS_Store')
+    arr, clean, infected = get_split_file_lists()
 
     # these are the images used in the distribution, don't want to fit or test off of those
-    l = training_size * iteration if exclude_files else 0
-    u = training_size * (iteration + 1) if exclude_files else 1
-    clean = list(
-        filter(
-            lambda x: 'clean' in x,
-            arr
-        )
-    )[l:u]
-    infected = list(
-        filter(
-            lambda x: 'infect' in x,
-            arr
-        )
-    )[l:u]
+    l = cumulative_distribution_samples_used * iteration
+    u = cumulative_distribution_samples_used * (iteration + 1)
+    clean = clean[l:u]
+    infected = infected[l:u]
 
-    arr = list(
-        filter(
-            lambda x: not (x in infected or x in clean),
-            arr
+    # When testing on sets that do not include the training data we do not need to exclude any files
+    if exclude_files:
+        arr = list(
+            filter(
+                lambda x: not (x in infected or x in clean),
+                arr
+            )
         )
-    )
 
     random.shuffle(arr)
     sample_size = min(sample_size, len(arr))
@@ -194,11 +138,10 @@ def get_distribution_data(
 
     print(f"{update_text_prefix}[0/{sample_size}]        ")
     for file_index, file_name in enumerate(arr):
-        # if ((file_index + 1) % 100) == 0:
         sys.stdout.write("\033[F")
         print(f"{update_text_prefix}[{file_index + 1}/{sample_size}]")
 
-        with open(f'{op_code_directory}/op_code_samples/{file_name}') as file:
+        with open(file_name) as file:
             try:
                 file_data = str(file.read()).split()
             except:
@@ -206,8 +149,7 @@ def get_distribution_data(
 
         combined_file_operations, line_index = reduce_op_code_list_to_index_list(
             file_data,
-            op_codes,
-            # (None if (op_code_type not in OP_CODE_CLUSTER) else OP_CODE_CLUSTER[op_code_type])
+            op_codes
         )
 
         for op_code_type in op_code_types:
@@ -225,7 +167,7 @@ def get_distribution_data(
                 enum_ops = sorted(OP_CODE_DICT[pruned_path][op_code_type])
                 file_operations = { k: v for k, v in combined_file_operations.items() if k in enum_ops}
 
-            length = get_len(OP_CODE_DICT[pruned_path], op_code_type)
+            length = get_number_of_opcodes_tracked(OP_CODE_DICT[pruned_path], op_code_type)
             current_images = _get_empty_data_sets(
                 funcs_dictionary=distribution_funcs,
                 bins=bins,
@@ -234,7 +176,7 @@ def get_distribution_data(
 
             for i, op in enumerate(enum_ops):
                 file_operations[op] = sorted(file_operations[op])
-                if method in ['jump', 'inverse_jump']:
+                if method in ['jump']:
                     number_of_operation_instances = len(file_operations[op])
 
                     if number_of_operation_instances > 1:
@@ -278,14 +220,11 @@ def get_distribution_data(
                         for i in range(length):
                             current_images[d][b][i, :] += 1
                             current_images[d][b][i, :] *= 1 / (sum(current_images[d][b][i, :]))
-            elif method in ['cumulative_share', 'share', 'inverse_jump']:
+            elif method in ['cumulative_share', 'share']:
                 for d in variants:
                     for b in variants[d]['op_code_types'][op_code_type]['bins']:
                         for i in range(b):
                             current_images[d][b][:, i] *= (1 / max(sum(current_images[d][b][:, i]), 0.001))
-                        # for i in range(length):
-                        #     value = sum(current_images[d][b][i, :])
-                        #     current_images[d][b][i, :] *= 1 / (value if value > 0 else .001)
 
             for d in variants:
                 for b in variants[d]['op_code_types'][op_code_type]['bins']:
@@ -304,7 +243,7 @@ def get_distribution_data(
                                         current_images[d][b][r],
                                         variants[d]['op_code_types'][op_code_type]['bins'][b]['infected_data'][r]
                                     )
-                        elif method in ['share', 'cumulative_share', 'inverse_jump']:
+                        elif method in ['share', 'cumulative_share']:
                             for r in range(current_images[d][b].shape[1]):
                                 if sum(current_images[d][b][:, r]) == 0:
                                     current_images[d][b][:, r] += 1 / current_images[d][b].shape[0]
@@ -321,13 +260,9 @@ def get_distribution_data(
                                         variants[d]['op_code_types'][op_code_type]['bins'][b]['infected_data'][:, r]
                                     )
 
-                        # variants[d]['bins'][b]['kl_funcs'][kl_func]['X'][file_index] = \
-                        #     variants[d]['bins'][b]['kl_funcs'][kl_func]['X'][file_index] \
-                        #     / (max(variants[d]['bins'][b]['kl_funcs'][kl_func]['X'][file_index]) + 1)
-
                         variants[d]['op_code_types'][op_code_type]['bins'][b]['kl_funcs'][kl_func]['y'][file_index] = 'clean' in file_name
 
-    # Remove lambdas so we can pickle this dictionary
+    # Remove lambdas so we can pickle this dictionary to save data
     for d in variants:
         variants[d].pop('distribution_func')
         for op_type in variants[d]['op_code_types']:
@@ -335,9 +270,6 @@ def get_distribution_data(
                 for kl_func in variants[d]['op_code_types'][op_type]['bins'][b]['kl_funcs']:
                     variants[d]['op_code_types'][op_type]['bins'][b]['kl_funcs'][kl_func].pop('clean')
                     variants[d]['op_code_types'][op_type]['bins'][b]['kl_funcs'][kl_func].pop('infected')
-                    # print(
-                    #     variants[d]['op_code_types'][op_type]['bins'][b]['kl_funcs'][kl_func]['X'].shape
-                    # )
 
     sys.stdout.write("\033[F")
     return variants
@@ -441,16 +373,13 @@ def train_data_on_models(
             pickle.dump(top_model, open(file_name, "wb"))
 
 
-def compare_distribution_data(
-        op_code_directory,
-        path,
+def get_test_accuracy_of_process(
         iterations,
-        distribution_funcs,
         sample_sizes,
         models,
         bins,
         op_code_types,
-        training_size,
+        cumulative_distribution_samples_used,
         kl_funcs,
         method,
         random_seed,
@@ -458,6 +387,9 @@ def compare_distribution_data(
         test_size=100
 ):
     result_json = {}
+    distribution_funcs = {
+        'linear': lambda a, b: a / 1000
+    }
 
     for sample_size in sample_sizes:
 
@@ -472,24 +404,22 @@ def compare_distribution_data(
             # ).item()
 
             variants = get_distribution_data(
-                op_code_directory=op_code_directory,
-                path=path,
                 iteration=iteration,
                 distribution_funcs=distribution_funcs,
                 sample_size=sample_size,
                 bins=bins,
                 op_code_types=op_code_types,
-                training_size=training_size,
+                cumulative_distribution_samples_used=cumulative_distribution_samples_used,
                 kl_funcs=kl_funcs,
                 method=method,
                 pruned=pruned,
                 random_seed=random_seed
             )
 
-            np.save(
-                f,
-                variants
-            )
+            # np.save(
+            #     f,
+            #     variants
+            # )
             # np.save(
             #     f,
             #     overwrite_dictionary_entries(n=variants, o=_variants)
@@ -510,16 +440,13 @@ def compare_distribution_data(
     return result_json
 
 
-def combine_opcode_sets(
-        op_code_directory,
-        path,
+def get_test_accuracy_of_process_combined_op_code_sets(
         iterations,
-        distribution_funcs,
         sample_sizes,
         models,
         bins,
         op_code_type_sets,
-        training_size,
+        cumulative_distribution_samples_used,
         kl_funcs,
         method,
         random_seed,
@@ -527,6 +454,9 @@ def combine_opcode_sets(
         test_size=100
 ):
     result_json = {}
+    distribution_funcs = {
+        'linear': lambda a, b: a / 1000
+    }
 
     for sample_size in sample_sizes:
 
@@ -589,16 +519,13 @@ def combine_opcode_sets(
     return result_json
 
 
-def combine_opcode_methods(
-        op_code_directory,
-        path,
+def get_test_accuracy_of_process_combined_methods(
         iterations,
-        distribution_funcs,
         sample_sizes,
         models,
         bins,
         op_code_set,
-        training_size,
+        cumulative_distribution_samples_used,
         kl_funcs,
         methods,
         random_seed,
@@ -606,6 +533,9 @@ def combine_opcode_methods(
         test_size=100
 ):
     result_json = {}
+    distribution_funcs = {
+        'linear': lambda a, b: a / 1000
+    }
 
     for sample_size in sample_sizes:
 
@@ -670,175 +600,42 @@ def combine_opcode_methods(
     return result_json
 
 
-def plot_comparisons(op_code_directory,
-                     path,
-                     iterations,
-                     distribution_funcs,
-                     sample_sizes,
-                     bins,
-                     op_code_type,
-                     training_size,
-                     kl_funcs,
-                     method,
-                     models=None,
-                     pruned=False,
-                     random_seed=-1,
-                     test_size=100
-                     ):
-    for sample_size in sample_sizes:
-
-        for iteration in iterations:
-
-            variants = get_distribution_data(
-                op_code_directory=op_code_directory,
-                path=path,
-                iteration=iteration,
-                distribution_funcs=distribution_funcs,
-                sample_size=sample_size,
-                models=models,
-                bins=bins,
-                op_code_type=op_code_type,
-                training_size=training_size,
-                kl_funcs=kl_funcs,
-                method=method,
-                pruned=pruned,
-                test_size=test_size,
-                random_seed=random_seed
-            )
-
-            for d in variants:
-                for b in variants[d]['bins']:
-                    for kl_func in variants[d]['bins'][b]['kl_funcs']:
-
-                        X_test = variants[d]['bins'][b]['kl_funcs'][kl_func]['X'][-test_size:]
-                        y_test = variants[d]['bins'][b]['kl_funcs'][kl_func]['y'][-test_size:].reshape(-1)
-                        y_test = y_test.astype(int)
-                        X = variants[d]['bins'][b]['kl_funcs'][kl_func]['X'][:-test_size]
-                        y = variants[d]['bins'][b]['kl_funcs'][kl_func]['y'][:-test_size]
-                        y = y.astype(int)
-
-                        print(X.shape)
-
-                        pca = PCA(n_components=2)
-                        pca.fit(X)
-                        X = pca.transform(X)
-                        X_test = pca.transform(X_test)
-
-                        x = [[], []]
-                        #
-                        # print(X)
-                        # print(y)
-                        for i in range(X.shape[0]):
-                            x[y[i]] += [X[i]]
-                            # print(y[i], X[i])
-                        x[0] = np.array(x[0])
-                        x[1] = np.array(x[1])
-
-                        print(X.shape)
-                        # print(x[0])
-                        # print(x[1])
-                        print(x[0].shape, x[1].shape)
-
-                        plt.title(f'{method}, {d}, {b}, {kl_func}')
-                        # plt.hist(x[0], alpha=0.5, label='Malicious')
-                        # plt.hist(x[1], alpha=0.5, label='Benign')
-                        plt.scatter(x[1][:, 0], x[1][:, 1], label='Benign', alpha=0.5)
-                        plt.scatter(x[0][:, 0], x[0][:, 1], label='Malicious', alpha=0.5)
-                        plt.legend()
-                        plt.show()
-
-
 if __name__ == "__main__":
 
-    distributions = {
-        'linear': lambda a, b: a / 1000,
-        # 'log10': lambda a, b: math.log(1 + ((a / 1000) * 9), 10),
-        # 'log100': lambda a, b: math.log(1 + ((a / 1000) * 99), 100),
-        # 'threshold': lambda a, b: a / b
-    }
-    models = {
-        # 'torch': {'model': MultiLayerClassifier(48, hidden_layers=[100, 200, 50]), 'scaler': None, 'plot': True},
-        # 'linear_svm': {'model': svm.SVC(kernel='linear'), 'scaler': None},
-        # 'linear_svm_scaled': {'model': svm.SVC(kernel='linear'), 'scaler': StandardScaler()},
-        # 'ridge': {'model': RidgeClassifier(), 'scaler': None},
-        # 'ridge_scaled': {'model': RidgeClassifier(), 'scaler': StandardScaler()},
-        # 'sgd': {'model': SGDClassifier(), 'scaler': StandardScaler()},
-        # 'logistic': {'model': LogisticRegression(max_iter=1000),  'scaler': None},
-        # 'logistic_scaled': {'model': LogisticRegression(max_iter=1000), 'scaler': StandardScaler()},
-        # 'mlp': {'model': MLPClassifier(hidden_layer_sizes=(100, 200, 50), random_state=1, max_iter=300), 'scaler': None},
-        'mlp_scaled': {'model': MLPClassifier(hidden_layer_sizes=(100, 200, 50), random_state=1, max_iter=300), 'scaler': StandardScaler()},
-        # 'mlp_scaled_big': {'model': MLPClassifier(hidden_layer_sizes=(500, 1000, 500, 250, 50), random_state=1, max_iter=600), 'scaler': StandardScaler()},
-        # 'k_means': {'model': KMeans(n_clusters=2, random_state=0), 'scaler': None, 'unsupervised': True}
-    }
 
-    kls = {
-        # 'two_sided': [(lambda a, b: (KL(a, b) + KL(b, a)) / 2) for _ in range(2)],
-        # 'x||dist': [(lambda a, b: KL(a, b)) for _ in range(2)],
-        # 'dist||x': [(lambda a, b: KL(b, a)) for _ in range(2)],
-        # 'x||dist_clean': [(lambda a, b: KL(a, b)), lambda a, b: 0],
-        # 'dist||x_clean': [(lambda a, b: KL(b, a)), lambda a, b: 0],
-        # 'x||dist_infected': [lambda a, b: 0, (lambda a, b: KL(a, b))],
-        # 'dist||x_infected': [lambda a, b: 0, (lambda a, b: math.log(KL(b, a), 10))],
-        # 'two_sided_log': [(lambda a, b: (math.log(KL(a, b), 2) + math.log(KL(b, a), 2)) / 2) for _ in range(2)],
-        # 'x||dist_log': [(lambda a, b: math.log(KL(a, b), 10)) for _ in range(2)],
-        'dist||x_log': [(lambda a, b: math.log(KL(b, a), 10)) for _ in range(2)],
-        # 'x||dist_clean_log': [(lambda a, b: math.log(KL(a, b), 10)), lambda a, b: 0],
-        # 'dist||x_clean_log': [(lambda a, b: math.log(KL(b, a), 10)), lambda a, b: 0],
-        # 'x||dist_infected_log': [lambda a, b: 0, (lambda a, b: math.log(KL(a, b), 10))],
-        # 'dist||x_infected_log': [lambda a, b: 0, (lambda a, b: math.log(KL(b, a), 10))],
-        # 'mann_whitney_u': [(lambda a, b: Mann_Whitney_U(a, b)) for _ in range(2)]
-    }
+    models = ['mlp_scaled']
+    kls = ['dist||x_log']
 
-    ops = ['infected', 'benign', 'union', 'intersection', 'disjoint'] #, 'ratio', 'ratio_a75', 'ratio_a25', 'malware_cluster', 'common_cluster']
-    # PRUNED = True
+    ops = ['infected', 'benign', 'union', 'intersection', 'disjoint']
 
-    # [9, 1, 85, 83, 29]
-    for random_seed in [85, 83]:
-        for PRUNED in [False]:
-            for method in ['share', 'cumulative_share']: #, 'share', 'cumulative_share', 'inverse_jump']: #
-                pruned_path = 'pruned' if PRUNED else 'base'
-                results_path = f"/Volumes/T7/pe_machine_learning_set/pe-machine-learning-dataset" \
-                               f"/results/{method}_{random_seed}_{int(time())}.json"
+    sample_size = 75
+    RANDOM_SEEDS = [9, 1, 85, 83]
+    methods = ['jump'] # can also use 'share', 'cumulative_share'
+    bins = [100]
+    cumulative_distribution_samples_used = 500 # this is just used as a param to find the write distributions samples
 
-                temp_results = compare_distribution_data(
-                    op_code_directory="/Volumes/T7/pe_machine_learning_set/pe-machine-learning-dataset/",
-                    path=f"/Volumes/T7/pe_machine_learning_set/pe-machine-learning-dataset"
-                         f"/op_code_distributions_samples/{method}/{pruned_path}/",
-                    iterations=range(10),
-                    distribution_funcs=distributions,
-                    sample_sizes=[2500],
-                    models=models,
-                    bins=[100],
+    for random_seed in [9]:
+        for pruned in [False]:
+            for method in methods:
+                results_file_name = f"{method}_{random_seed}_{int(time())}.json"
+                pruned_path = 'base' if not pruned else method
+
+                temp_results = get_test_accuracy_of_process(
+                    iterations=range(1),
+                    sample_sizes=[sample_size],
+                    models={k:MODELS[k] for k in models},
+                    bins=bins,
                     op_code_types=ops,
-                    training_size=500,
-                    kl_funcs=kls,
+                    cumulative_distribution_samples_used=cumulative_distribution_samples_used,
+                    kl_funcs={kl:KL_METHODS[kl] for kl in kls},
                     method=method,
-                    pruned=PRUNED,
-                    test_size=500,
+                    pruned=pruned,
+                    test_size=int(sample_size * .2),
                     random_seed=random_seed
                 )
-                # temp_results = combine_opcode_sets(
-                #     op_code_directory="/Volumes/T7/pe_machine_learning_set/pe-machine-learning-dataset/",
-                #     path=f"/Volumes/T7/pe_machine_learning_set/pe-machine-learning-dataset"
-                #          f"/op_code_distributions_samples/{method}/{pruned_path}/",
-                #     iterations=range(10),
-                #     distribution_funcs=distributions,
-                #     sample_sizes=[2500],
-                #     models=models,
-                #     bins=[100],
-                #     op_code_type_sets=[('ratio_a75', 'common_cluster'), ['common_cluster']],
-                #     training_size=500,
-                #     kl_funcs=kls,
-                #     method=method,
-                #     pruned=PRUNED,
-                #     test_size=500,
-                #     random_seed=random_seed
-                # )
-                # print(f"...{t.upper()}-{method.upper()}")
-                # results.update()
 
                 json_object = json.dumps({pruned_path: temp_results}, indent=4)
 
                 # Writing to sample.json
-                with open(results_path, "w") as outfile:
+                with open(f"{RESULTS_BASE_PATH}/{results_file_name}", "w") as outfile:
                     outfile.write(json_object)

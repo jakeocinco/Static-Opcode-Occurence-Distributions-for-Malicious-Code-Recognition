@@ -1,5 +1,6 @@
 
 DISTRIBUTION_SAMPLE_PATH = f"/Volumes/T7/pe_machine_learning_set/pe-machine-learning-dataset/op_code_distributions_samples/"
+RESULTS_BASE_PATH = f"/Volumes/T7/pe_machine_learning_set/pe-machine-learning-dataset/results/"
 
 TRAINING_SAMPLES = [
     {
