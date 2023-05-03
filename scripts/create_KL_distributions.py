@@ -5,6 +5,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 from op_codes import *
+from base_functions import *
 from config import *
 
 
@@ -77,40 +78,6 @@ def _get_variant_base_func(base_path, funcs_dictionary, bins, op_code_options):
     return func
 
 
-def _get_split_file_lists():
-    # This functions gets all of the training sample op code lists and splits them into
-    # two lists
-    op_code_list = []
-    clean_all = []
-    infected_all = []
-
-    for training_set in TRAINING_SAMPLES:
-        _op_code_list = os.listdir(training_set['op_code_list_directory'])
-        _op_code_list = list(
-            map(
-                lambda x: f"{training_set['op_code_list_directory']}/{x}",
-                _op_code_list
-            )
-        )
-        if '.DS_Store' in _op_code_list:
-            _op_code_list.remove('.DS_Store')
-
-        clean_all += list(
-            filter(
-                lambda x: 'clean' in x,
-                _op_code_list
-            )
-        )
-        infected_all += list(
-            filter(
-                lambda x: 'infect' in x,
-                _op_code_list
-            )
-        )
-        op_code_list += _op_code_list
-    return op_code_list, clean_all, infected_all
-
-
 def write_aggregated_distribution_sets(
     op_code_sets,
     bins,
@@ -147,7 +114,7 @@ def write_aggregated_distribution_sets(
     )
 
     # get all files
-    op_code_list, clean_all, infected_all = _get_split_file_lists()
+    op_code_list, clean_all, infected_all = get_split_file_lists()
     len_op_code_list = len(op_code_list)
     del op_code_list
 

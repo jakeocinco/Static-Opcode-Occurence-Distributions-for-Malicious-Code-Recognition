@@ -13,9 +13,10 @@ TRAINING_SAMPLES = [
 ]
 
 TESTING_SAMPLES = [
-    # {
-    #     'name': 'VirusShare00005',
-    #     'executable_directory': "/Volumes/T7/VirusShare/executables/VirusShare00005",
-    #     'label': 'infected'
-    # }
+    {
+        'name': 'VirusShare00005',
+        'executable_directory': "/Volumes/T7/VirusShare/executables/VirusShare_00005",
+        'op_code_list_directory': "/Volumes/T7/VirusShare/VirusShare_00005/op_code_samples",
+        'label': 'infected'
+    }
 ]
