@@ -91,14 +91,25 @@ def get_number_of_opcodes_tracked(op_code_options, option):
     return len(op_code_options[option])
 
 
-def get_split_file_lists():
+def get_split_file_lists(sample_names=None):
     # This functions gets all of the training sample op code lists and splits them into
     # two lists
+    if sample_names is None:
+        sample_names = []
+
     op_code_list = []
     clean_all = []
     infected_all = []
 
-    for training_set in TRAINING_SAMPLES:
+    if not sample_names:
+        sets = TRAINING_SAMPLES
+    else:
+        sets = []
+        for sample in TRAINING_SAMPLES + TESTING_SAMPLES:
+            if sample['name'] in sample_names:
+                sets += [sample]
+
+    for training_set in sets:
         _op_code_list = os.listdir(training_set['op_code_list_directory'])
         _op_code_list = list(
             map(

@@ -1,6 +1,7 @@
 import random
 import sys
 import pickle
+import json
 
 from time import time
 from copy import deepcopy
@@ -82,7 +83,8 @@ def get_distribution_data(
         pruned=False,
         random_seed=-1,
         update_text_prefix='',
-        exclude_files=True
+        exclude_files=True,
+        sample_names=None,
 ):
     if method not in ['jump', 'cumulative_share', 'share']:
         raise Exception(f'Unknown Method | {method}')
@@ -107,7 +109,7 @@ def get_distribution_data(
         pruned_path=pruned_path
     )
 
-    arr, clean, infected = get_split_file_lists()
+    arr, clean, infected = get_split_file_lists(sample_names=sample_names)
 
     # these are the images used in the distribution, don't want to fit or test off of those
     l = cumulative_distribution_samples_used * iteration
@@ -136,7 +138,8 @@ def get_distribution_data(
         iteration=iteration
     )
 
-    print(f"{update_text_prefix}[0/{sample_size}]        ")
+    # This is a long line so it overwrites whatever it said before
+    print(f"{update_text_prefix}[0/{sample_size}]                                           ")
     for file_index, file_name in enumerate(arr):
         sys.stdout.write("\033[F")
         print(f"{update_text_prefix}[{file_index + 1}/{sample_size}]")
@@ -370,7 +373,7 @@ def train_data_on_models(
             file_name = top_results[k]['file_name']
             top_model = top_results[k]['model']
 
-            pickle.dump(top_model, open(file_name, "wb"))
+            # pickle.dump(top_model, open(file_name, "wb"))
 
 
 def get_test_accuracy_of_process(
@@ -413,7 +416,8 @@ def get_test_accuracy_of_process(
                 kl_funcs=kl_funcs,
                 method=method,
                 pruned=pruned,
-                random_seed=random_seed
+                random_seed=random_seed,
+                update_text_prefix=f'{random_seed}/{iteration} - '
             )
 
             # np.save(
@@ -604,11 +608,11 @@ if __name__ == "__main__":
 
 
     models = ['mlp_scaled']
-    kls = ['dist||x_log']
+    kls = ['dist||x_log', 'x||dist']
 
-    ops = ['infected', 'benign', 'union', 'intersection', 'disjoint']
+    ops = ['infected'] #, 'benign', 'union', 'intersection', 'disjoint']
 
-    sample_size = 75
+    sample_size = 2500
     RANDOM_SEEDS = [9, 1, 85, 83]
     methods = ['jump'] # can also use 'share', 'cumulative_share'
     bins = [100]
@@ -621,7 +625,7 @@ if __name__ == "__main__":
                 pruned_path = 'base' if not pruned else method
 
                 temp_results = get_test_accuracy_of_process(
-                    iterations=range(1),
+                    iterations=range(5),
                     sample_sizes=[sample_size],
                     models={k:MODELS[k] for k in models},
                     bins=bins,
@@ -631,7 +635,7 @@ if __name__ == "__main__":
                     method=method,
                     pruned=pruned,
                     test_size=int(sample_size * .2),
-                    random_seed=random_seed
+                    random_seed=random_seed,
                 )
 
                 json_object = json.dumps({pruned_path: temp_results}, indent=4)

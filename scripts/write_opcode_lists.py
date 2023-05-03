@@ -55,6 +55,7 @@ def translate_op_code_list_to_files(
 ):
     count = 0
     for i, f_name in enumerate(executable_name_list):
+        print(f_name)
         if (i + 1) % 1000 == 0:
             print(f"{i + 1} {label.capitalize()}")
         try:
@@ -88,7 +89,7 @@ def write_files_from_external_collection_to_external_ops_multiclass_from_label_f
     with open(csv_file_list) as f:
         reader = csv.DictReader(f)
         files = list(reader)
-
+    print(files[0])
     # split the list of files into seperate lists of benign and malicious files
     clean = list(
         map(
@@ -141,48 +142,26 @@ def write_files_from_external_collection_to_external_ops_single_class(
         replace_str='VirusShare_'
     )
 
-def write_windows_test_files_from_shared(
-        samples,
-):
-    path = f"/Volumes/T7/Machines/compiled/executables"
-
-    destination = f"/Volumes/T7/Windows/op_code_samples/"
-    files = os.listdir(path)[:samples]
-    for i, f_name in enumerate(files):
-        if (i + 1) % 1000 == 0:
-            print(f"{i + 1} Infected")
-        try:
-            arr = get_op_code_array(
-                f"{path}/{f_name}"
-            )
-
-            with open(
-                    f"{destination}/clean_{f_name.replace('exe_', '')}.txt", "w+"
-            ) as f:
-                f.write("\n".join(arr))
-        except Exception as e:
-            pass
 
 if __name__ == "__main__":
 
     random.seed(9)
     num_samples = 5
 
-    if len(sys.argv) == 2 and not isinstance(sys.argv[1], int):
-        raise Exception('Only parameter accepted is the number of files to write from each class. Must be int.')
+    if len(sys.argv) == 2:
+        try:
+            num_samples = int(sys.argv[1])
+        except:
+            raise Exception('Only parameter accepted is the number of files to write from each class. Must be int.')
 
     if len(sys.argv) != 2:
         print('No parameter received. Writing 5 samples of each class for each sample set.')
         print('To get more data please input an integer when executing the script')
         print('ex. python write_opcode_lists.py 1000')
 
-    if len(sys.argv) == 2:
-        num_samples = sys.argv[1]
-
     for _set in TRAINING_SAMPLES + TESTING_SAMPLES:
 
         if 'label_csv' in _set:
-            print('here')
             if 'benign_identifier' not in _set or 'malicious_identifier' not in _set:
                 raise Exception(
                     'Both benign_identifier and malicious_identifier must be set when using label file, '
@@ -196,21 +175,21 @@ if __name__ == "__main__":
                 malicious_identifier=_set['malicious_identifier'],
                 num_samples=num_samples
             )
-        else:
-            if 'label' not in _set:
-                raise Exception(
-                    'Single class writes must include label'
-                )
-            if _set['label'] not in ['clean', 'infected']:
-                raise Exception(
-                    'Unknown label. [\'clean\', \'infected\'] are only labels.\n'
-                    '\t clean for non-malicious or benign code',
-                    '\t infected for malicious code samples'
-                )
-            write_files_from_external_collection_to_external_ops_single_class(
-                executable_directory=_set['executable_directory'],
-                destination_directory=_set['op_code_list_directory'],
-                label=_set['label'],
-                num_samples=num_samples
-            )
+        # else:
+        #     if 'label' not in _set:
+        #         raise Exception(
+        #             'Single class writes must include label'
+        #         )
+        #     if _set['label'] not in ['clean', 'infected']:
+        #         raise Exception(
+        #             'Unknown label. [\'clean\', \'infected\'] are only labels.\n'
+        #             '\t clean for non-malicious or benign code',
+        #             '\t infected for malicious code samples'
+        #         )
+        #     write_files_from_external_collection_to_external_ops_single_class(
+        #         executable_directory=_set['executable_directory'],
+        #         destination_directory=_set['op_code_list_directory'],
+        #         label=_set['label'],
+        #         num_samples=num_samples
+        #     )
 

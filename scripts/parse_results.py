@@ -1,17 +1,19 @@
 import json
 import sys
 
+from config import  *
+
 SEEDS = [1, 9, 85, 83]
 METHOD = 'cumulative_share'
-# OP_CODES = ['infected']
 ITERATIONS = range(10)
 BINS = [100]
 KL = ['dist||x_log']
 model = ['mlp_scaled']
+pruned = False
 
 if __name__ == "__main__":
 
-    pruned_path = 'base'
+    pruned_path = METHOD if pruned else 'base'
     print(f"{METHOD} - Seeds: {SEEDS}, KL: {KL}, Model: {model} {', PRUNED' if pruned_path == 'pruned' else ''}")
     for _op in sys.argv[1:]:
 
@@ -20,7 +22,7 @@ if __name__ == "__main__":
         for s in SEEDS:
 
             results = json.load(
-                open(f"/Volumes/T7/pe_machine_learning_set/pe-machine-learning-dataset/results/{METHOD}_{s}.json", "r")
+                open(f"{RESULTS_BASE_PATH}/{METHOD}_{s}.json", "r")
             )
             for iteration in results[pruned_path]:
                 if int(iteration) in ITERATIONS:
@@ -38,7 +40,7 @@ if __name__ == "__main__":
         mean = sum(data) / len(data)
         variance = sum([((x - mean) ** 2) for x in data]) / len(data)
         res = variance ** 0.5
-        # print(data)
+
         print(f"{_op} - {mean * 100:.1f}, {res * 100:.1f}")
 
 

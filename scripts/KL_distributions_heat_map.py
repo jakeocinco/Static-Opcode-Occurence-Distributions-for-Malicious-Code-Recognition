@@ -1,8 +1,7 @@
 import numpy as np
-from PIL import Image
 import matplotlib.pyplot as plt
-import os
-from opcode_sets import OP_CODE_DICT, OP_CODE_CLUSTER
+
+from base_functions import  *
 
 def KL(a, b):
     a = np.asarray(a, dtype=np.float)
@@ -90,7 +89,6 @@ def get_difference_matrix(
 
 
 def distributions_heat_map(
-    op_code_distribution_path,
     distribution,
     bins,
     sample_size,
@@ -99,68 +97,28 @@ def distributions_heat_map(
     pruned=False
 ):
     prune_path = 'base' if not pruned else 'pruned'
-    _op_code_distribution_path = f"{op_code_distribution_path}/{METHOD}/{prune_path}/{op_sample}/op_codes"
+    _op_code_distribution_path = f"{DISTRIBUTION_SAMPLE_PATH}/{METHOD}/{prune_path}/{op_sample}/op_codes"
 
-    # _keys = sorted(list(set(OP_CODE_CLUSTER[op_sample].values())))
-    # for i in range(len(_keys)):
     differences = get_difference_matrix(
         op_code_distribution_path=_op_code_distribution_path,
         distribution=distribution,
         bins=bins,
         sample_size=sample_size,
-        method=method,
-        # rows=[i]
+        method=method
     )['differences']
 
     plt.imshow(differences, cmap='hot', interpolation=None)
-    #{_keys[i]}
     plt.title(f"{op_sample.capitalize()} - bins: {bins}, samples: {sample_size}")
     plt.show()
 
 
-def distribution_efficacy(
-    op_code_distribution_path,
-    distributions,
-    bins,
-    op_codes,
-    sample_size,
-):
-    for op_code in op_codes:
-        for distribution in distributions:
-            for b in bins:
-                distrib = get_difference_matrix(
-                    op_code_distribution_path=op_code_distribution_path + f"{op_code}/op_codes",
-                    distribution=distribution,
-                    bins=b,
-                    sample_size=sample_size
-                )
-                differences = distrib['differences']
-                split_index = distrib['split_index']
-
-                total = 0
-
-                for r in range(differences.shape[0]):
-                    for c in range(differences.shape[1]):
-                        if (r < split_index and c < split_index) or (r >= split_index and c >= split_index):
-                            total -= differences[r, c]
-                        else:
-                            total += differences[r, c]
-
-                total /= 2 * ((differences.shape[0] - split_index) ** 2)
-
-                print(f"{op_code.capitalize()}, Distribution: {distribution}, Bins: {b} - {total}")
-        print()
-
-
 if __name__ == "__main__":
-    METHOD = "share"
+    METHOD = "jump"
     op_code_samples = ['benign', 'infected', 'union', 'intersection', 'disjoint']
     for op_code_sample in op_code_samples:
         for distributions in ['linear']: #, 'log10', 'log100', 'threshold']:
             for bins in [100]:
                 distributions_heat_map(
-                    op_code_distribution_path=f"/Volumes/T7/pe_machine_learning_set/pe-machine-learning-dataset/"
-                                              f"op_code_distributions_samples/",
                     distribution=distributions,
                     bins=bins,
                     sample_size=500,
@@ -168,14 +126,3 @@ if __name__ == "__main__":
                     method=METHOD,
                     pruned=False
                 )
-
-    # distributions = ['ration'] # , 'log100', 'threshold'
-    # bins = [25, 100]
-    # distribution_efficacy(
-    #     op_code_distribution_path=f"/Volumes/MALWARE/pe_machine_learning_set/pe-machine-learning-dataset/"
-    #                               f"op_code_distributions_samples/",
-    #     distributions=distributions,
-    #     bins=bins,
-    #     op_codes=op_code_samples,
-    #     sample_size=500
-    # )

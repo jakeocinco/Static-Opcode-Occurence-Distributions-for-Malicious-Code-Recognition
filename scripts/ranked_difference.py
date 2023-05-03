@@ -1,6 +1,9 @@
 import json
-import scipy.stats
 import sys
+
+import scipy.stats
+
+from config import *
 
 KL_CANDIDATES = ['two_sided', 'x||dist', 'dist||x', 'x||dist_clean', 'dist||x_clean', 'x||dist_infected',
                  'dist||x_infected', 'two_sided_log', 'x||dist_log', 'dist||x_log', 'x||dist_clean_log',
@@ -10,13 +13,11 @@ MODEL_CANDIDATES = ['linear_svm', 'linear_svm_scaled', 'ridge', 'ridge_scaled', 
 OP_CANDIDATES = ['benign', 'infected', 'union', 'intersection', 'disjoint', 'ratio', 'ratio_a25', 'ratio_a75',
                    'malware_cluster', 'common_cluster', 'infected_common_cluster', 'infected_ratio_a75',
                  'infected_ratio_a75_common_cluster', 'jump_share', 'ratio_a75_common_cluster']
-FILES = ['jump_9_1680727145.json']
+
+
 METHOD = 'jump'
-OP_CODES = ['benign', 'infected', 'union', 'intersection', 'disjoint']
 ITERATIONS = range(10)
 BINS = [100]
-KL = ['x||dist']
-MODELS = ['mlp']
 
 
 def print_res(text, _long, Z):
@@ -24,25 +25,15 @@ def print_res(text, _long, Z):
     print(f"{text} {' ' * (_long - len(text))}| Z:{Z:.2f} - p:{1 - p:.3f}")
 
 
-def _rank_simple(vector):
-    return sorted(range(len(vector)), key=vector.__getitem__)
-
-
 def _ranked_sign_test(diff):
 
     l = len(diff)
     sign = [0 if x < 0 else 1 for x in diff]
     rank = list(scipy.stats.rankdata([abs(x) for x in diff]))
-    # print(sign)
-    # print(rank)
-    # rank = _rank_simple([abs(x) for x in diff])
-    # print(rank)
+
     expected_vs = (l * (l + 1)) / 4
     var_vs = (l * (l + 1) * ((2 * l) + 1)) / 24
     vs = sum([sign[i] * rank[i] for i in range(l)])
-
-    # print(vs)
-    # print(expected_vs, var_vs, vs)
 
     if vs == 0:
         vs = 1
@@ -66,7 +57,7 @@ def get_results(
     for seed in seeds:
 
         results = json.load(
-            open(f"/Volumes/T7/pe_machine_learning_set/pe-machine-learning-dataset/results/{method}_{seed}.json", "r")
+            open(f"{RESULTS_BASE_PATH}/{method}_{seed}.json", "r")
         )
 
         for iteration in results[pruned_path]:
@@ -99,9 +90,6 @@ def pairwise_op(
     for r in range(len(results[0])):
         diff += [results[1][r] - results[0][r]]
 
-    # print([f"{x:.3f}" for x in results[0]])
-    # print([f"{x:.3f}" for x in results[1]])
-
     Z = _ranked_sign_test(diff)
 
     p = scipy.stats.norm.sf(Z)
@@ -119,12 +107,6 @@ def pairwise_op(
                     results += [get_results(seeds, method, [_op], iterations, bins, kls, models)]
                 for r in range(len(results[0])):
                     diff += [results[1][r] - results[0][r]]
-
-                if op == 'jump_share':
-
-                    print([f"{x:.3f}" for x in results[0]])
-                    print([f"{x:.3f}" for x in results[1]])
-                    print([f"{x:.3f}" for x in diff])
 
                 Z = _ranked_sign_test(diff)
                 print_res(op, _long, Z)
@@ -154,13 +136,8 @@ def pairwise_kl(
                 for r in range(len(results[0])):
                     diff += [results[1][r] - results[0][r]]
 
-                # print([f"{x:.3f}" for x in results[0]])
-                # print([f"{x:.3f}" for x in results[1]])
-                # print([f"{x:.3f}" for x in diff])
-
                 Z = _ranked_sign_test(diff)
 
-                # print(f"{kl} | Z:{Z:.2f} - p:{1 - p:.3f}")
                 print_res(kl, _long, Z)
         print()
 
@@ -169,11 +146,7 @@ def pairwise_kl(
     kl_options = [
         ('x||dist', 'x||dist_log'),
         ('dist||x', 'dist||x_log'),
-        ('two_sided', 'two_sided_log'),
-        # ('x||dist_clean', 'x||dist_clean_log'),
-        # ('dist||x_clean', 'dist||x_clean_log'),
-        # ('x||dist_infected', 'x||dist_infected_log'),
-        # ('dist||x_infected', 'dist||x_infected_log')
+        ('two_sided', 'two_sided_log')
     ]
     _long = max([(len(x[0]) + len(x[1]) + 3) for x in kl_options])
     for kls in kl_options:
@@ -203,10 +176,6 @@ def pairwise_kl(
                     results += [get_results(seeds, method, op_codes, iterations, bins, [_kl], models)]
                 for r in range(len(results[0])):
                     diff += [results[1][r] - results[0][r]]
-
-                # print([f"{x:.3f}" for x in results[0]])
-                # print([f"{x:.3f}" for x in results[1]])
-                # print([f"{x:.3f}" for x in diff])
 
                 Z = _ranked_sign_test(diff)
                 print_res(kl, _long, Z)
@@ -378,6 +347,7 @@ if __name__ == "__main__":
 
     SEEDS = [1, 9, 83, 85]
     count = 0
+
     if 'op' in sys.argv:
         print(' -- Op Code Sets --')
         pairwise_op(
@@ -411,7 +381,7 @@ if __name__ == "__main__":
         pairwise_models(
             seeds=SEEDS,
             method='jump',
-            op_codes=OP_CODES,
+            op_codes=OP_CANDIDATES,
             iterations=ITERATIONS,
             bins=BINS,
             kls=KL_CANDIDATES
@@ -429,8 +399,6 @@ if __name__ == "__main__":
             ops=['benign'],
             kls=['x||dist'],
             models=['mlp_scaled']
-            # kls=['x||dist'],
-            # models=['mlp']
         )
         count += 1
 
@@ -443,8 +411,6 @@ if __name__ == "__main__":
             method='jump',
             iterations=ITERATIONS,
             bins=BINS,
-            # kls=KL_CANDIDATES,
-            # models=MODEL_CANDIDATES
             kls=['x||dist'],
             models=['mlp_scaled']
         )
@@ -460,8 +426,6 @@ if __name__ == "__main__":
             op_codes=['benign', 'infected', 'union', 'intersection', 'disjoint'],
             iterations=ITERATIONS,
             bins=BINS,
-            # kls=KL_CANDIDATES,
-            # models=MODEL_CANDIDATES
             kls=['dist||x_log'],
             models=['mlp_scaled']
         )
