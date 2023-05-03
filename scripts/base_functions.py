@@ -2,7 +2,7 @@ import os
 import math
 import numpy as np
 
-from op_codes import *
+from opcode_sets import *
 from config import *
 
 
@@ -42,6 +42,41 @@ KL_METHODS = {
     'x||dist_infected_log': [lambda a, b: 0, (lambda a, b: math.log(KL(a, b), 10))],
     'dist||x_infected_log': [lambda a, b: 0, (lambda a, b: math.log(KL(b, a), 10))]
 }
+
+def make_directory(path):
+    # This is just a safe make directory function
+    # In this case it does not matter if it already exists
+    try:
+        os.mkdir(path)
+    except FileExistsError:
+        pass
+
+
+def find_all_sub_paths(path):
+    # Split a long destionation down into a list of all paths between the end and root.
+    # This is just used to make sure all folders are made if needed
+    index = path.rfind("/")
+    if index > 0:
+        temp = path[:index]
+        return [temp] + find_all_sub_paths(temp)
+    return []
+
+
+def create_all_possible_sub_directories(base_path, variants):
+
+    directories = list(
+        map(
+            find_all_sub_paths,
+            [variants[d]['options'][option]['bins'][b]['sub_path']
+             for d in variants for option in variants[d]['options'] for b in variants[d]['options'][option]['bins']]
+        )
+    )
+    directories = list(set([item for sublist in directories for item in sublist]))
+    directories.sort(key=len)
+
+    for directory in directories:
+        make_directory(base_path + "/" + directory)
+
 
 def KL(a, b):
     a = np.asarray(a, dtype=np.float) + .000001

@@ -2,7 +2,7 @@ import numpy as np
 from PIL import Image
 import matplotlib.pyplot as plt
 import os
-from op_codes import OP_CODE_DICT, OP_CODE_CLUSTER
+from opcode_sets import OP_CODE_DICT, OP_CODE_CLUSTER
 
 def KL(a, b):
     a = np.asarray(a, dtype=np.float)

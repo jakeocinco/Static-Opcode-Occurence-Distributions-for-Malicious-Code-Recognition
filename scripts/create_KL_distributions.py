@@ -7,30 +7,11 @@ import matplotlib.pyplot as plt
 from base_functions import *
 
 
-def make_directory(path):
-    # This is just a safe make directory function
-    # In this case it does not matter if it already exists
-    try:
-        os.mkdir(path)
-    except FileExistsError:
-        pass
-
-
-def _find_all_sub_paths(path):
-    # Split a long destionation down into a list of all paths between the end and root.
-    # This is just used to make sure all folders are made if needed
-    index = path.rfind("/")
-    if index > 0:
-        temp = path[:index]
-        return [temp] + _find_all_sub_paths(temp)
-    return []
-
-
 def _create_all_possible_sub_directories(base_path, variants):
 
     directories = list(
         map(
-            _find_all_sub_paths,
+            find_all_sub_paths,
             [variants[d]['options'][option]['bins'][b]['sub_path']
              for d in variants for option in variants[d]['options'] for b in variants[d]['options'][option]['bins']]
         )

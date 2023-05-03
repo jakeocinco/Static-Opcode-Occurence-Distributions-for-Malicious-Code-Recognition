@@ -1,6 +1,6 @@
 
 # Layered dict of all opcode sets
-#   base - refers to the standard opcode sets that were found through either get_op_code_sets.py or outside methods
+#   base - refers to the standard opcode sets that were found through either get_opcode_sets.py or outside methods
 #   jump - refers to the same opcode sets as base but pruned for the jump opcode set
 OP_CODE_DICT = {
     'base': {

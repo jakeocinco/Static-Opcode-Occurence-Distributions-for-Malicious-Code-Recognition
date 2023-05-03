@@ -1,38 +1,19 @@
-import os
 import numpy as np
 from sklearn.svm import SVC
-from op_codes import *
 
+from base_functions import  *
 
-def make_directory(path):
-    try:
-        os.mkdir(path)
-    except FileExistsError:
-        pass
-
-
-def _find_all_sub_paths(path):
-    index = path.rfind("/")
-    if index > 0:
-        temp = path[:index]
-        return [temp] + _find_all_sub_paths(temp)
-    return []
-
+# This script prunes opcodes from opcode sets by using Linear SVM to determine whether the opcodes are
+# separable by classes
 
 def _create_all_possible_sub_directories(base_path):
 
-    directories = _find_all_sub_paths(base_path)
+    directories = find_all_sub_paths(base_path)
     # directories = list(set([item for sublist in directories for item in sublist]))
     directories.sort(key=len)
     for directory in directories:
         # print('-', directory)
         make_directory(directory)
-
-
-def KL(a, b):
-    a = np.asarray(a, dtype=np.float) + .000001
-    b = np.asarray(b, dtype=np.float) + .000001
-    return np.sum(a * np.log(a / b), 0)
 
 
 def select_pruned_ops(
@@ -110,19 +91,16 @@ def select_pruned_ops(
     except: print(op_code_sample, [])
 
 
-def create_pruned_images(
-    op_code_distribution_path,
+def create_pruned_distribution_sets(
     distribution,
     bins,
     sample_size,
     method,
     op_code_sample
 ):
-    # TODO - read in images and remove unnecessary rows
-    #   if adjusting a vertical column method, normalize it
-    base_path = f"{op_code_distribution_path}/{method}/base/{op_code_sample}/op_codes/{distribution}/" \
+    base_path = f"{DISTRIBUTION_SAMPLE_PATH}/{method}/base/{op_code_sample}/op_codes/{distribution}/" \
                 f"{bins}_bins/{sample_size}_samples"
-    prune_path = f"{op_code_distribution_path}/{method}/pruned/{op_code_sample}/op_codes/{distribution}/" \
+    prune_path = f"{DISTRIBUTION_SAMPLE_PATH}/{method}/pruned/{op_code_sample}/op_codes/{distribution}/" \
                 f"{bins}_bins/{sample_size}_samples"
 
     clean_arr = os.listdir(f"{base_path}/clean")
@@ -154,18 +132,6 @@ def create_pruned_images(
     sample_image_data = np.load(f"{base_path}/{clean_arr[0]}")
 
     combined = clean_arr + infected_arr
-    combined_length = len(combined)
-
-    data = np.zeros((combined_length, combined_length))
-
-    index = 0
-
-    x = {}
-
-    # data = np.zeros((sample_image_data.shape[0], combined_length))
-    # print(data.shape)
-    clean_len = len(clean_arr)
-    y = np.array([1 for _ in range(len(clean_arr))] + [0 for _ in range(len(infected_arr))])
 
     for i, id in enumerate(combined):
         base_image = np.load(f"{base_path}/{id}")
@@ -194,31 +160,18 @@ def create_pruned_images(
 
 
 if __name__ == "__main__":
-    path = f"/Volumes/T7/pe_machine_learning_set/pe-machine-learning-dataset/op_code_distributions_samples/"
 
-    op_code_samples = ['malware_cluster']
+    op_code_samples = ['infected']
 
-    for method in ['share']:
-        x = {}
+    for method in ['jump']:
 
         for op_code_sample in op_code_samples:
             print(op_code_sample, method)
             for b in [25, 100]:
-                create_pruned_images(
-                    op_code_distribution_path=path,
+                create_pruned_distribution_sets(
                     distribution='linear',
                     bins=b,
                     sample_size=500,
                     method=method,
                     op_code_sample=op_code_sample
                 )
-        #     x.update({op_code_sample: select_pruned_ops(
-        #         op_code_distribution_path=path,
-        #         distribution='linear',
-        #         bins=100,
-        #         sample_size=500,
-        #         method=method,
-        #         op_code_sample=op_code_sample
-        #     )})
-
-        print(x)

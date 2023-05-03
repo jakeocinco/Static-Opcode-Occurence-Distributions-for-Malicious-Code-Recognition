@@ -1,7 +1,6 @@
 import os
 import random
 import shutil
-from payloads import *
 import subprocess
 import json
 import csv

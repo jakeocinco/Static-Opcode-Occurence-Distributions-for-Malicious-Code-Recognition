@@ -2,7 +2,7 @@ import math
 import numpy as np
 import sys
 
-from op_codes import *
+from opcode_sets import *
 from base_functions import *
 
 # This script is used to get new opcode sets
