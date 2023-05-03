@@ -1,8 +1,7 @@
+import os
 
-DISTRIBUTION_SAMPLE_PATH = f"/Volumes/T7/pe_machine_learning_set/pe-machine-learning-dataset/op_code_distributions_samples/"
-RESULTS_BASE_PATH = f"/Volumes/T7/pe_machine_learning_set/pe-machine-learning-dataset/results/"
-
-# ADD SAVED DATA PATH
+DISTRIBUTION_SAMPLE_PATH = f"{os.path.dirname(os.path.abspath(__file__))}/../data/op_code_distributions_samples/"
+RESULTS_BASE_PATH = f"{os.path.dirname(os.path.abspath(__file__))}/../data/results/"
 
 TRAINING_SAMPLES = [
     {

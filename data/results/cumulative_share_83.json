@@ -1,0 +1,394 @@
+{
+    "base": {
+        "0": {
+            "linear": {
+                "infected": {
+                    "100": {
+                        "dist||x_log": {
+                            "mlp_scaled": 0.816
+                        }
+                    }
+                },
+                "benign": {
+                    "100": {
+                        "dist||x_log": {
+                            "mlp_scaled": 0.794
+                        }
+                    }
+                },
+                "union": {
+                    "100": {
+                        "dist||x_log": {
+                            "mlp_scaled": 0.812
+                        }
+                    }
+                },
+                "intersection": {
+                    "100": {
+                        "dist||x_log": {
+                            "mlp_scaled": 0.842
+                        }
+                    }
+                },
+                "disjoint": {
+                    "100": {
+                        "dist||x_log": {
+                            "mlp_scaled": 0.816
+                        }
+                    }
+                }
+            }
+        },
+        "1": {
+            "linear": {
+                "infected": {
+                    "100": {
+                        "dist||x_log": {
+                            "mlp_scaled": 0.854
+                        }
+                    }
+                },
+                "benign": {
+                    "100": {
+                        "dist||x_log": {
+                            "mlp_scaled": 0.822
+                        }
+                    }
+                },
+                "union": {
+                    "100": {
+                        "dist||x_log": {
+                            "mlp_scaled": 0.816
+                        }
+                    }
+                },
+                "intersection": {
+                    "100": {
+                        "dist||x_log": {
+                            "mlp_scaled": 0.84
+                        }
+                    }
+                },
+                "disjoint": {
+                    "100": {
+                        "dist||x_log": {
+                            "mlp_scaled": 0.8
+                        }
+                    }
+                }
+            }
+        },
+        "2": {
+            "linear": {
+                "infected": {
+                    "100": {
+                        "dist||x_log": {
+                            "mlp_scaled": 0.83
+                        }
+                    }
+                },
+                "benign": {
+                    "100": {
+                        "dist||x_log": {
+                            "mlp_scaled": 0.79
+                        }
+                    }
+                },
+                "union": {
+                    "100": {
+                        "dist||x_log": {
+                            "mlp_scaled": 0.8
+                        }
+                    }
+                },
+                "intersection": {
+                    "100": {
+                        "dist||x_log": {
+                            "mlp_scaled": 0.794
+                        }
+                    }
+                },
+                "disjoint": {
+                    "100": {
+                        "dist||x_log": {
+                            "mlp_scaled": 0.794
+                        }
+                    }
+                }
+            }
+        },
+        "3": {
+            "linear": {
+                "infected": {
+                    "100": {
+                        "dist||x_log": {
+                            "mlp_scaled": 0.83
+                        }
+                    }
+                },
+                "benign": {
+                    "100": {
+                        "dist||x_log": {
+                            "mlp_scaled": 0.794
+                        }
+                    }
+                },
+                "union": {
+                    "100": {
+                        "dist||x_log": {
+                            "mlp_scaled": 0.828
+                        }
+                    }
+                },
+                "intersection": {
+                    "100": {
+                        "dist||x_log": {
+                            "mlp_scaled": 0.796
+                        }
+                    }
+                },
+                "disjoint": {
+                    "100": {
+                        "dist||x_log": {
+                            "mlp_scaled": 0.784
+                        }
+                    }
+                }
+            }
+        },
+        "4": {
+            "linear": {
+                "infected": {
+                    "100": {
+                        "dist||x_log": {
+                            "mlp_scaled": 0.832
+                        }
+                    }
+                },
+                "benign": {
+                    "100": {
+                        "dist||x_log": {
+                            "mlp_scaled": 0.828
+                        }
+                    }
+                },
+                "union": {
+                    "100": {
+                        "dist||x_log": {
+                            "mlp_scaled": 0.842
+                        }
+                    }
+                },
+                "intersection": {
+                    "100": {
+                        "dist||x_log": {
+                            "mlp_scaled": 0.812
+                        }
+                    }
+                },
+                "disjoint": {
+                    "100": {
+                        "dist||x_log": {
+                            "mlp_scaled": 0.824
+                        }
+                    }
+                }
+            }
+        },
+        "5": {
+            "linear": {
+                "infected": {
+                    "100": {
+                        "dist||x_log": {
+                            "mlp_scaled": 0.832
+                        }
+                    }
+                },
+                "benign": {
+                    "100": {
+                        "dist||x_log": {
+                            "mlp_scaled": 0.83
+                        }
+                    }
+                },
+                "union": {
+                    "100": {
+                        "dist||x_log": {
+                            "mlp_scaled": 0.832
+                        }
+                    }
+                },
+                "intersection": {
+                    "100": {
+                        "dist||x_log": {
+                            "mlp_scaled": 0.804
+                        }
+                    }
+                },
+                "disjoint": {
+                    "100": {
+                        "dist||x_log": {
+                            "mlp_scaled": 0.81
+                        }
+                    }
+                }
+            }
+        },
+        "6": {
+            "linear": {
+                "infected": {
+                    "100": {
+                        "dist||x_log": {
+                            "mlp_scaled": 0.828
+                        }
+                    }
+                },
+                "benign": {
+                    "100": {
+                        "dist||x_log": {
+                            "mlp_scaled": 0.846
+                        }
+                    }
+                },
+                "union": {
+                    "100": {
+                        "dist||x_log": {
+                            "mlp_scaled": 0.842
+                        }
+                    }
+                },
+                "intersection": {
+                    "100": {
+                        "dist||x_log": {
+                            "mlp_scaled": 0.814
+                        }
+                    }
+                },
+                "disjoint": {
+                    "100": {
+                        "dist||x_log": {
+                            "mlp_scaled": 0.792
+                        }
+                    }
+                }
+            }
+        },
+        "7": {
+            "linear": {
+                "infected": {
+                    "100": {
+                        "dist||x_log": {
+                            "mlp_scaled": 0.836
+                        }
+                    }
+                },
+                "benign": {
+                    "100": {
+                        "dist||x_log": {
+                            "mlp_scaled": 0.842
+                        }
+                    }
+                },
+                "union": {
+                    "100": {
+                        "dist||x_log": {
+                            "mlp_scaled": 0.84
+                        }
+                    }
+                },
+                "intersection": {
+                    "100": {
+                        "dist||x_log": {
+                            "mlp_scaled": 0.814
+                        }
+                    }
+                },
+                "disjoint": {
+                    "100": {
+                        "dist||x_log": {
+                            "mlp_scaled": 0.8
+                        }
+                    }
+                }
+            }
+        },
+        "8": {
+            "linear": {
+                "infected": {
+                    "100": {
+                        "dist||x_log": {
+                            "mlp_scaled": 0.824
+                        }
+                    }
+                },
+                "benign": {
+                    "100": {
+                        "dist||x_log": {
+                            "mlp_scaled": 0.838
+                        }
+                    }
+                },
+                "union": {
+                    "100": {
+                        "dist||x_log": {
+                            "mlp_scaled": 0.858
+                        }
+                    }
+                },
+                "intersection": {
+                    "100": {
+                        "dist||x_log": {
+                            "mlp_scaled": 0.838
+                        }
+                    }
+                },
+                "disjoint": {
+                    "100": {
+                        "dist||x_log": {
+                            "mlp_scaled": 0.814
+                        }
+                    }
+                }
+            }
+        },
+        "9": {
+            "linear": {
+                "infected": {
+                    "100": {
+                        "dist||x_log": {
+                            "mlp_scaled": 0.85
+                        }
+                    }
+                },
+                "benign": {
+                    "100": {
+                        "dist||x_log": {
+                            "mlp_scaled": 0.814
+                        }
+                    }
+                },
+                "union": {
+                    "100": {
+                        "dist||x_log": {
+                            "mlp_scaled": 0.838
+                        }
+                    }
+                },
+                "intersection": {
+                    "100": {
+                        "dist||x_log": {
+                            "mlp_scaled": 0.852
+                        }
+                    }
+                },
+                "disjoint": {
+                    "100": {
+                        "dist||x_log": {
+                            "mlp_scaled": 0.81
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

@@ -1,3 +1,5 @@
+import os
+
 import numpy as np
 import matplotlib.pyplot as plt
 
@@ -42,7 +44,7 @@ def get_difference_matrix(
     )
 
     sample_image_data = np.load(f"{clean_path}/{clean_arr[0]}")
-    print(sample_image_data.shape)
+
     combined_length = len(clean_arr) + len(infected_arr)
     data = np.zeros((combined_length, sample_image_data.shape[0], sample_image_data.shape[1]))
 

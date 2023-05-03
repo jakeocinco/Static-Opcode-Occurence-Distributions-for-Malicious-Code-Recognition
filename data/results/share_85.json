@@ -1,0 +1,4544 @@
+{
+    "base": {
+        "0": {
+            "linear": {
+                "benign": {
+                    "25": {
+                        "two_sided": {
+                            "mlp_scaled": 0.838
+                        },
+                        "x||dist": {
+                            "mlp_scaled": 0.842
+                        },
+                        "dist||x": {
+                            "mlp_scaled": 0.838
+                        },
+                        "x||dist_clean": {
+                            "mlp_scaled": 0.74
+                        },
+                        "dist||x_clean": {
+                            "mlp_scaled": 0.778
+                        },
+                        "x||dist_infected": {
+                            "mlp_scaled": 0.794
+                        },
+                        "dist||x_infected": {
+                            "mlp_scaled": 0.828
+                        },
+                        "two_sided_log": {
+                            "mlp_scaled": 0.828
+                        },
+                        "x||dist_log": {
+                            "mlp_scaled": 0.828
+                        },
+                        "dist||x_log": {
+                            "mlp_scaled": 0.824
+                        },
+                        "x||dist_clean_log": {
+                            "mlp_scaled": 0.744
+                        },
+                        "dist||x_clean_log": {
+                            "mlp_scaled": 0.78
+                        },
+                        "x||dist_infected_log": {
+                            "mlp_scaled": 0.794
+                        },
+                        "dist||x_infected_log": {
+                            "mlp_scaled": 0.828
+                        }
+                    },
+                    "100": {
+                        "two_sided": {
+                            "mlp_scaled": 0.836
+                        },
+                        "x||dist": {
+                            "mlp_scaled": 0.826
+                        },
+                        "dist||x": {
+                            "mlp_scaled": 0.81
+                        },
+                        "x||dist_clean": {
+                            "mlp_scaled": 0.732
+                        },
+                        "dist||x_clean": {
+                            "mlp_scaled": 0.752
+                        },
+                        "x||dist_infected": {
+                            "mlp_scaled": 0.798
+                        },
+                        "dist||x_infected": {
+                            "mlp_scaled": 0.816
+                        },
+                        "two_sided_log": {
+                            "mlp_scaled": 0.782
+                        },
+                        "x||dist_log": {
+                            "mlp_scaled": 0.782
+                        },
+                        "dist||x_log": {
+                            "mlp_scaled": 0.802
+                        },
+                        "x||dist_clean_log": {
+                            "mlp_scaled": 0.752
+                        },
+                        "dist||x_clean_log": {
+                            "mlp_scaled": 0.762
+                        },
+                        "x||dist_infected_log": {
+                            "mlp_scaled": 0.778
+                        },
+                        "dist||x_infected_log": {
+                            "mlp_scaled": 0.816
+                        }
+                    }
+                },
+                "infected": {
+                    "25": {
+                        "two_sided": {
+                            "mlp_scaled": 0.836
+                        },
+                        "x||dist": {
+                            "mlp_scaled": 0.864
+                        },
+                        "dist||x": {
+                            "mlp_scaled": 0.836
+                        },
+                        "x||dist_clean": {
+                            "mlp_scaled": 0.74
+                        },
+                        "dist||x_clean": {
+                            "mlp_scaled": 0.772
+                        },
+                        "x||dist_infected": {
+                            "mlp_scaled": 0.762
+                        },
+                        "dist||x_infected": {
+                            "mlp_scaled": 0.804
+                        },
+                        "two_sided_log": {
+                            "mlp_scaled": 0.854
+                        },
+                        "x||dist_log": {
+                            "mlp_scaled": 0.854
+                        },
+                        "dist||x_log": {
+                            "mlp_scaled": 0.832
+                        },
+                        "x||dist_clean_log": {
+                            "mlp_scaled": 0.76
+                        },
+                        "dist||x_clean_log": {
+                            "mlp_scaled": 0.784
+                        },
+                        "x||dist_infected_log": {
+                            "mlp_scaled": 0.788
+                        },
+                        "dist||x_infected_log": {
+                            "mlp_scaled": 0.804
+                        }
+                    },
+                    "100": {
+                        "two_sided": {
+                            "mlp_scaled": 0.826
+                        },
+                        "x||dist": {
+                            "mlp_scaled": 0.85
+                        },
+                        "dist||x": {
+                            "mlp_scaled": 0.814
+                        },
+                        "x||dist_clean": {
+                            "mlp_scaled": 0.752
+                        },
+                        "dist||x_clean": {
+                            "mlp_scaled": 0.776
+                        },
+                        "x||dist_infected": {
+                            "mlp_scaled": 0.778
+                        },
+                        "dist||x_infected": {
+                            "mlp_scaled": 0.814
+                        },
+                        "two_sided_log": {
+                            "mlp_scaled": 0.848
+                        },
+                        "x||dist_log": {
+                            "mlp_scaled": 0.848
+                        },
+                        "dist||x_log": {
+                            "mlp_scaled": 0.812
+                        },
+                        "x||dist_clean_log": {
+                            "mlp_scaled": 0.776
+                        },
+                        "dist||x_clean_log": {
+                            "mlp_scaled": 0.77
+                        },
+                        "x||dist_infected_log": {
+                            "mlp_scaled": 0.778
+                        },
+                        "dist||x_infected_log": {
+                            "mlp_scaled": 0.814
+                        }
+                    }
+                },
+                "union": {
+                    "25": {
+                        "two_sided": {
+                            "mlp_scaled": 0.812
+                        },
+                        "x||dist": {
+                            "mlp_scaled": 0.74
+                        },
+                        "dist||x": {
+                            "mlp_scaled": 0.816
+                        },
+                        "x||dist_clean": {
+                            "mlp_scaled": 0.742
+                        },
+                        "dist||x_clean": {
+                            "mlp_scaled": 0.774
+                        },
+                        "x||dist_infected": {
+                            "mlp_scaled": 0.51
+                        },
+                        "dist||x_infected": {
+                            "mlp_scaled": 0.782
+                        },
+                        "two_sided_log": {
+                            "mlp_scaled": 0.736
+                        },
+                        "x||dist_log": {
+                            "mlp_scaled": 0.736
+                        },
+                        "dist||x_log": {
+                            "mlp_scaled": 0.832
+                        },
+                        "x||dist_clean_log": {
+                            "mlp_scaled": 0.762
+                        },
+                        "dist||x_clean_log": {
+                            "mlp_scaled": 0.78
+                        },
+                        "x||dist_infected_log": {
+                            "mlp_scaled": 0.496
+                        },
+                        "dist||x_infected_log": {
+                            "mlp_scaled": 0.782
+                        }
+                    },
+                    "100": {
+                        "two_sided": {
+                            "mlp_scaled": 0.8
+                        },
+                        "x||dist": {
+                            "mlp_scaled": 0.76
+                        },
+                        "dist||x": {
+                            "mlp_scaled": 0.8
+                        },
+                        "x||dist_clean": {
+                            "mlp_scaled": 0.754
+                        },
+                        "dist||x_clean": {
+                            "mlp_scaled": 0.768
+                        },
+                        "x||dist_infected": {
+                            "mlp_scaled": 0.508
+                        },
+                        "dist||x_infected": {
+                            "mlp_scaled": 0.724
+                        },
+                        "two_sided_log": {
+                            "mlp_scaled": 0.708
+                        },
+                        "x||dist_log": {
+                            "mlp_scaled": 0.708
+                        },
+                        "dist||x_log": {
+                            "mlp_scaled": 0.814
+                        },
+                        "x||dist_clean_log": {
+                            "mlp_scaled": 0.752
+                        },
+                        "dist||x_clean_log": {
+                            "mlp_scaled": 0.766
+                        },
+                        "x||dist_infected_log": {
+                            "mlp_scaled": 0.496
+                        },
+                        "dist||x_infected_log": {
+                            "mlp_scaled": 0.724
+                        }
+                    }
+                },
+                "intersection": {
+                    "25": {
+                        "two_sided": {
+                            "mlp_scaled": 0.826
+                        },
+                        "x||dist": {
+                            "mlp_scaled": 0.836
+                        },
+                        "dist||x": {
+                            "mlp_scaled": 0.838
+                        },
+                        "x||dist_clean": {
+                            "mlp_scaled": 0.74
+                        },
+                        "dist||x_clean": {
+                            "mlp_scaled": 0.768
+                        },
+                        "x||dist_infected": {
+                            "mlp_scaled": 0.768
+                        },
+                        "dist||x_infected": {
+                            "mlp_scaled": 0.786
+                        },
+                        "two_sided_log": {
+                            "mlp_scaled": 0.846
+                        },
+                        "x||dist_log": {
+                            "mlp_scaled": 0.846
+                        },
+                        "dist||x_log": {
+                            "mlp_scaled": 0.834
+                        },
+                        "x||dist_clean_log": {
+                            "mlp_scaled": 0.746
+                        },
+                        "dist||x_clean_log": {
+                            "mlp_scaled": 0.758
+                        },
+                        "x||dist_infected_log": {
+                            "mlp_scaled": 0.742
+                        },
+                        "dist||x_infected_log": {
+                            "mlp_scaled": 0.786
+                        }
+                    },
+                    "100": {
+                        "two_sided": {
+                            "mlp_scaled": 0.836
+                        },
+                        "x||dist": {
+                            "mlp_scaled": 0.844
+                        },
+                        "dist||x": {
+                            "mlp_scaled": 0.828
+                        },
+                        "x||dist_clean": {
+                            "mlp_scaled": 0.746
+                        },
+                        "dist||x_clean": {
+                            "mlp_scaled": 0.758
+                        },
+                        "x||dist_infected": {
+                            "mlp_scaled": 0.768
+                        },
+                        "dist||x_infected": {
+                            "mlp_scaled": 0.812
+                        },
+                        "two_sided_log": {
+                            "mlp_scaled": 0.858
+                        },
+                        "x||dist_log": {
+                            "mlp_scaled": 0.858
+                        },
+                        "dist||x_log": {
+                            "mlp_scaled": 0.818
+                        },
+                        "x||dist_clean_log": {
+                            "mlp_scaled": 0.774
+                        },
+                        "dist||x_clean_log": {
+                            "mlp_scaled": 0.76
+                        },
+                        "x||dist_infected_log": {
+                            "mlp_scaled": 0.796
+                        },
+                        "dist||x_infected_log": {
+                            "mlp_scaled": 0.812
+                        }
+                    }
+                },
+                "disjoint": {
+                    "25": {
+                        "two_sided": {
+                            "mlp_scaled": 0.832
+                        },
+                        "x||dist": {
+                            "mlp_scaled": 0.81
+                        },
+                        "dist||x": {
+                            "mlp_scaled": 0.81
+                        },
+                        "x||dist_clean": {
+                            "mlp_scaled": 0.778
+                        },
+                        "dist||x_clean": {
+                            "mlp_scaled": 0.794
+                        },
+                        "x||dist_infected": {
+                            "mlp_scaled": 0.79
+                        },
+                        "dist||x_infected": {
+                            "mlp_scaled": 0.808
+                        },
+                        "two_sided_log": {
+                            "mlp_scaled": 0.826
+                        },
+                        "x||dist_log": {
+                            "mlp_scaled": 0.826
+                        },
+                        "dist||x_log": {
+                            "mlp_scaled": 0.81
+                        },
+                        "x||dist_clean_log": {
+                            "mlp_scaled": 0.79
+                        },
+                        "dist||x_clean_log": {
+                            "mlp_scaled": 0.796
+                        },
+                        "x||dist_infected_log": {
+                            "mlp_scaled": 0.794
+                        },
+                        "dist||x_infected_log": {
+                            "mlp_scaled": 0.808
+                        }
+                    },
+                    "100": {
+                        "two_sided": {
+                            "mlp_scaled": 0.798
+                        },
+                        "x||dist": {
+                            "mlp_scaled": 0.792
+                        },
+                        "dist||x": {
+                            "mlp_scaled": 0.75
+                        },
+                        "x||dist_clean": {
+                            "mlp_scaled": 0.768
+                        },
+                        "dist||x_clean": {
+                            "mlp_scaled": 0.75
+                        },
+                        "x||dist_infected": {
+                            "mlp_scaled": 0.81
+                        },
+                        "dist||x_infected": {
+                            "mlp_scaled": 0.804
+                        },
+                        "two_sided_log": {
+                            "mlp_scaled": 0.734
+                        },
+                        "x||dist_log": {
+                            "mlp_scaled": 0.734
+                        },
+                        "dist||x_log": {
+                            "mlp_scaled": 0.794
+                        },
+                        "x||dist_clean_log": {
+                            "mlp_scaled": 0.718
+                        },
+                        "dist||x_clean_log": {
+                            "mlp_scaled": 0.774
+                        },
+                        "x||dist_infected_log": {
+                            "mlp_scaled": 0.736
+                        },
+                        "dist||x_infected_log": {
+                            "mlp_scaled": 0.804
+                        }
+                    }
+                }
+            }
+        },
+        "1": {
+            "linear": {
+                "benign": {
+                    "25": {
+                        "two_sided": {
+                            "mlp_scaled": 0.822
+                        },
+                        "x||dist": {
+                            "mlp_scaled": 0.856
+                        },
+                        "dist||x": {
+                            "mlp_scaled": 0.83
+                        },
+                        "x||dist_clean": {
+                            "mlp_scaled": 0.736
+                        },
+                        "dist||x_clean": {
+                            "mlp_scaled": 0.764
+                        },
+                        "x||dist_infected": {
+                            "mlp_scaled": 0.756
+                        },
+                        "dist||x_infected": {
+                            "mlp_scaled": 0.802
+                        },
+                        "two_sided_log": {
+                            "mlp_scaled": 0.846
+                        },
+                        "x||dist_log": {
+                            "mlp_scaled": 0.846
+                        },
+                        "dist||x_log": {
+                            "mlp_scaled": 0.816
+                        },
+                        "x||dist_clean_log": {
+                            "mlp_scaled": 0.758
+                        },
+                        "dist||x_clean_log": {
+                            "mlp_scaled": 0.78
+                        },
+                        "x||dist_infected_log": {
+                            "mlp_scaled": 0.78
+                        },
+                        "dist||x_infected_log": {
+                            "mlp_scaled": 0.802
+                        }
+                    },
+                    "100": {
+                        "two_sided": {
+                            "mlp_scaled": 0.832
+                        },
+                        "x||dist": {
+                            "mlp_scaled": 0.836
+                        },
+                        "dist||x": {
+                            "mlp_scaled": 0.814
+                        },
+                        "x||dist_clean": {
+                            "mlp_scaled": 0.744
+                        },
+                        "dist||x_clean": {
+                            "mlp_scaled": 0.758
+                        },
+                        "x||dist_infected": {
+                            "mlp_scaled": 0.754
+                        },
+                        "dist||x_infected": {
+                            "mlp_scaled": 0.81
+                        },
+                        "two_sided_log": {
+                            "mlp_scaled": 0.852
+                        },
+                        "x||dist_log": {
+                            "mlp_scaled": 0.852
+                        },
+                        "dist||x_log": {
+                            "mlp_scaled": 0.808
+                        },
+                        "x||dist_clean_log": {
+                            "mlp_scaled": 0.756
+                        },
+                        "dist||x_clean_log": {
+                            "mlp_scaled": 0.77
+                        },
+                        "x||dist_infected_log": {
+                            "mlp_scaled": 0.762
+                        },
+                        "dist||x_infected_log": {
+                            "mlp_scaled": 0.81
+                        }
+                    }
+                },
+                "infected": {
+                    "25": {
+                        "two_sided": {
+                            "mlp_scaled": 0.826
+                        },
+                        "x||dist": {
+                            "mlp_scaled": 0.84
+                        },
+                        "dist||x": {
+                            "mlp_scaled": 0.836
+                        },
+                        "x||dist_clean": {
+                            "mlp_scaled": 0.774
+                        },
+                        "dist||x_clean": {
+                            "mlp_scaled": 0.776
+                        },
+                        "x||dist_infected": {
+                            "mlp_scaled": 0.776
+                        },
+                        "dist||x_infected": {
+                            "mlp_scaled": 0.778
+                        },
+                        "two_sided_log": {
+                            "mlp_scaled": 0.85
+                        },
+                        "x||dist_log": {
+                            "mlp_scaled": 0.85
+                        },
+                        "dist||x_log": {
+                            "mlp_scaled": 0.832
+                        },
+                        "x||dist_clean_log": {
+                            "mlp_scaled": 0.772
+                        },
+                        "dist||x_clean_log": {
+                            "mlp_scaled": 0.77
+                        },
+                        "x||dist_infected_log": {
+                            "mlp_scaled": 0.772
+                        },
+                        "dist||x_infected_log": {
+                            "mlp_scaled": 0.778
+                        }
+                    },
+                    "100": {
+                        "two_sided": {
+                            "mlp_scaled": 0.832
+                        },
+                        "x||dist": {
+                            "mlp_scaled": 0.852
+                        },
+                        "dist||x": {
+                            "mlp_scaled": 0.802
+                        },
+                        "x||dist_clean": {
+                            "mlp_scaled": 0.772
+                        },
+                        "dist||x_clean": {
+                            "mlp_scaled": 0.772
+                        },
+                        "x||dist_infected": {
+                            "mlp_scaled": 0.78
+                        },
+                        "dist||x_infected": {
+                            "mlp_scaled": 0.802
+                        },
+                        "two_sided_log": {
+                            "mlp_scaled": 0.848
+                        },
+                        "x||dist_log": {
+                            "mlp_scaled": 0.848
+                        },
+                        "dist||x_log": {
+                            "mlp_scaled": 0.824
+                        },
+                        "x||dist_clean_log": {
+                            "mlp_scaled": 0.774
+                        },
+                        "dist||x_clean_log": {
+                            "mlp_scaled": 0.764
+                        },
+                        "x||dist_infected_log": {
+                            "mlp_scaled": 0.764
+                        },
+                        "dist||x_infected_log": {
+                            "mlp_scaled": 0.802
+                        }
+                    }
+                },
+                "union": {
+                    "25": {
+                        "two_sided": {
+                            "mlp_scaled": 0.832
+                        },
+                        "x||dist": {
+                            "mlp_scaled": 0.51
+                        },
+                        "dist||x": {
+                            "mlp_scaled": 0.828
+                        },
+                        "x||dist_clean": {
+                            "mlp_scaled": 0.498
+                        },
+                        "dist||x_clean": {
+                            "mlp_scaled": 0.776
+                        },
+                        "x||dist_infected": {
+                            "mlp_scaled": 0.494
+                        },
+                        "dist||x_infected": {
+                            "mlp_scaled": 0.774
+                        },
+                        "two_sided_log": {
+                            "mlp_scaled": 0.51
+                        },
+                        "x||dist_log": {
+                            "mlp_scaled": 0.51
+                        },
+                        "dist||x_log": {
+                            "mlp_scaled": 0.816
+                        },
+                        "x||dist_clean_log": {
+                            "mlp_scaled": 0.498
+                        },
+                        "dist||x_clean_log": {
+                            "mlp_scaled": 0.772
+                        },
+                        "x||dist_infected_log": {
+                            "mlp_scaled": 0.51
+                        },
+                        "dist||x_infected_log": {
+                            "mlp_scaled": 0.774
+                        }
+                    },
+                    "100": {
+                        "two_sided": {
+                            "mlp_scaled": 0.808
+                        },
+                        "x||dist": {
+                            "mlp_scaled": 0.496
+                        },
+                        "dist||x": {
+                            "mlp_scaled": 0.81
+                        },
+                        "x||dist_clean": {
+                            "mlp_scaled": 0.502
+                        },
+                        "dist||x_clean": {
+                            "mlp_scaled": 0.676
+                        },
+                        "x||dist_infected": {
+                            "mlp_scaled": 0.516
+                        },
+                        "dist||x_infected": {
+                            "mlp_scaled": 0.65
+                        },
+                        "two_sided_log": {
+                            "mlp_scaled": 0.496
+                        },
+                        "x||dist_log": {
+                            "mlp_scaled": 0.496
+                        },
+                        "dist||x_log": {
+                            "mlp_scaled": 0.804
+                        },
+                        "x||dist_clean_log": {
+                            "mlp_scaled": 0.496
+                        },
+                        "dist||x_clean_log": {
+                            "mlp_scaled": 0.75
+                        },
+                        "x||dist_infected_log": {
+                            "mlp_scaled": 0.516
+                        },
+                        "dist||x_infected_log": {
+                            "mlp_scaled": 0.65
+                        }
+                    }
+                },
+                "intersection": {
+                    "25": {
+                        "two_sided": {
+                            "mlp_scaled": 0.83
+                        },
+                        "x||dist": {
+                            "mlp_scaled": 0.842
+                        },
+                        "dist||x": {
+                            "mlp_scaled": 0.814
+                        },
+                        "x||dist_clean": {
+                            "mlp_scaled": 0.764
+                        },
+                        "dist||x_clean": {
+                            "mlp_scaled": 0.788
+                        },
+                        "x||dist_infected": {
+                            "mlp_scaled": 0.782
+                        },
+                        "dist||x_infected": {
+                            "mlp_scaled": 0.794
+                        },
+                        "two_sided_log": {
+                            "mlp_scaled": 0.842
+                        },
+                        "x||dist_log": {
+                            "mlp_scaled": 0.842
+                        },
+                        "dist||x_log": {
+                            "mlp_scaled": 0.826
+                        },
+                        "x||dist_clean_log": {
+                            "mlp_scaled": 0.738
+                        },
+                        "dist||x_clean_log": {
+                            "mlp_scaled": 0.774
+                        },
+                        "x||dist_infected_log": {
+                            "mlp_scaled": 0.764
+                        },
+                        "dist||x_infected_log": {
+                            "mlp_scaled": 0.794
+                        }
+                    },
+                    "100": {
+                        "two_sided": {
+                            "mlp_scaled": 0.828
+                        },
+                        "x||dist": {
+                            "mlp_scaled": 0.844
+                        },
+                        "dist||x": {
+                            "mlp_scaled": 0.814
+                        },
+                        "x||dist_clean": {
+                            "mlp_scaled": 0.744
+                        },
+                        "dist||x_clean": {
+                            "mlp_scaled": 0.764
+                        },
+                        "x||dist_infected": {
+                            "mlp_scaled": 0.758
+                        },
+                        "dist||x_infected": {
+                            "mlp_scaled": 0.798
+                        },
+                        "two_sided_log": {
+                            "mlp_scaled": 0.846
+                        },
+                        "x||dist_log": {
+                            "mlp_scaled": 0.846
+                        },
+                        "dist||x_log": {
+                            "mlp_scaled": 0.808
+                        },
+                        "x||dist_clean_log": {
+                            "mlp_scaled": 0.778
+                        },
+                        "dist||x_clean_log": {
+                            "mlp_scaled": 0.76
+                        },
+                        "x||dist_infected_log": {
+                            "mlp_scaled": 0.76
+                        },
+                        "dist||x_infected_log": {
+                            "mlp_scaled": 0.798
+                        }
+                    }
+                },
+                "disjoint": {
+                    "25": {
+                        "two_sided": {
+                            "mlp_scaled": 0.84
+                        },
+                        "x||dist": {
+                            "mlp_scaled": 0.812
+                        },
+                        "dist||x": {
+                            "mlp_scaled": 0.824
+                        },
+                        "x||dist_clean": {
+                            "mlp_scaled": 0.796
+                        },
+                        "dist||x_clean": {
+                            "mlp_scaled": 0.782
+                        },
+                        "x||dist_infected": {
+                            "mlp_scaled": 0.808
+                        },
+                        "dist||x_infected": {
+                            "mlp_scaled": 0.778
+                        },
+                        "two_sided_log": {
+                            "mlp_scaled": 0.828
+                        },
+                        "x||dist_log": {
+                            "mlp_scaled": 0.828
+                        },
+                        "dist||x_log": {
+                            "mlp_scaled": 0.812
+                        },
+                        "x||dist_clean_log": {
+                            "mlp_scaled": 0.79
+                        },
+                        "dist||x_clean_log": {
+                            "mlp_scaled": 0.792
+                        },
+                        "x||dist_infected_log": {
+                            "mlp_scaled": 0.81
+                        },
+                        "dist||x_infected_log": {
+                            "mlp_scaled": 0.778
+                        }
+                    },
+                    "100": {
+                        "two_sided": {
+                            "mlp_scaled": 0.782
+                        },
+                        "x||dist": {
+                            "mlp_scaled": 0.736
+                        },
+                        "dist||x": {
+                            "mlp_scaled": 0.754
+                        },
+                        "x||dist_clean": {
+                            "mlp_scaled": 0.74
+                        },
+                        "dist||x_clean": {
+                            "mlp_scaled": 0.782
+                        },
+                        "x||dist_infected": {
+                            "mlp_scaled": 0.78
+                        },
+                        "dist||x_infected": {
+                            "mlp_scaled": 0.754
+                        },
+                        "two_sided_log": {
+                            "mlp_scaled": 0.78
+                        },
+                        "x||dist_log": {
+                            "mlp_scaled": 0.78
+                        },
+                        "dist||x_log": {
+                            "mlp_scaled": 0.78
+                        },
+                        "x||dist_clean_log": {
+                            "mlp_scaled": 0.744
+                        },
+                        "dist||x_clean_log": {
+                            "mlp_scaled": 0.744
+                        },
+                        "x||dist_infected_log": {
+                            "mlp_scaled": 0.712
+                        },
+                        "dist||x_infected_log": {
+                            "mlp_scaled": 0.754
+                        }
+                    }
+                }
+            }
+        },
+        "2": {
+            "linear": {
+                "benign": {
+                    "25": {
+                        "two_sided": {
+                            "mlp_scaled": 0.836
+                        },
+                        "x||dist": {
+                            "mlp_scaled": 0.812
+                        },
+                        "dist||x": {
+                            "mlp_scaled": 0.824
+                        },
+                        "x||dist_clean": {
+                            "mlp_scaled": 0.728
+                        },
+                        "dist||x_clean": {
+                            "mlp_scaled": 0.768
+                        },
+                        "x||dist_infected": {
+                            "mlp_scaled": 0.774
+                        },
+                        "dist||x_infected": {
+                            "mlp_scaled": 0.812
+                        },
+                        "two_sided_log": {
+                            "mlp_scaled": 0.834
+                        },
+                        "x||dist_log": {
+                            "mlp_scaled": 0.834
+                        },
+                        "dist||x_log": {
+                            "mlp_scaled": 0.836
+                        },
+                        "x||dist_clean_log": {
+                            "mlp_scaled": 0.752
+                        },
+                        "dist||x_clean_log": {
+                            "mlp_scaled": 0.778
+                        },
+                        "x||dist_infected_log": {
+                            "mlp_scaled": 0.786
+                        },
+                        "dist||x_infected_log": {
+                            "mlp_scaled": 0.812
+                        }
+                    },
+                    "100": {
+                        "two_sided": {
+                            "mlp_scaled": 0.824
+                        },
+                        "x||dist": {
+                            "mlp_scaled": 0.828
+                        },
+                        "dist||x": {
+                            "mlp_scaled": 0.82
+                        },
+                        "x||dist_clean": {
+                            "mlp_scaled": 0.77
+                        },
+                        "dist||x_clean": {
+                            "mlp_scaled": 0.782
+                        },
+                        "x||dist_infected": {
+                            "mlp_scaled": 0.748
+                        },
+                        "dist||x_infected": {
+                            "mlp_scaled": 0.806
+                        },
+                        "two_sided_log": {
+                            "mlp_scaled": 0.84
+                        },
+                        "x||dist_log": {
+                            "mlp_scaled": 0.84
+                        },
+                        "dist||x_log": {
+                            "mlp_scaled": 0.814
+                        },
+                        "x||dist_clean_log": {
+                            "mlp_scaled": 0.772
+                        },
+                        "dist||x_clean_log": {
+                            "mlp_scaled": 0.796
+                        },
+                        "x||dist_infected_log": {
+                            "mlp_scaled": 0.788
+                        },
+                        "dist||x_infected_log": {
+                            "mlp_scaled": 0.806
+                        }
+                    }
+                },
+                "infected": {
+                    "25": {
+                        "two_sided": {
+                            "mlp_scaled": 0.816
+                        },
+                        "x||dist": {
+                            "mlp_scaled": 0.836
+                        },
+                        "dist||x": {
+                            "mlp_scaled": 0.804
+                        },
+                        "x||dist_clean": {
+                            "mlp_scaled": 0.746
+                        },
+                        "dist||x_clean": {
+                            "mlp_scaled": 0.76
+                        },
+                        "x||dist_infected": {
+                            "mlp_scaled": 0.778
+                        },
+                        "dist||x_infected": {
+                            "mlp_scaled": 0.798
+                        },
+                        "two_sided_log": {
+                            "mlp_scaled": 0.842
+                        },
+                        "x||dist_log": {
+                            "mlp_scaled": 0.842
+                        },
+                        "dist||x_log": {
+                            "mlp_scaled": 0.838
+                        },
+                        "x||dist_clean_log": {
+                            "mlp_scaled": 0.746
+                        },
+                        "dist||x_clean_log": {
+                            "mlp_scaled": 0.786
+                        },
+                        "x||dist_infected_log": {
+                            "mlp_scaled": 0.796
+                        },
+                        "dist||x_infected_log": {
+                            "mlp_scaled": 0.798
+                        }
+                    },
+                    "100": {
+                        "two_sided": {
+                            "mlp_scaled": 0.834
+                        },
+                        "x||dist": {
+                            "mlp_scaled": 0.834
+                        },
+                        "dist||x": {
+                            "mlp_scaled": 0.818
+                        },
+                        "x||dist_clean": {
+                            "mlp_scaled": 0.774
+                        },
+                        "dist||x_clean": {
+                            "mlp_scaled": 0.78
+                        },
+                        "x||dist_infected": {
+                            "mlp_scaled": 0.772
+                        },
+                        "dist||x_infected": {
+                            "mlp_scaled": 0.804
+                        },
+                        "two_sided_log": {
+                            "mlp_scaled": 0.84
+                        },
+                        "x||dist_log": {
+                            "mlp_scaled": 0.84
+                        },
+                        "dist||x_log": {
+                            "mlp_scaled": 0.776
+                        },
+                        "x||dist_clean_log": {
+                            "mlp_scaled": 0.792
+                        },
+                        "dist||x_clean_log": {
+                            "mlp_scaled": 0.772
+                        },
+                        "x||dist_infected_log": {
+                            "mlp_scaled": 0.812
+                        },
+                        "dist||x_infected_log": {
+                            "mlp_scaled": 0.804
+                        }
+                    }
+                },
+                "union": {
+                    "25": {
+                        "two_sided": {
+                            "mlp_scaled": 0.774
+                        },
+                        "x||dist": {
+                            "mlp_scaled": 0.496
+                        },
+                        "dist||x": {
+                            "mlp_scaled": 0.786
+                        },
+                        "x||dist_clean": {
+                            "mlp_scaled": 0.498
+                        },
+                        "dist||x_clean": {
+                            "mlp_scaled": 0.766
+                        },
+                        "x||dist_infected": {
+                            "mlp_scaled": 0.496
+                        },
+                        "dist||x_infected": {
+                            "mlp_scaled": 0.752
+                        },
+                        "two_sided_log": {
+                            "mlp_scaled": 0.496
+                        },
+                        "x||dist_log": {
+                            "mlp_scaled": 0.496
+                        },
+                        "dist||x_log": {
+                            "mlp_scaled": 0.786
+                        },
+                        "x||dist_clean_log": {
+                            "mlp_scaled": 0.5
+                        },
+                        "dist||x_clean_log": {
+                            "mlp_scaled": 0.77
+                        },
+                        "x||dist_infected_log": {
+                            "mlp_scaled": 0.496
+                        },
+                        "dist||x_infected_log": {
+                            "mlp_scaled": 0.752
+                        }
+                    },
+                    "100": {
+                        "two_sided": {
+                            "mlp_scaled": 0.74
+                        },
+                        "x||dist": {
+                            "mlp_scaled": 0.496
+                        },
+                        "dist||x": {
+                            "mlp_scaled": 0.794
+                        },
+                        "x||dist_clean": {
+                            "mlp_scaled": 0.496
+                        },
+                        "dist||x_clean": {
+                            "mlp_scaled": 0.712
+                        },
+                        "x||dist_infected": {
+                            "mlp_scaled": 0.512
+                        },
+                        "dist||x_infected": {
+                            "mlp_scaled": 0.754
+                        },
+                        "two_sided_log": {
+                            "mlp_scaled": 0.496
+                        },
+                        "x||dist_log": {
+                            "mlp_scaled": 0.496
+                        },
+                        "dist||x_log": {
+                            "mlp_scaled": 0.784
+                        },
+                        "x||dist_clean_log": {
+                            "mlp_scaled": 0.496
+                        },
+                        "dist||x_clean_log": {
+                            "mlp_scaled": 0.682
+                        },
+                        "x||dist_infected_log": {
+                            "mlp_scaled": 0.496
+                        },
+                        "dist||x_infected_log": {
+                            "mlp_scaled": 0.754
+                        }
+                    }
+                },
+                "intersection": {
+                    "25": {
+                        "two_sided": {
+                            "mlp_scaled": 0.804
+                        },
+                        "x||dist": {
+                            "mlp_scaled": 0.782
+                        },
+                        "dist||x": {
+                            "mlp_scaled": 0.826
+                        },
+                        "x||dist_clean": {
+                            "mlp_scaled": 0.728
+                        },
+                        "dist||x_clean": {
+                            "mlp_scaled": 0.71
+                        },
+                        "x||dist_infected": {
+                            "mlp_scaled": 0.772
+                        },
+                        "dist||x_infected": {
+                            "mlp_scaled": 0.81
+                        },
+                        "two_sided_log": {
+                            "mlp_scaled": 0.82
+                        },
+                        "x||dist_log": {
+                            "mlp_scaled": 0.82
+                        },
+                        "dist||x_log": {
+                            "mlp_scaled": 0.832
+                        },
+                        "x||dist_clean_log": {
+                            "mlp_scaled": 0.74
+                        },
+                        "dist||x_clean_log": {
+                            "mlp_scaled": 0.774
+                        },
+                        "x||dist_infected_log": {
+                            "mlp_scaled": 0.764
+                        },
+                        "dist||x_infected_log": {
+                            "mlp_scaled": 0.81
+                        }
+                    },
+                    "100": {
+                        "two_sided": {
+                            "mlp_scaled": 0.836
+                        },
+                        "x||dist": {
+                            "mlp_scaled": 0.848
+                        },
+                        "dist||x": {
+                            "mlp_scaled": 0.738
+                        },
+                        "x||dist_clean": {
+                            "mlp_scaled": 0.772
+                        },
+                        "dist||x_clean": {
+                            "mlp_scaled": 0.784
+                        },
+                        "x||dist_infected": {
+                            "mlp_scaled": 0.776
+                        },
+                        "dist||x_infected": {
+                            "mlp_scaled": 0.814
+                        },
+                        "two_sided_log": {
+                            "mlp_scaled": 0.862
+                        },
+                        "x||dist_log": {
+                            "mlp_scaled": 0.862
+                        },
+                        "dist||x_log": {
+                            "mlp_scaled": 0.796
+                        },
+                        "x||dist_clean_log": {
+                            "mlp_scaled": 0.764
+                        },
+                        "dist||x_clean_log": {
+                            "mlp_scaled": 0.798
+                        },
+                        "x||dist_infected_log": {
+                            "mlp_scaled": 0.748
+                        },
+                        "dist||x_infected_log": {
+                            "mlp_scaled": 0.814
+                        }
+                    }
+                },
+                "disjoint": {
+                    "25": {
+                        "two_sided": {
+                            "mlp_scaled": 0.826
+                        },
+                        "x||dist": {
+                            "mlp_scaled": 0.814
+                        },
+                        "dist||x": {
+                            "mlp_scaled": 0.798
+                        },
+                        "x||dist_clean": {
+                            "mlp_scaled": 0.796
+                        },
+                        "dist||x_clean": {
+                            "mlp_scaled": 0.782
+                        },
+                        "x||dist_infected": {
+                            "mlp_scaled": 0.814
+                        },
+                        "dist||x_infected": {
+                            "mlp_scaled": 0.838
+                        },
+                        "two_sided_log": {
+                            "mlp_scaled": 0.83
+                        },
+                        "x||dist_log": {
+                            "mlp_scaled": 0.83
+                        },
+                        "dist||x_log": {
+                            "mlp_scaled": 0.8
+                        },
+                        "x||dist_clean_log": {
+                            "mlp_scaled": 0.788
+                        },
+                        "dist||x_clean_log": {
+                            "mlp_scaled": 0.79
+                        },
+                        "x||dist_infected_log": {
+                            "mlp_scaled": 0.844
+                        },
+                        "dist||x_infected_log": {
+                            "mlp_scaled": 0.838
+                        }
+                    },
+                    "100": {
+                        "two_sided": {
+                            "mlp_scaled": 0.752
+                        },
+                        "x||dist": {
+                            "mlp_scaled": 0.794
+                        },
+                        "dist||x": {
+                            "mlp_scaled": 0.788
+                        },
+                        "x||dist_clean": {
+                            "mlp_scaled": 0.744
+                        },
+                        "dist||x_clean": {
+                            "mlp_scaled": 0.71
+                        },
+                        "x||dist_infected": {
+                            "mlp_scaled": 0.78
+                        },
+                        "dist||x_infected": {
+                            "mlp_scaled": 0.74
+                        },
+                        "two_sided_log": {
+                            "mlp_scaled": 0.792
+                        },
+                        "x||dist_log": {
+                            "mlp_scaled": 0.792
+                        },
+                        "dist||x_log": {
+                            "mlp_scaled": 0.748
+                        },
+                        "x||dist_clean_log": {
+                            "mlp_scaled": 0.752
+                        },
+                        "dist||x_clean_log": {
+                            "mlp_scaled": 0.768
+                        },
+                        "x||dist_infected_log": {
+                            "mlp_scaled": 0.74
+                        },
+                        "dist||x_infected_log": {
+                            "mlp_scaled": 0.74
+                        }
+                    }
+                }
+            }
+        },
+        "3": {
+            "linear": {
+                "benign": {
+                    "25": {
+                        "two_sided": {
+                            "mlp_scaled": 0.822
+                        },
+                        "x||dist": {
+                            "mlp_scaled": 0.806
+                        },
+                        "dist||x": {
+                            "mlp_scaled": 0.818
+                        },
+                        "x||dist_clean": {
+                            "mlp_scaled": 0.75
+                        },
+                        "dist||x_clean": {
+                            "mlp_scaled": 0.776
+                        },
+                        "x||dist_infected": {
+                            "mlp_scaled": 0.782
+                        },
+                        "dist||x_infected": {
+                            "mlp_scaled": 0.794
+                        },
+                        "two_sided_log": {
+                            "mlp_scaled": 0.824
+                        },
+                        "x||dist_log": {
+                            "mlp_scaled": 0.824
+                        },
+                        "dist||x_log": {
+                            "mlp_scaled": 0.828
+                        },
+                        "x||dist_clean_log": {
+                            "mlp_scaled": 0.776
+                        },
+                        "dist||x_clean_log": {
+                            "mlp_scaled": 0.776
+                        },
+                        "x||dist_infected_log": {
+                            "mlp_scaled": 0.774
+                        },
+                        "dist||x_infected_log": {
+                            "mlp_scaled": 0.794
+                        }
+                    },
+                    "100": {
+                        "two_sided": {
+                            "mlp_scaled": 0.822
+                        },
+                        "x||dist": {
+                            "mlp_scaled": 0.82
+                        },
+                        "dist||x": {
+                            "mlp_scaled": 0.794
+                        },
+                        "x||dist_clean": {
+                            "mlp_scaled": 0.764
+                        },
+                        "dist||x_clean": {
+                            "mlp_scaled": 0.78
+                        },
+                        "x||dist_infected": {
+                            "mlp_scaled": 0.79
+                        },
+                        "dist||x_infected": {
+                            "mlp_scaled": 0.782
+                        },
+                        "two_sided_log": {
+                            "mlp_scaled": 0.844
+                        },
+                        "x||dist_log": {
+                            "mlp_scaled": 0.844
+                        },
+                        "dist||x_log": {
+                            "mlp_scaled": 0.798
+                        },
+                        "x||dist_clean_log": {
+                            "mlp_scaled": 0.774
+                        },
+                        "dist||x_clean_log": {
+                            "mlp_scaled": 0.788
+                        },
+                        "x||dist_infected_log": {
+                            "mlp_scaled": 0.76
+                        },
+                        "dist||x_infected_log": {
+                            "mlp_scaled": 0.782
+                        }
+                    }
+                },
+                "infected": {
+                    "25": {
+                        "two_sided": {
+                            "mlp_scaled": 0.838
+                        },
+                        "x||dist": {
+                            "mlp_scaled": 0.834
+                        },
+                        "dist||x": {
+                            "mlp_scaled": 0.822
+                        },
+                        "x||dist_clean": {
+                            "mlp_scaled": 0.764
+                        },
+                        "dist||x_clean": {
+                            "mlp_scaled": 0.784
+                        },
+                        "x||dist_infected": {
+                            "mlp_scaled": 0.742
+                        },
+                        "dist||x_infected": {
+                            "mlp_scaled": 0.808
+                        },
+                        "two_sided_log": {
+                            "mlp_scaled": 0.84
+                        },
+                        "x||dist_log": {
+                            "mlp_scaled": 0.84
+                        },
+                        "dist||x_log": {
+                            "mlp_scaled": 0.828
+                        },
+                        "x||dist_clean_log": {
+                            "mlp_scaled": 0.768
+                        },
+                        "dist||x_clean_log": {
+                            "mlp_scaled": 0.796
+                        },
+                        "x||dist_infected_log": {
+                            "mlp_scaled": 0.784
+                        },
+                        "dist||x_infected_log": {
+                            "mlp_scaled": 0.808
+                        }
+                    },
+                    "100": {
+                        "two_sided": {
+                            "mlp_scaled": 0.836
+                        },
+                        "x||dist": {
+                            "mlp_scaled": 0.866
+                        },
+                        "dist||x": {
+                            "mlp_scaled": 0.82
+                        },
+                        "x||dist_clean": {
+                            "mlp_scaled": 0.786
+                        },
+                        "dist||x_clean": {
+                            "mlp_scaled": 0.79
+                        },
+                        "x||dist_infected": {
+                            "mlp_scaled": 0.778
+                        },
+                        "dist||x_infected": {
+                            "mlp_scaled": 0.796
+                        },
+                        "two_sided_log": {
+                            "mlp_scaled": 0.852
+                        },
+                        "x||dist_log": {
+                            "mlp_scaled": 0.852
+                        },
+                        "dist||x_log": {
+                            "mlp_scaled": 0.814
+                        },
+                        "x||dist_clean_log": {
+                            "mlp_scaled": 0.766
+                        },
+                        "dist||x_clean_log": {
+                            "mlp_scaled": 0.792
+                        },
+                        "x||dist_infected_log": {
+                            "mlp_scaled": 0.78
+                        },
+                        "dist||x_infected_log": {
+                            "mlp_scaled": 0.796
+                        }
+                    }
+                },
+                "union": {
+                    "25": {
+                        "two_sided": {
+                            "mlp_scaled": 0.792
+                        },
+                        "x||dist": {
+                            "mlp_scaled": 0.496
+                        },
+                        "dist||x": {
+                            "mlp_scaled": 0.806
+                        },
+                        "x||dist_clean": {
+                            "mlp_scaled": 0.494
+                        },
+                        "dist||x_clean": {
+                            "mlp_scaled": 0.77
+                        },
+                        "x||dist_infected": {
+                            "mlp_scaled": 0.496
+                        },
+                        "dist||x_infected": {
+                            "mlp_scaled": 0.772
+                        },
+                        "two_sided_log": {
+                            "mlp_scaled": 0.496
+                        },
+                        "x||dist_log": {
+                            "mlp_scaled": 0.496
+                        },
+                        "dist||x_log": {
+                            "mlp_scaled": 0.804
+                        },
+                        "x||dist_clean_log": {
+                            "mlp_scaled": 0.494
+                        },
+                        "dist||x_clean_log": {
+                            "mlp_scaled": 0.774
+                        },
+                        "x||dist_infected_log": {
+                            "mlp_scaled": 0.496
+                        },
+                        "dist||x_infected_log": {
+                            "mlp_scaled": 0.772
+                        }
+                    },
+                    "100": {
+                        "two_sided": {
+                            "mlp_scaled": 0.798
+                        },
+                        "x||dist": {
+                            "mlp_scaled": 0.514
+                        },
+                        "dist||x": {
+                            "mlp_scaled": 0.79
+                        },
+                        "x||dist_clean": {
+                            "mlp_scaled": 0.492
+                        },
+                        "dist||x_clean": {
+                            "mlp_scaled": 0.698
+                        },
+                        "x||dist_infected": {
+                            "mlp_scaled": 0.492
+                        },
+                        "dist||x_infected": {
+                            "mlp_scaled": 0.716
+                        },
+                        "two_sided_log": {
+                            "mlp_scaled": 0.492
+                        },
+                        "x||dist_log": {
+                            "mlp_scaled": 0.492
+                        },
+                        "dist||x_log": {
+                            "mlp_scaled": 0.784
+                        },
+                        "x||dist_clean_log": {
+                            "mlp_scaled": 0.492
+                        },
+                        "dist||x_clean_log": {
+                            "mlp_scaled": 0.738
+                        },
+                        "x||dist_infected_log": {
+                            "mlp_scaled": 0.494
+                        },
+                        "dist||x_infected_log": {
+                            "mlp_scaled": 0.716
+                        }
+                    }
+                },
+                "intersection": {
+                    "25": {
+                        "two_sided": {
+                            "mlp_scaled": 0.82
+                        },
+                        "x||dist": {
+                            "mlp_scaled": 0.828
+                        },
+                        "dist||x": {
+                            "mlp_scaled": 0.816
+                        },
+                        "x||dist_clean": {
+                            "mlp_scaled": 0.752
+                        },
+                        "dist||x_clean": {
+                            "mlp_scaled": 0.784
+                        },
+                        "x||dist_infected": {
+                            "mlp_scaled": 0.762
+                        },
+                        "dist||x_infected": {
+                            "mlp_scaled": 0.784
+                        },
+                        "two_sided_log": {
+                            "mlp_scaled": 0.832
+                        },
+                        "x||dist_log": {
+                            "mlp_scaled": 0.832
+                        },
+                        "dist||x_log": {
+                            "mlp_scaled": 0.83
+                        },
+                        "x||dist_clean_log": {
+                            "mlp_scaled": 0.756
+                        },
+                        "dist||x_clean_log": {
+                            "mlp_scaled": 0.8
+                        },
+                        "x||dist_infected_log": {
+                            "mlp_scaled": 0.78
+                        },
+                        "dist||x_infected_log": {
+                            "mlp_scaled": 0.784
+                        }
+                    },
+                    "100": {
+                        "two_sided": {
+                            "mlp_scaled": 0.808
+                        },
+                        "x||dist": {
+                            "mlp_scaled": 0.824
+                        },
+                        "dist||x": {
+                            "mlp_scaled": 0.796
+                        },
+                        "x||dist_clean": {
+                            "mlp_scaled": 0.788
+                        },
+                        "dist||x_clean": {
+                            "mlp_scaled": 0.79
+                        },
+                        "x||dist_infected": {
+                            "mlp_scaled": 0.778
+                        },
+                        "dist||x_infected": {
+                            "mlp_scaled": 0.79
+                        },
+                        "two_sided_log": {
+                            "mlp_scaled": 0.836
+                        },
+                        "x||dist_log": {
+                            "mlp_scaled": 0.836
+                        },
+                        "dist||x_log": {
+                            "mlp_scaled": 0.794
+                        },
+                        "x||dist_clean_log": {
+                            "mlp_scaled": 0.77
+                        },
+                        "dist||x_clean_log": {
+                            "mlp_scaled": 0.78
+                        },
+                        "x||dist_infected_log": {
+                            "mlp_scaled": 0.76
+                        },
+                        "dist||x_infected_log": {
+                            "mlp_scaled": 0.79
+                        }
+                    }
+                },
+                "disjoint": {
+                    "25": {
+                        "two_sided": {
+                            "mlp_scaled": 0.83
+                        },
+                        "x||dist": {
+                            "mlp_scaled": 0.808
+                        },
+                        "dist||x": {
+                            "mlp_scaled": 0.81
+                        },
+                        "x||dist_clean": {
+                            "mlp_scaled": 0.788
+                        },
+                        "dist||x_clean": {
+                            "mlp_scaled": 0.79
+                        },
+                        "x||dist_infected": {
+                            "mlp_scaled": 0.774
+                        },
+                        "dist||x_infected": {
+                            "mlp_scaled": 0.812
+                        },
+                        "two_sided_log": {
+                            "mlp_scaled": 0.812
+                        },
+                        "x||dist_log": {
+                            "mlp_scaled": 0.812
+                        },
+                        "dist||x_log": {
+                            "mlp_scaled": 0.814
+                        },
+                        "x||dist_clean_log": {
+                            "mlp_scaled": 0.798
+                        },
+                        "dist||x_clean_log": {
+                            "mlp_scaled": 0.788
+                        },
+                        "x||dist_infected_log": {
+                            "mlp_scaled": 0.778
+                        },
+                        "dist||x_infected_log": {
+                            "mlp_scaled": 0.812
+                        }
+                    },
+                    "100": {
+                        "two_sided": {
+                            "mlp_scaled": 0.778
+                        },
+                        "x||dist": {
+                            "mlp_scaled": 0.748
+                        },
+                        "dist||x": {
+                            "mlp_scaled": 0.736
+                        },
+                        "x||dist_clean": {
+                            "mlp_scaled": 0.772
+                        },
+                        "dist||x_clean": {
+                            "mlp_scaled": 0.754
+                        },
+                        "x||dist_infected": {
+                            "mlp_scaled": 0.788
+                        },
+                        "dist||x_infected": {
+                            "mlp_scaled": 0.798
+                        },
+                        "two_sided_log": {
+                            "mlp_scaled": 0.74
+                        },
+                        "x||dist_log": {
+                            "mlp_scaled": 0.74
+                        },
+                        "dist||x_log": {
+                            "mlp_scaled": 0.804
+                        },
+                        "x||dist_clean_log": {
+                            "mlp_scaled": 0.746
+                        },
+                        "dist||x_clean_log": {
+                            "mlp_scaled": 0.774
+                        },
+                        "x||dist_infected_log": {
+                            "mlp_scaled": 0.72
+                        },
+                        "dist||x_infected_log": {
+                            "mlp_scaled": 0.798
+                        }
+                    }
+                }
+            }
+        },
+        "4": {
+            "linear": {
+                "benign": {
+                    "25": {
+                        "two_sided": {
+                            "mlp_scaled": 0.814
+                        },
+                        "x||dist": {
+                            "mlp_scaled": 0.814
+                        },
+                        "dist||x": {
+                            "mlp_scaled": 0.824
+                        },
+                        "x||dist_clean": {
+                            "mlp_scaled": 0.736
+                        },
+                        "dist||x_clean": {
+                            "mlp_scaled": 0.714
+                        },
+                        "x||dist_infected": {
+                            "mlp_scaled": 0.76
+                        },
+                        "dist||x_infected": {
+                            "mlp_scaled": 0.8
+                        },
+                        "two_sided_log": {
+                            "mlp_scaled": 0.812
+                        },
+                        "x||dist_log": {
+                            "mlp_scaled": 0.812
+                        },
+                        "dist||x_log": {
+                            "mlp_scaled": 0.83
+                        },
+                        "x||dist_clean_log": {
+                            "mlp_scaled": 0.746
+                        },
+                        "dist||x_clean_log": {
+                            "mlp_scaled": 0.758
+                        },
+                        "x||dist_infected_log": {
+                            "mlp_scaled": 0.742
+                        },
+                        "dist||x_infected_log": {
+                            "mlp_scaled": 0.8
+                        }
+                    },
+                    "100": {
+                        "two_sided": {
+                            "mlp_scaled": 0.814
+                        },
+                        "x||dist": {
+                            "mlp_scaled": 0.824
+                        },
+                        "dist||x": {
+                            "mlp_scaled": 0.804
+                        },
+                        "x||dist_clean": {
+                            "mlp_scaled": 0.758
+                        },
+                        "dist||x_clean": {
+                            "mlp_scaled": 0.762
+                        },
+                        "x||dist_infected": {
+                            "mlp_scaled": 0.772
+                        },
+                        "dist||x_infected": {
+                            "mlp_scaled": 0.816
+                        },
+                        "two_sided_log": {
+                            "mlp_scaled": 0.806
+                        },
+                        "x||dist_log": {
+                            "mlp_scaled": 0.806
+                        },
+                        "dist||x_log": {
+                            "mlp_scaled": 0.806
+                        },
+                        "x||dist_clean_log": {
+                            "mlp_scaled": 0.79
+                        },
+                        "dist||x_clean_log": {
+                            "mlp_scaled": 0.764
+                        },
+                        "x||dist_infected_log": {
+                            "mlp_scaled": 0.784
+                        },
+                        "dist||x_infected_log": {
+                            "mlp_scaled": 0.816
+                        }
+                    }
+                },
+                "infected": {
+                    "25": {
+                        "two_sided": {
+                            "mlp_scaled": 0.814
+                        },
+                        "x||dist": {
+                            "mlp_scaled": 0.822
+                        },
+                        "dist||x": {
+                            "mlp_scaled": 0.836
+                        },
+                        "x||dist_clean": {
+                            "mlp_scaled": 0.74
+                        },
+                        "dist||x_clean": {
+                            "mlp_scaled": 0.72
+                        },
+                        "x||dist_infected": {
+                            "mlp_scaled": 0.748
+                        },
+                        "dist||x_infected": {
+                            "mlp_scaled": 0.806
+                        },
+                        "two_sided_log": {
+                            "mlp_scaled": 0.83
+                        },
+                        "x||dist_log": {
+                            "mlp_scaled": 0.83
+                        },
+                        "dist||x_log": {
+                            "mlp_scaled": 0.84
+                        },
+                        "x||dist_clean_log": {
+                            "mlp_scaled": 0.762
+                        },
+                        "dist||x_clean_log": {
+                            "mlp_scaled": 0.76
+                        },
+                        "x||dist_infected_log": {
+                            "mlp_scaled": 0.784
+                        },
+                        "dist||x_infected_log": {
+                            "mlp_scaled": 0.806
+                        }
+                    },
+                    "100": {
+                        "two_sided": {
+                            "mlp_scaled": 0.838
+                        },
+                        "x||dist": {
+                            "mlp_scaled": 0.844
+                        },
+                        "dist||x": {
+                            "mlp_scaled": 0.818
+                        },
+                        "x||dist_clean": {
+                            "mlp_scaled": 0.764
+                        },
+                        "dist||x_clean": {
+                            "mlp_scaled": 0.772
+                        },
+                        "x||dist_infected": {
+                            "mlp_scaled": 0.792
+                        },
+                        "dist||x_infected": {
+                            "mlp_scaled": 0.784
+                        },
+                        "two_sided_log": {
+                            "mlp_scaled": 0.846
+                        },
+                        "x||dist_log": {
+                            "mlp_scaled": 0.846
+                        },
+                        "dist||x_log": {
+                            "mlp_scaled": 0.804
+                        },
+                        "x||dist_clean_log": {
+                            "mlp_scaled": 0.782
+                        },
+                        "dist||x_clean_log": {
+                            "mlp_scaled": 0.776
+                        },
+                        "x||dist_infected_log": {
+                            "mlp_scaled": 0.79
+                        },
+                        "dist||x_infected_log": {
+                            "mlp_scaled": 0.784
+                        }
+                    }
+                },
+                "union": {
+                    "25": {
+                        "two_sided": {
+                            "mlp_scaled": 0.802
+                        },
+                        "x||dist": {
+                            "mlp_scaled": 0.508
+                        },
+                        "dist||x": {
+                            "mlp_scaled": 0.794
+                        },
+                        "x||dist_clean": {
+                            "mlp_scaled": 0.496
+                        },
+                        "dist||x_clean": {
+                            "mlp_scaled": 0.756
+                        },
+                        "x||dist_infected": {
+                            "mlp_scaled": 0.496
+                        },
+                        "dist||x_infected": {
+                            "mlp_scaled": 0.766
+                        },
+                        "two_sided_log": {
+                            "mlp_scaled": 0.496
+                        },
+                        "x||dist_log": {
+                            "mlp_scaled": 0.496
+                        },
+                        "dist||x_log": {
+                            "mlp_scaled": 0.81
+                        },
+                        "x||dist_clean_log": {
+                            "mlp_scaled": 0.496
+                        },
+                        "dist||x_clean_log": {
+                            "mlp_scaled": 0.762
+                        },
+                        "x||dist_infected_log": {
+                            "mlp_scaled": 0.496
+                        },
+                        "dist||x_infected_log": {
+                            "mlp_scaled": 0.766
+                        }
+                    },
+                    "100": {
+                        "two_sided": {
+                            "mlp_scaled": 0.748
+                        },
+                        "x||dist": {
+                            "mlp_scaled": 0.496
+                        },
+                        "dist||x": {
+                            "mlp_scaled": 0.786
+                        },
+                        "x||dist_clean": {
+                            "mlp_scaled": 0.492
+                        },
+                        "dist||x_clean": {
+                            "mlp_scaled": 0.736
+                        },
+                        "x||dist_infected": {
+                            "mlp_scaled": 0.512
+                        },
+                        "dist||x_infected": {
+                            "mlp_scaled": 0.76
+                        },
+                        "two_sided_log": {
+                            "mlp_scaled": 0.512
+                        },
+                        "x||dist_log": {
+                            "mlp_scaled": 0.512
+                        },
+                        "dist||x_log": {
+                            "mlp_scaled": 0.808
+                        },
+                        "x||dist_clean_log": {
+                            "mlp_scaled": 0.492
+                        },
+                        "dist||x_clean_log": {
+                            "mlp_scaled": 0.752
+                        },
+                        "x||dist_infected_log": {
+                            "mlp_scaled": 0.512
+                        },
+                        "dist||x_infected_log": {
+                            "mlp_scaled": 0.76
+                        }
+                    }
+                },
+                "intersection": {
+                    "25": {
+                        "two_sided": {
+                            "mlp_scaled": 0.81
+                        },
+                        "x||dist": {
+                            "mlp_scaled": 0.786
+                        },
+                        "dist||x": {
+                            "mlp_scaled": 0.818
+                        },
+                        "x||dist_clean": {
+                            "mlp_scaled": 0.734
+                        },
+                        "dist||x_clean": {
+                            "mlp_scaled": 0.766
+                        },
+                        "x||dist_infected": {
+                            "mlp_scaled": 0.698
+                        },
+                        "dist||x_infected": {
+                            "mlp_scaled": 0.8
+                        },
+                        "two_sided_log": {
+                            "mlp_scaled": 0.828
+                        },
+                        "x||dist_log": {
+                            "mlp_scaled": 0.828
+                        },
+                        "dist||x_log": {
+                            "mlp_scaled": 0.828
+                        },
+                        "x||dist_clean_log": {
+                            "mlp_scaled": 0.728
+                        },
+                        "dist||x_clean_log": {
+                            "mlp_scaled": 0.694
+                        },
+                        "x||dist_infected_log": {
+                            "mlp_scaled": 0.77
+                        },
+                        "dist||x_infected_log": {
+                            "mlp_scaled": 0.8
+                        }
+                    },
+                    "100": {
+                        "two_sided": {
+                            "mlp_scaled": 0.822
+                        },
+                        "x||dist": {
+                            "mlp_scaled": 0.85
+                        },
+                        "dist||x": {
+                            "mlp_scaled": 0.814
+                        },
+                        "x||dist_clean": {
+                            "mlp_scaled": 0.758
+                        },
+                        "dist||x_clean": {
+                            "mlp_scaled": 0.774
+                        },
+                        "x||dist_infected": {
+                            "mlp_scaled": 0.768
+                        },
+                        "dist||x_infected": {
+                            "mlp_scaled": 0.764
+                        },
+                        "two_sided_log": {
+                            "mlp_scaled": 0.846
+                        },
+                        "x||dist_log": {
+                            "mlp_scaled": 0.846
+                        },
+                        "dist||x_log": {
+                            "mlp_scaled": 0.812
+                        },
+                        "x||dist_clean_log": {
+                            "mlp_scaled": 0.772
+                        },
+                        "dist||x_clean_log": {
+                            "mlp_scaled": 0.764
+                        },
+                        "x||dist_infected_log": {
+                            "mlp_scaled": 0.79
+                        },
+                        "dist||x_infected_log": {
+                            "mlp_scaled": 0.764
+                        }
+                    }
+                },
+                "disjoint": {
+                    "25": {
+                        "two_sided": {
+                            "mlp_scaled": 0.806
+                        },
+                        "x||dist": {
+                            "mlp_scaled": 0.83
+                        },
+                        "dist||x": {
+                            "mlp_scaled": 0.81
+                        },
+                        "x||dist_clean": {
+                            "mlp_scaled": 0.786
+                        },
+                        "dist||x_clean": {
+                            "mlp_scaled": 0.79
+                        },
+                        "x||dist_infected": {
+                            "mlp_scaled": 0.8
+                        },
+                        "dist||x_infected": {
+                            "mlp_scaled": 0.798
+                        },
+                        "two_sided_log": {
+                            "mlp_scaled": 0.828
+                        },
+                        "x||dist_log": {
+                            "mlp_scaled": 0.828
+                        },
+                        "dist||x_log": {
+                            "mlp_scaled": 0.786
+                        },
+                        "x||dist_clean_log": {
+                            "mlp_scaled": 0.778
+                        },
+                        "dist||x_clean_log": {
+                            "mlp_scaled": 0.798
+                        },
+                        "x||dist_infected_log": {
+                            "mlp_scaled": 0.77
+                        },
+                        "dist||x_infected_log": {
+                            "mlp_scaled": 0.798
+                        }
+                    },
+                    "100": {
+                        "two_sided": {
+                            "mlp_scaled": 0.758
+                        },
+                        "x||dist": {
+                            "mlp_scaled": 0.746
+                        },
+                        "dist||x": {
+                            "mlp_scaled": 0.75
+                        },
+                        "x||dist_clean": {
+                            "mlp_scaled": 0.768
+                        },
+                        "dist||x_clean": {
+                            "mlp_scaled": 0.78
+                        },
+                        "x||dist_infected": {
+                            "mlp_scaled": 0.784
+                        },
+                        "dist||x_infected": {
+                            "mlp_scaled": 0.758
+                        },
+                        "two_sided_log": {
+                            "mlp_scaled": 0.73
+                        },
+                        "x||dist_log": {
+                            "mlp_scaled": 0.73
+                        },
+                        "dist||x_log": {
+                            "mlp_scaled": 0.78
+                        },
+                        "x||dist_clean_log": {
+                            "mlp_scaled": 0.752
+                        },
+                        "dist||x_clean_log": {
+                            "mlp_scaled": 0.77
+                        },
+                        "x||dist_infected_log": {
+                            "mlp_scaled": 0.754
+                        },
+                        "dist||x_infected_log": {
+                            "mlp_scaled": 0.758
+                        }
+                    }
+                }
+            }
+        },
+        "5": {
+            "linear": {
+                "benign": {
+                    "25": {
+                        "two_sided": {
+                            "mlp_scaled": 0.842
+                        },
+                        "x||dist": {
+                            "mlp_scaled": 0.834
+                        },
+                        "dist||x": {
+                            "mlp_scaled": 0.816
+                        },
+                        "x||dist_clean": {
+                            "mlp_scaled": 0.758
+                        },
+                        "dist||x_clean": {
+                            "mlp_scaled": 0.79
+                        },
+                        "x||dist_infected": {
+                            "mlp_scaled": 0.79
+                        },
+                        "dist||x_infected": {
+                            "mlp_scaled": 0.816
+                        },
+                        "two_sided_log": {
+                            "mlp_scaled": 0.83
+                        },
+                        "x||dist_log": {
+                            "mlp_scaled": 0.83
+                        },
+                        "dist||x_log": {
+                            "mlp_scaled": 0.834
+                        },
+                        "x||dist_clean_log": {
+                            "mlp_scaled": 0.766
+                        },
+                        "dist||x_clean_log": {
+                            "mlp_scaled": 0.776
+                        },
+                        "x||dist_infected_log": {
+                            "mlp_scaled": 0.798
+                        },
+                        "dist||x_infected_log": {
+                            "mlp_scaled": 0.816
+                        }
+                    },
+                    "100": {
+                        "two_sided": {
+                            "mlp_scaled": 0.828
+                        },
+                        "x||dist": {
+                            "mlp_scaled": 0.86
+                        },
+                        "dist||x": {
+                            "mlp_scaled": 0.808
+                        },
+                        "x||dist_clean": {
+                            "mlp_scaled": 0.768
+                        },
+                        "dist||x_clean": {
+                            "mlp_scaled": 0.776
+                        },
+                        "x||dist_infected": {
+                            "mlp_scaled": 0.746
+                        },
+                        "dist||x_infected": {
+                            "mlp_scaled": 0.82
+                        },
+                        "two_sided_log": {
+                            "mlp_scaled": 0.844
+                        },
+                        "x||dist_log": {
+                            "mlp_scaled": 0.844
+                        },
+                        "dist||x_log": {
+                            "mlp_scaled": 0.818
+                        },
+                        "x||dist_clean_log": {
+                            "mlp_scaled": 0.766
+                        },
+                        "dist||x_clean_log": {
+                            "mlp_scaled": 0.794
+                        },
+                        "x||dist_infected_log": {
+                            "mlp_scaled": 0.79
+                        },
+                        "dist||x_infected_log": {
+                            "mlp_scaled": 0.82
+                        }
+                    }
+                },
+                "infected": {
+                    "25": {
+                        "two_sided": {
+                            "mlp_scaled": 0.848
+                        },
+                        "x||dist": {
+                            "mlp_scaled": 0.844
+                        },
+                        "dist||x": {
+                            "mlp_scaled": 0.806
+                        },
+                        "x||dist_clean": {
+                            "mlp_scaled": 0.776
+                        },
+                        "dist||x_clean": {
+                            "mlp_scaled": 0.79
+                        },
+                        "x||dist_infected": {
+                            "mlp_scaled": 0.784
+                        },
+                        "dist||x_infected": {
+                            "mlp_scaled": 0.81
+                        },
+                        "two_sided_log": {
+                            "mlp_scaled": 0.862
+                        },
+                        "x||dist_log": {
+                            "mlp_scaled": 0.862
+                        },
+                        "dist||x_log": {
+                            "mlp_scaled": 0.834
+                        },
+                        "x||dist_clean_log": {
+                            "mlp_scaled": 0.772
+                        },
+                        "dist||x_clean_log": {
+                            "mlp_scaled": 0.776
+                        },
+                        "x||dist_infected_log": {
+                            "mlp_scaled": 0.806
+                        },
+                        "dist||x_infected_log": {
+                            "mlp_scaled": 0.81
+                        }
+                    },
+                    "100": {
+                        "two_sided": {
+                            "mlp_scaled": 0.848
+                        },
+                        "x||dist": {
+                            "mlp_scaled": 0.848
+                        },
+                        "dist||x": {
+                            "mlp_scaled": 0.834
+                        },
+                        "x||dist_clean": {
+                            "mlp_scaled": 0.788
+                        },
+                        "dist||x_clean": {
+                            "mlp_scaled": 0.784
+                        },
+                        "x||dist_infected": {
+                            "mlp_scaled": 0.776
+                        },
+                        "dist||x_infected": {
+                            "mlp_scaled": 0.808
+                        },
+                        "two_sided_log": {
+                            "mlp_scaled": 0.864
+                        },
+                        "x||dist_log": {
+                            "mlp_scaled": 0.864
+                        },
+                        "dist||x_log": {
+                            "mlp_scaled": 0.822
+                        },
+                        "x||dist_clean_log": {
+                            "mlp_scaled": 0.796
+                        },
+                        "dist||x_clean_log": {
+                            "mlp_scaled": 0.768
+                        },
+                        "x||dist_infected_log": {
+                            "mlp_scaled": 0.782
+                        },
+                        "dist||x_infected_log": {
+                            "mlp_scaled": 0.808
+                        }
+                    }
+                },
+                "union": {
+                    "25": {
+                        "two_sided": {
+                            "mlp_scaled": 0.794
+                        },
+                        "x||dist": {
+                            "mlp_scaled": 0.504
+                        },
+                        "dist||x": {
+                            "mlp_scaled": 0.808
+                        },
+                        "x||dist_clean": {
+                            "mlp_scaled": 0.494
+                        },
+                        "dist||x_clean": {
+                            "mlp_scaled": 0.78
+                        },
+                        "x||dist_infected": {
+                            "mlp_scaled": 0.508
+                        },
+                        "dist||x_infected": {
+                            "mlp_scaled": 0.78
+                        },
+                        "two_sided_log": {
+                            "mlp_scaled": 0.506
+                        },
+                        "x||dist_log": {
+                            "mlp_scaled": 0.506
+                        },
+                        "dist||x_log": {
+                            "mlp_scaled": 0.798
+                        },
+                        "x||dist_clean_log": {
+                            "mlp_scaled": 0.498
+                        },
+                        "dist||x_clean_log": {
+                            "mlp_scaled": 0.766
+                        },
+                        "x||dist_infected_log": {
+                            "mlp_scaled": 0.508
+                        },
+                        "dist||x_infected_log": {
+                            "mlp_scaled": 0.78
+                        }
+                    },
+                    "100": {
+                        "two_sided": {
+                            "mlp_scaled": 0.814
+                        },
+                        "x||dist": {
+                            "mlp_scaled": 0.52
+                        },
+                        "dist||x": {
+                            "mlp_scaled": 0.806
+                        },
+                        "x||dist_clean": {
+                            "mlp_scaled": 0.496
+                        },
+                        "dist||x_clean": {
+                            "mlp_scaled": 0.74
+                        },
+                        "x||dist_infected": {
+                            "mlp_scaled": 0.516
+                        },
+                        "dist||x_infected": {
+                            "mlp_scaled": 0.716
+                        },
+                        "two_sided_log": {
+                            "mlp_scaled": 0.514
+                        },
+                        "x||dist_log": {
+                            "mlp_scaled": 0.514
+                        },
+                        "dist||x_log": {
+                            "mlp_scaled": 0.778
+                        },
+                        "x||dist_clean_log": {
+                            "mlp_scaled": 0.496
+                        },
+                        "dist||x_clean_log": {
+                            "mlp_scaled": 0.774
+                        },
+                        "x||dist_infected_log": {
+                            "mlp_scaled": 0.516
+                        },
+                        "dist||x_infected_log": {
+                            "mlp_scaled": 0.716
+                        }
+                    }
+                },
+                "intersection": {
+                    "25": {
+                        "two_sided": {
+                            "mlp_scaled": 0.836
+                        },
+                        "x||dist": {
+                            "mlp_scaled": 0.832
+                        },
+                        "dist||x": {
+                            "mlp_scaled": 0.824
+                        },
+                        "x||dist_clean": {
+                            "mlp_scaled": 0.782
+                        },
+                        "dist||x_clean": {
+                            "mlp_scaled": 0.77
+                        },
+                        "x||dist_infected": {
+                            "mlp_scaled": 0.76
+                        },
+                        "dist||x_infected": {
+                            "mlp_scaled": 0.824
+                        },
+                        "two_sided_log": {
+                            "mlp_scaled": 0.836
+                        },
+                        "x||dist_log": {
+                            "mlp_scaled": 0.836
+                        },
+                        "dist||x_log": {
+                            "mlp_scaled": 0.836
+                        },
+                        "x||dist_clean_log": {
+                            "mlp_scaled": 0.768
+                        },
+                        "dist||x_clean_log": {
+                            "mlp_scaled": 0.774
+                        },
+                        "x||dist_infected_log": {
+                            "mlp_scaled": 0.754
+                        },
+                        "dist||x_infected_log": {
+                            "mlp_scaled": 0.824
+                        }
+                    },
+                    "100": {
+                        "two_sided": {
+                            "mlp_scaled": 0.826
+                        },
+                        "x||dist": {
+                            "mlp_scaled": 0.838
+                        },
+                        "dist||x": {
+                            "mlp_scaled": 0.828
+                        },
+                        "x||dist_clean": {
+                            "mlp_scaled": 0.766
+                        },
+                        "dist||x_clean": {
+                            "mlp_scaled": 0.73
+                        },
+                        "x||dist_infected": {
+                            "mlp_scaled": 0.778
+                        },
+                        "dist||x_infected": {
+                            "mlp_scaled": 0.8
+                        },
+                        "two_sided_log": {
+                            "mlp_scaled": 0.852
+                        },
+                        "x||dist_log": {
+                            "mlp_scaled": 0.852
+                        },
+                        "dist||x_log": {
+                            "mlp_scaled": 0.808
+                        },
+                        "x||dist_clean_log": {
+                            "mlp_scaled": 0.786
+                        },
+                        "dist||x_clean_log": {
+                            "mlp_scaled": 0.762
+                        },
+                        "x||dist_infected_log": {
+                            "mlp_scaled": 0.788
+                        },
+                        "dist||x_infected_log": {
+                            "mlp_scaled": 0.8
+                        }
+                    }
+                },
+                "disjoint": {
+                    "25": {
+                        "two_sided": {
+                            "mlp_scaled": 0.822
+                        },
+                        "x||dist": {
+                            "mlp_scaled": 0.822
+                        },
+                        "dist||x": {
+                            "mlp_scaled": 0.822
+                        },
+                        "x||dist_clean": {
+                            "mlp_scaled": 0.762
+                        },
+                        "dist||x_clean": {
+                            "mlp_scaled": 0.784
+                        },
+                        "x||dist_infected": {
+                            "mlp_scaled": 0.798
+                        },
+                        "dist||x_infected": {
+                            "mlp_scaled": 0.802
+                        },
+                        "two_sided_log": {
+                            "mlp_scaled": 0.818
+                        },
+                        "x||dist_log": {
+                            "mlp_scaled": 0.818
+                        },
+                        "dist||x_log": {
+                            "mlp_scaled": 0.804
+                        },
+                        "x||dist_clean_log": {
+                            "mlp_scaled": 0.768
+                        },
+                        "dist||x_clean_log": {
+                            "mlp_scaled": 0.8
+                        },
+                        "x||dist_infected_log": {
+                            "mlp_scaled": 0.8
+                        },
+                        "dist||x_infected_log": {
+                            "mlp_scaled": 0.802
+                        }
+                    },
+                    "100": {
+                        "two_sided": {
+                            "mlp_scaled": 0.82
+                        },
+                        "x||dist": {
+                            "mlp_scaled": 0.794
+                        },
+                        "dist||x": {
+                            "mlp_scaled": 0.746
+                        },
+                        "x||dist_clean": {
+                            "mlp_scaled": 0.762
+                        },
+                        "dist||x_clean": {
+                            "mlp_scaled": 0.79
+                        },
+                        "x||dist_infected": {
+                            "mlp_scaled": 0.78
+                        },
+                        "dist||x_infected": {
+                            "mlp_scaled": 0.77
+                        },
+                        "two_sided_log": {
+                            "mlp_scaled": 0.756
+                        },
+                        "x||dist_log": {
+                            "mlp_scaled": 0.756
+                        },
+                        "dist||x_log": {
+                            "mlp_scaled": 0.746
+                        },
+                        "x||dist_clean_log": {
+                            "mlp_scaled": 0.756
+                        },
+                        "dist||x_clean_log": {
+                            "mlp_scaled": 0.726
+                        },
+                        "x||dist_infected_log": {
+                            "mlp_scaled": 0.744
+                        },
+                        "dist||x_infected_log": {
+                            "mlp_scaled": 0.77
+                        }
+                    }
+                }
+            }
+        },
+        "6": {
+            "linear": {
+                "benign": {
+                    "25": {
+                        "two_sided": {
+                            "mlp_scaled": 0.852
+                        },
+                        "x||dist": {
+                            "mlp_scaled": 0.854
+                        },
+                        "dist||x": {
+                            "mlp_scaled": 0.844
+                        },
+                        "x||dist_clean": {
+                            "mlp_scaled": 0.79
+                        },
+                        "dist||x_clean": {
+                            "mlp_scaled": 0.82
+                        },
+                        "x||dist_infected": {
+                            "mlp_scaled": 0.798
+                        },
+                        "dist||x_infected": {
+                            "mlp_scaled": 0.828
+                        },
+                        "two_sided_log": {
+                            "mlp_scaled": 0.85
+                        },
+                        "x||dist_log": {
+                            "mlp_scaled": 0.85
+                        },
+                        "dist||x_log": {
+                            "mlp_scaled": 0.85
+                        },
+                        "x||dist_clean_log": {
+                            "mlp_scaled": 0.776
+                        },
+                        "dist||x_clean_log": {
+                            "mlp_scaled": 0.798
+                        },
+                        "x||dist_infected_log": {
+                            "mlp_scaled": 0.79
+                        },
+                        "dist||x_infected_log": {
+                            "mlp_scaled": 0.828
+                        }
+                    },
+                    "100": {
+                        "two_sided": {
+                            "mlp_scaled": 0.86
+                        },
+                        "x||dist": {
+                            "mlp_scaled": 0.856
+                        },
+                        "dist||x": {
+                            "mlp_scaled": 0.822
+                        },
+                        "x||dist_clean": {
+                            "mlp_scaled": 0.744
+                        },
+                        "dist||x_clean": {
+                            "mlp_scaled": 0.774
+                        },
+                        "x||dist_infected": {
+                            "mlp_scaled": 0.808
+                        },
+                        "dist||x_infected": {
+                            "mlp_scaled": 0.824
+                        },
+                        "two_sided_log": {
+                            "mlp_scaled": 0.832
+                        },
+                        "x||dist_log": {
+                            "mlp_scaled": 0.832
+                        },
+                        "dist||x_log": {
+                            "mlp_scaled": 0.826
+                        },
+                        "x||dist_clean_log": {
+                            "mlp_scaled": 0.748
+                        },
+                        "dist||x_clean_log": {
+                            "mlp_scaled": 0.78
+                        },
+                        "x||dist_infected_log": {
+                            "mlp_scaled": 0.784
+                        },
+                        "dist||x_infected_log": {
+                            "mlp_scaled": 0.824
+                        }
+                    }
+                },
+                "infected": {
+                    "25": {
+                        "two_sided": {
+                            "mlp_scaled": 0.834
+                        },
+                        "x||dist": {
+                            "mlp_scaled": 0.854
+                        },
+                        "dist||x": {
+                            "mlp_scaled": 0.852
+                        },
+                        "x||dist_clean": {
+                            "mlp_scaled": 0.77
+                        },
+                        "dist||x_clean": {
+                            "mlp_scaled": 0.794
+                        },
+                        "x||dist_infected": {
+                            "mlp_scaled": 0.782
+                        },
+                        "dist||x_infected": {
+                            "mlp_scaled": 0.814
+                        },
+                        "two_sided_log": {
+                            "mlp_scaled": 0.848
+                        },
+                        "x||dist_log": {
+                            "mlp_scaled": 0.848
+                        },
+                        "dist||x_log": {
+                            "mlp_scaled": 0.858
+                        },
+                        "x||dist_clean_log": {
+                            "mlp_scaled": 0.776
+                        },
+                        "dist||x_clean_log": {
+                            "mlp_scaled": 0.788
+                        },
+                        "x||dist_infected_log": {
+                            "mlp_scaled": 0.792
+                        },
+                        "dist||x_infected_log": {
+                            "mlp_scaled": 0.814
+                        }
+                    },
+                    "100": {
+                        "two_sided": {
+                            "mlp_scaled": 0.846
+                        },
+                        "x||dist": {
+                            "mlp_scaled": 0.878
+                        },
+                        "dist||x": {
+                            "mlp_scaled": 0.842
+                        },
+                        "x||dist_clean": {
+                            "mlp_scaled": 0.748
+                        },
+                        "dist||x_clean": {
+                            "mlp_scaled": 0.79
+                        },
+                        "x||dist_infected": {
+                            "mlp_scaled": 0.81
+                        },
+                        "dist||x_infected": {
+                            "mlp_scaled": 0.82
+                        },
+                        "two_sided_log": {
+                            "mlp_scaled": 0.846
+                        },
+                        "x||dist_log": {
+                            "mlp_scaled": 0.846
+                        },
+                        "dist||x_log": {
+                            "mlp_scaled": 0.834
+                        },
+                        "x||dist_clean_log": {
+                            "mlp_scaled": 0.788
+                        },
+                        "dist||x_clean_log": {
+                            "mlp_scaled": 0.782
+                        },
+                        "x||dist_infected_log": {
+                            "mlp_scaled": 0.818
+                        },
+                        "dist||x_infected_log": {
+                            "mlp_scaled": 0.82
+                        }
+                    }
+                },
+                "union": {
+                    "25": {
+                        "two_sided": {
+                            "mlp_scaled": 0.79
+                        },
+                        "x||dist": {
+                            "mlp_scaled": 0.496
+                        },
+                        "dist||x": {
+                            "mlp_scaled": 0.808
+                        },
+                        "x||dist_clean": {
+                            "mlp_scaled": 0.498
+                        },
+                        "dist||x_clean": {
+                            "mlp_scaled": 0.77
+                        },
+                        "x||dist_infected": {
+                            "mlp_scaled": 0.496
+                        },
+                        "dist||x_infected": {
+                            "mlp_scaled": 0.768
+                        },
+                        "two_sided_log": {
+                            "mlp_scaled": 0.496
+                        },
+                        "x||dist_log": {
+                            "mlp_scaled": 0.496
+                        },
+                        "dist||x_log": {
+                            "mlp_scaled": 0.798
+                        },
+                        "x||dist_clean_log": {
+                            "mlp_scaled": 0.498
+                        },
+                        "dist||x_clean_log": {
+                            "mlp_scaled": 0.758
+                        },
+                        "x||dist_infected_log": {
+                            "mlp_scaled": 0.496
+                        },
+                        "dist||x_infected_log": {
+                            "mlp_scaled": 0.768
+                        }
+                    },
+                    "100": {
+                        "two_sided": {
+                            "mlp_scaled": 0.764
+                        },
+                        "x||dist": {
+                            "mlp_scaled": 0.514
+                        },
+                        "dist||x": {
+                            "mlp_scaled": 0.734
+                        },
+                        "x||dist_clean": {
+                            "mlp_scaled": 0.496
+                        },
+                        "dist||x_clean": {
+                            "mlp_scaled": 0.72
+                        },
+                        "x||dist_infected": {
+                            "mlp_scaled": 0.496
+                        },
+                        "dist||x_infected": {
+                            "mlp_scaled": 0.702
+                        },
+                        "two_sided_log": {
+                            "mlp_scaled": 0.514
+                        },
+                        "x||dist_log": {
+                            "mlp_scaled": 0.514
+                        },
+                        "dist||x_log": {
+                            "mlp_scaled": 0.808
+                        },
+                        "x||dist_clean_log": {
+                            "mlp_scaled": 0.496
+                        },
+                        "dist||x_clean_log": {
+                            "mlp_scaled": 0.766
+                        },
+                        "x||dist_infected_log": {
+                            "mlp_scaled": 0.51
+                        },
+                        "dist||x_infected_log": {
+                            "mlp_scaled": 0.702
+                        }
+                    }
+                },
+                "intersection": {
+                    "25": {
+                        "two_sided": {
+                            "mlp_scaled": 0.856
+                        },
+                        "x||dist": {
+                            "mlp_scaled": 0.858
+                        },
+                        "dist||x": {
+                            "mlp_scaled": 0.836
+                        },
+                        "x||dist_clean": {
+                            "mlp_scaled": 0.772
+                        },
+                        "dist||x_clean": {
+                            "mlp_scaled": 0.79
+                        },
+                        "x||dist_infected": {
+                            "mlp_scaled": 0.792
+                        },
+                        "dist||x_infected": {
+                            "mlp_scaled": 0.818
+                        },
+                        "two_sided_log": {
+                            "mlp_scaled": 0.854
+                        },
+                        "x||dist_log": {
+                            "mlp_scaled": 0.854
+                        },
+                        "dist||x_log": {
+                            "mlp_scaled": 0.834
+                        },
+                        "x||dist_clean_log": {
+                            "mlp_scaled": 0.778
+                        },
+                        "dist||x_clean_log": {
+                            "mlp_scaled": 0.792
+                        },
+                        "x||dist_infected_log": {
+                            "mlp_scaled": 0.804
+                        },
+                        "dist||x_infected_log": {
+                            "mlp_scaled": 0.818
+                        }
+                    },
+                    "100": {
+                        "two_sided": {
+                            "mlp_scaled": 0.862
+                        },
+                        "x||dist": {
+                            "mlp_scaled": 0.856
+                        },
+                        "dist||x": {
+                            "mlp_scaled": 0.836
+                        },
+                        "x||dist_clean": {
+                            "mlp_scaled": 0.786
+                        },
+                        "dist||x_clean": {
+                            "mlp_scaled": 0.778
+                        },
+                        "x||dist_infected": {
+                            "mlp_scaled": 0.812
+                        },
+                        "dist||x_infected": {
+                            "mlp_scaled": 0.812
+                        },
+                        "two_sided_log": {
+                            "mlp_scaled": 0.862
+                        },
+                        "x||dist_log": {
+                            "mlp_scaled": 0.862
+                        },
+                        "dist||x_log": {
+                            "mlp_scaled": 0.818
+                        },
+                        "x||dist_clean_log": {
+                            "mlp_scaled": 0.778
+                        },
+                        "dist||x_clean_log": {
+                            "mlp_scaled": 0.778
+                        },
+                        "x||dist_infected_log": {
+                            "mlp_scaled": 0.81
+                        },
+                        "dist||x_infected_log": {
+                            "mlp_scaled": 0.812
+                        }
+                    }
+                },
+                "disjoint": {
+                    "25": {
+                        "two_sided": {
+                            "mlp_scaled": 0.836
+                        },
+                        "x||dist": {
+                            "mlp_scaled": 0.824
+                        },
+                        "dist||x": {
+                            "mlp_scaled": 0.822
+                        },
+                        "x||dist_clean": {
+                            "mlp_scaled": 0.766
+                        },
+                        "dist||x_clean": {
+                            "mlp_scaled": 0.796
+                        },
+                        "x||dist_infected": {
+                            "mlp_scaled": 0.794
+                        },
+                        "dist||x_infected": {
+                            "mlp_scaled": 0.78
+                        },
+                        "two_sided_log": {
+                            "mlp_scaled": 0.82
+                        },
+                        "x||dist_log": {
+                            "mlp_scaled": 0.82
+                        },
+                        "dist||x_log": {
+                            "mlp_scaled": 0.84
+                        },
+                        "x||dist_clean_log": {
+                            "mlp_scaled": 0.792
+                        },
+                        "dist||x_clean_log": {
+                            "mlp_scaled": 0.804
+                        },
+                        "x||dist_infected_log": {
+                            "mlp_scaled": 0.788
+                        },
+                        "dist||x_infected_log": {
+                            "mlp_scaled": 0.78
+                        }
+                    },
+                    "100": {
+                        "two_sided": {
+                            "mlp_scaled": 0.798
+                        },
+                        "x||dist": {
+                            "mlp_scaled": 0.75
+                        },
+                        "dist||x": {
+                            "mlp_scaled": 0.772
+                        },
+                        "x||dist_clean": {
+                            "mlp_scaled": 0.766
+                        },
+                        "dist||x_clean": {
+                            "mlp_scaled": 0.782
+                        },
+                        "x||dist_infected": {
+                            "mlp_scaled": 0.742
+                        },
+                        "dist||x_infected": {
+                            "mlp_scaled": 0.748
+                        },
+                        "two_sided_log": {
+                            "mlp_scaled": 0.768
+                        },
+                        "x||dist_log": {
+                            "mlp_scaled": 0.768
+                        },
+                        "dist||x_log": {
+                            "mlp_scaled": 0.724
+                        },
+                        "x||dist_clean_log": {
+                            "mlp_scaled": 0.726
+                        },
+                        "dist||x_clean_log": {
+                            "mlp_scaled": 0.78
+                        },
+                        "x||dist_infected_log": {
+                            "mlp_scaled": 0.734
+                        },
+                        "dist||x_infected_log": {
+                            "mlp_scaled": 0.748
+                        }
+                    }
+                }
+            }
+        },
+        "7": {
+            "linear": {
+                "benign": {
+                    "25": {
+                        "two_sided": {
+                            "mlp_scaled": 0.856
+                        },
+                        "x||dist": {
+                            "mlp_scaled": 0.84
+                        },
+                        "dist||x": {
+                            "mlp_scaled": 0.852
+                        },
+                        "x||dist_clean": {
+                            "mlp_scaled": 0.796
+                        },
+                        "dist||x_clean": {
+                            "mlp_scaled": 0.786
+                        },
+                        "x||dist_infected": {
+                            "mlp_scaled": 0.816
+                        },
+                        "dist||x_infected": {
+                            "mlp_scaled": 0.838
+                        },
+                        "two_sided_log": {
+                            "mlp_scaled": 0.85
+                        },
+                        "x||dist_log": {
+                            "mlp_scaled": 0.85
+                        },
+                        "dist||x_log": {
+                            "mlp_scaled": 0.866
+                        },
+                        "x||dist_clean_log": {
+                            "mlp_scaled": 0.794
+                        },
+                        "dist||x_clean_log": {
+                            "mlp_scaled": 0.792
+                        },
+                        "x||dist_infected_log": {
+                            "mlp_scaled": 0.79
+                        },
+                        "dist||x_infected_log": {
+                            "mlp_scaled": 0.838
+                        }
+                    },
+                    "100": {
+                        "two_sided": {
+                            "mlp_scaled": 0.834
+                        },
+                        "x||dist": {
+                            "mlp_scaled": 0.808
+                        },
+                        "dist||x": {
+                            "mlp_scaled": 0.824
+                        },
+                        "x||dist_clean": {
+                            "mlp_scaled": 0.766
+                        },
+                        "dist||x_clean": {
+                            "mlp_scaled": 0.77
+                        },
+                        "x||dist_infected": {
+                            "mlp_scaled": 0.796
+                        },
+                        "dist||x_infected": {
+                            "mlp_scaled": 0.838
+                        },
+                        "two_sided_log": {
+                            "mlp_scaled": 0.838
+                        },
+                        "x||dist_log": {
+                            "mlp_scaled": 0.838
+                        },
+                        "dist||x_log": {
+                            "mlp_scaled": 0.834
+                        },
+                        "x||dist_clean_log": {
+                            "mlp_scaled": 0.776
+                        },
+                        "dist||x_clean_log": {
+                            "mlp_scaled": 0.774
+                        },
+                        "x||dist_infected_log": {
+                            "mlp_scaled": 0.806
+                        },
+                        "dist||x_infected_log": {
+                            "mlp_scaled": 0.838
+                        }
+                    }
+                },
+                "infected": {
+                    "25": {
+                        "two_sided": {
+                            "mlp_scaled": 0.854
+                        },
+                        "x||dist": {
+                            "mlp_scaled": 0.858
+                        },
+                        "dist||x": {
+                            "mlp_scaled": 0.86
+                        },
+                        "x||dist_clean": {
+                            "mlp_scaled": 0.778
+                        },
+                        "dist||x_clean": {
+                            "mlp_scaled": 0.804
+                        },
+                        "x||dist_infected": {
+                            "mlp_scaled": 0.8
+                        },
+                        "dist||x_infected": {
+                            "mlp_scaled": 0.842
+                        },
+                        "two_sided_log": {
+                            "mlp_scaled": 0.856
+                        },
+                        "x||dist_log": {
+                            "mlp_scaled": 0.856
+                        },
+                        "dist||x_log": {
+                            "mlp_scaled": 0.85
+                        },
+                        "x||dist_clean_log": {
+                            "mlp_scaled": 0.802
+                        },
+                        "dist||x_clean_log": {
+                            "mlp_scaled": 0.804
+                        },
+                        "x||dist_infected_log": {
+                            "mlp_scaled": 0.808
+                        },
+                        "dist||x_infected_log": {
+                            "mlp_scaled": 0.842
+                        }
+                    },
+                    "100": {
+                        "two_sided": {
+                            "mlp_scaled": 0.844
+                        },
+                        "x||dist": {
+                            "mlp_scaled": 0.86
+                        },
+                        "dist||x": {
+                            "mlp_scaled": 0.842
+                        },
+                        "x||dist_clean": {
+                            "mlp_scaled": 0.794
+                        },
+                        "dist||x_clean": {
+                            "mlp_scaled": 0.768
+                        },
+                        "x||dist_infected": {
+                            "mlp_scaled": 0.802
+                        },
+                        "dist||x_infected": {
+                            "mlp_scaled": 0.81
+                        },
+                        "two_sided_log": {
+                            "mlp_scaled": 0.868
+                        },
+                        "x||dist_log": {
+                            "mlp_scaled": 0.868
+                        },
+                        "dist||x_log": {
+                            "mlp_scaled": 0.834
+                        },
+                        "x||dist_clean_log": {
+                            "mlp_scaled": 0.79
+                        },
+                        "dist||x_clean_log": {
+                            "mlp_scaled": 0.784
+                        },
+                        "x||dist_infected_log": {
+                            "mlp_scaled": 0.788
+                        },
+                        "dist||x_infected_log": {
+                            "mlp_scaled": 0.81
+                        }
+                    }
+                },
+                "union": {
+                    "25": {
+                        "two_sided": {
+                            "mlp_scaled": 0.76
+                        },
+                        "x||dist": {
+                            "mlp_scaled": 0.514
+                        },
+                        "dist||x": {
+                            "mlp_scaled": 0.822
+                        },
+                        "x||dist_clean": {
+                            "mlp_scaled": 0.494
+                        },
+                        "dist||x_clean": {
+                            "mlp_scaled": 0.786
+                        },
+                        "x||dist_infected": {
+                            "mlp_scaled": 0.5
+                        },
+                        "dist||x_infected": {
+                            "mlp_scaled": 0.772
+                        },
+                        "two_sided_log": {
+                            "mlp_scaled": 0.514
+                        },
+                        "x||dist_log": {
+                            "mlp_scaled": 0.514
+                        },
+                        "dist||x_log": {
+                            "mlp_scaled": 0.838
+                        },
+                        "x||dist_clean_log": {
+                            "mlp_scaled": 0.496
+                        },
+                        "dist||x_clean_log": {
+                            "mlp_scaled": 0.786
+                        },
+                        "x||dist_infected_log": {
+                            "mlp_scaled": 0.52
+                        },
+                        "dist||x_infected_log": {
+                            "mlp_scaled": 0.772
+                        }
+                    },
+                    "100": {
+                        "two_sided": {
+                            "mlp_scaled": 0.758
+                        },
+                        "x||dist": {
+                            "mlp_scaled": 0.492
+                        },
+                        "dist||x": {
+                            "mlp_scaled": 0.748
+                        },
+                        "x||dist_clean": {
+                            "mlp_scaled": 0.498
+                        },
+                        "dist||x_clean": {
+                            "mlp_scaled": 0.736
+                        },
+                        "x||dist_infected": {
+                            "mlp_scaled": 0.524
+                        },
+                        "dist||x_infected": {
+                            "mlp_scaled": 0.782
+                        },
+                        "two_sided_log": {
+                            "mlp_scaled": 0.492
+                        },
+                        "x||dist_log": {
+                            "mlp_scaled": 0.492
+                        },
+                        "dist||x_log": {
+                            "mlp_scaled": 0.75
+                        },
+                        "x||dist_clean_log": {
+                            "mlp_scaled": 0.498
+                        },
+                        "dist||x_clean_log": {
+                            "mlp_scaled": 0.724
+                        },
+                        "x||dist_infected_log": {
+                            "mlp_scaled": 0.494
+                        },
+                        "dist||x_infected_log": {
+                            "mlp_scaled": 0.782
+                        }
+                    }
+                },
+                "intersection": {
+                    "25": {
+                        "two_sided": {
+                            "mlp_scaled": 0.854
+                        },
+                        "x||dist": {
+                            "mlp_scaled": 0.83
+                        },
+                        "dist||x": {
+                            "mlp_scaled": 0.828
+                        },
+                        "x||dist_clean": {
+                            "mlp_scaled": 0.764
+                        },
+                        "dist||x_clean": {
+                            "mlp_scaled": 0.798
+                        },
+                        "x||dist_infected": {
+                            "mlp_scaled": 0.81
+                        },
+                        "dist||x_infected": {
+                            "mlp_scaled": 0.842
+                        },
+                        "two_sided_log": {
+                            "mlp_scaled": 0.846
+                        },
+                        "x||dist_log": {
+                            "mlp_scaled": 0.846
+                        },
+                        "dist||x_log": {
+                            "mlp_scaled": 0.852
+                        },
+                        "x||dist_clean_log": {
+                            "mlp_scaled": 0.79
+                        },
+                        "dist||x_clean_log": {
+                            "mlp_scaled": 0.78
+                        },
+                        "x||dist_infected_log": {
+                            "mlp_scaled": 0.788
+                        },
+                        "dist||x_infected_log": {
+                            "mlp_scaled": 0.842
+                        }
+                    },
+                    "100": {
+                        "two_sided": {
+                            "mlp_scaled": 0.844
+                        },
+                        "x||dist": {
+                            "mlp_scaled": 0.836
+                        },
+                        "dist||x": {
+                            "mlp_scaled": 0.844
+                        },
+                        "x||dist_clean": {
+                            "mlp_scaled": 0.77
+                        },
+                        "dist||x_clean": {
+                            "mlp_scaled": 0.778
+                        },
+                        "x||dist_infected": {
+                            "mlp_scaled": 0.8
+                        },
+                        "dist||x_infected": {
+                            "mlp_scaled": 0.81
+                        },
+                        "two_sided_log": {
+                            "mlp_scaled": 0.864
+                        },
+                        "x||dist_log": {
+                            "mlp_scaled": 0.864
+                        },
+                        "dist||x_log": {
+                            "mlp_scaled": 0.832
+                        },
+                        "x||dist_clean_log": {
+                            "mlp_scaled": 0.76
+                        },
+                        "dist||x_clean_log": {
+                            "mlp_scaled": 0.726
+                        },
+                        "x||dist_infected_log": {
+                            "mlp_scaled": 0.81
+                        },
+                        "dist||x_infected_log": {
+                            "mlp_scaled": 0.81
+                        }
+                    }
+                },
+                "disjoint": {
+                    "25": {
+                        "two_sided": {
+                            "mlp_scaled": 0.822
+                        },
+                        "x||dist": {
+                            "mlp_scaled": 0.836
+                        },
+                        "dist||x": {
+                            "mlp_scaled": 0.82
+                        },
+                        "x||dist_clean": {
+                            "mlp_scaled": 0.796
+                        },
+                        "dist||x_clean": {
+                            "mlp_scaled": 0.818
+                        },
+                        "x||dist_infected": {
+                            "mlp_scaled": 0.808
+                        },
+                        "dist||x_infected": {
+                            "mlp_scaled": 0.796
+                        },
+                        "two_sided_log": {
+                            "mlp_scaled": 0.834
+                        },
+                        "x||dist_log": {
+                            "mlp_scaled": 0.834
+                        },
+                        "dist||x_log": {
+                            "mlp_scaled": 0.826
+                        },
+                        "x||dist_clean_log": {
+                            "mlp_scaled": 0.798
+                        },
+                        "dist||x_clean_log": {
+                            "mlp_scaled": 0.792
+                        },
+                        "x||dist_infected_log": {
+                            "mlp_scaled": 0.816
+                        },
+                        "dist||x_infected_log": {
+                            "mlp_scaled": 0.796
+                        }
+                    },
+                    "100": {
+                        "two_sided": {
+                            "mlp_scaled": 0.734
+                        },
+                        "x||dist": {
+                            "mlp_scaled": 0.758
+                        },
+                        "dist||x": {
+                            "mlp_scaled": 0.796
+                        },
+                        "x||dist_clean": {
+                            "mlp_scaled": 0.8
+                        },
+                        "dist||x_clean": {
+                            "mlp_scaled": 0.798
+                        },
+                        "x||dist_infected": {
+                            "mlp_scaled": 0.738
+                        },
+                        "dist||x_infected": {
+                            "mlp_scaled": 0.752
+                        },
+                        "two_sided_log": {
+                            "mlp_scaled": 0.772
+                        },
+                        "x||dist_log": {
+                            "mlp_scaled": 0.772
+                        },
+                        "dist||x_log": {
+                            "mlp_scaled": 0.764
+                        },
+                        "x||dist_clean_log": {
+                            "mlp_scaled": 0.764
+                        },
+                        "dist||x_clean_log": {
+                            "mlp_scaled": 0.76
+                        },
+                        "x||dist_infected_log": {
+                            "mlp_scaled": 0.738
+                        },
+                        "dist||x_infected_log": {
+                            "mlp_scaled": 0.752
+                        }
+                    }
+                }
+            }
+        },
+        "8": {
+            "linear": {
+                "benign": {
+                    "25": {
+                        "two_sided": {
+                            "mlp_scaled": 0.84
+                        },
+                        "x||dist": {
+                            "mlp_scaled": 0.85
+                        },
+                        "dist||x": {
+                            "mlp_scaled": 0.844
+                        },
+                        "x||dist_clean": {
+                            "mlp_scaled": 0.744
+                        },
+                        "dist||x_clean": {
+                            "mlp_scaled": 0.81
+                        },
+                        "x||dist_infected": {
+                            "mlp_scaled": 0.81
+                        },
+                        "dist||x_infected": {
+                            "mlp_scaled": 0.824
+                        },
+                        "two_sided_log": {
+                            "mlp_scaled": 0.842
+                        },
+                        "x||dist_log": {
+                            "mlp_scaled": 0.842
+                        },
+                        "dist||x_log": {
+                            "mlp_scaled": 0.85
+                        },
+                        "x||dist_clean_log": {
+                            "mlp_scaled": 0.746
+                        },
+                        "dist||x_clean_log": {
+                            "mlp_scaled": 0.804
+                        },
+                        "x||dist_infected_log": {
+                            "mlp_scaled": 0.82
+                        },
+                        "dist||x_infected_log": {
+                            "mlp_scaled": 0.824
+                        }
+                    },
+                    "100": {
+                        "two_sided": {
+                            "mlp_scaled": 0.846
+                        },
+                        "x||dist": {
+                            "mlp_scaled": 0.82
+                        },
+                        "dist||x": {
+                            "mlp_scaled": 0.85
+                        },
+                        "x||dist_clean": {
+                            "mlp_scaled": 0.746
+                        },
+                        "dist||x_clean": {
+                            "mlp_scaled": 0.772
+                        },
+                        "x||dist_infected": {
+                            "mlp_scaled": 0.826
+                        },
+                        "dist||x_infected": {
+                            "mlp_scaled": 0.814
+                        },
+                        "two_sided_log": {
+                            "mlp_scaled": 0.844
+                        },
+                        "x||dist_log": {
+                            "mlp_scaled": 0.844
+                        },
+                        "dist||x_log": {
+                            "mlp_scaled": 0.832
+                        },
+                        "x||dist_clean_log": {
+                            "mlp_scaled": 0.76
+                        },
+                        "dist||x_clean_log": {
+                            "mlp_scaled": 0.77
+                        },
+                        "x||dist_infected_log": {
+                            "mlp_scaled": 0.818
+                        },
+                        "dist||x_infected_log": {
+                            "mlp_scaled": 0.814
+                        }
+                    }
+                },
+                "infected": {
+                    "25": {
+                        "two_sided": {
+                            "mlp_scaled": 0.84
+                        },
+                        "x||dist": {
+                            "mlp_scaled": 0.844
+                        },
+                        "dist||x": {
+                            "mlp_scaled": 0.834
+                        },
+                        "x||dist_clean": {
+                            "mlp_scaled": 0.768
+                        },
+                        "dist||x_clean": {
+                            "mlp_scaled": 0.796
+                        },
+                        "x||dist_infected": {
+                            "mlp_scaled": 0.81
+                        },
+                        "dist||x_infected": {
+                            "mlp_scaled": 0.854
+                        },
+                        "two_sided_log": {
+                            "mlp_scaled": 0.826
+                        },
+                        "x||dist_log": {
+                            "mlp_scaled": 0.826
+                        },
+                        "dist||x_log": {
+                            "mlp_scaled": 0.854
+                        },
+                        "x||dist_clean_log": {
+                            "mlp_scaled": 0.776
+                        },
+                        "dist||x_clean_log": {
+                            "mlp_scaled": 0.786
+                        },
+                        "x||dist_infected_log": {
+                            "mlp_scaled": 0.826
+                        },
+                        "dist||x_infected_log": {
+                            "mlp_scaled": 0.854
+                        }
+                    },
+                    "100": {
+                        "two_sided": {
+                            "mlp_scaled": 0.846
+                        },
+                        "x||dist": {
+                            "mlp_scaled": 0.856
+                        },
+                        "dist||x": {
+                            "mlp_scaled": 0.85
+                        },
+                        "x||dist_clean": {
+                            "mlp_scaled": 0.716
+                        },
+                        "dist||x_clean": {
+                            "mlp_scaled": 0.77
+                        },
+                        "x||dist_infected": {
+                            "mlp_scaled": 0.826
+                        },
+                        "dist||x_infected": {
+                            "mlp_scaled": 0.836
+                        },
+                        "two_sided_log": {
+                            "mlp_scaled": 0.856
+                        },
+                        "x||dist_log": {
+                            "mlp_scaled": 0.856
+                        },
+                        "dist||x_log": {
+                            "mlp_scaled": 0.846
+                        },
+                        "x||dist_clean_log": {
+                            "mlp_scaled": 0.764
+                        },
+                        "dist||x_clean_log": {
+                            "mlp_scaled": 0.78
+                        },
+                        "x||dist_infected_log": {
+                            "mlp_scaled": 0.824
+                        },
+                        "dist||x_infected_log": {
+                            "mlp_scaled": 0.836
+                        }
+                    }
+                },
+                "union": {
+                    "25": {
+                        "two_sided": {
+                            "mlp_scaled": 0.812
+                        },
+                        "x||dist": {
+                            "mlp_scaled": 0.492
+                        },
+                        "dist||x": {
+                            "mlp_scaled": 0.8
+                        },
+                        "x||dist_clean": {
+                            "mlp_scaled": 0.494
+                        },
+                        "dist||x_clean": {
+                            "mlp_scaled": 0.782
+                        },
+                        "x||dist_infected": {
+                            "mlp_scaled": 0.496
+                        },
+                        "dist||x_infected": {
+                            "mlp_scaled": 0.782
+                        },
+                        "two_sided_log": {
+                            "mlp_scaled": 0.492
+                        },
+                        "x||dist_log": {
+                            "mlp_scaled": 0.492
+                        },
+                        "dist||x_log": {
+                            "mlp_scaled": 0.828
+                        },
+                        "x||dist_clean_log": {
+                            "mlp_scaled": 0.494
+                        },
+                        "dist||x_clean_log": {
+                            "mlp_scaled": 0.788
+                        },
+                        "x||dist_infected_log": {
+                            "mlp_scaled": 0.494
+                        },
+                        "dist||x_infected_log": {
+                            "mlp_scaled": 0.782
+                        }
+                    },
+                    "100": {
+                        "two_sided": {
+                            "mlp_scaled": 0.748
+                        },
+                        "x||dist": {
+                            "mlp_scaled": 0.522
+                        },
+                        "dist||x": {
+                            "mlp_scaled": 0.758
+                        },
+                        "x||dist_clean": {
+                            "mlp_scaled": 0.494
+                        },
+                        "dist||x_clean": {
+                            "mlp_scaled": 0.752
+                        },
+                        "x||dist_infected": {
+                            "mlp_scaled": 0.524
+                        },
+                        "dist||x_infected": {
+                            "mlp_scaled": 0.774
+                        },
+                        "two_sided_log": {
+                            "mlp_scaled": 0.49
+                        },
+                        "x||dist_log": {
+                            "mlp_scaled": 0.49
+                        },
+                        "dist||x_log": {
+                            "mlp_scaled": 0.796
+                        },
+                        "x||dist_clean_log": {
+                            "mlp_scaled": 0.496
+                        },
+                        "dist||x_clean_log": {
+                            "mlp_scaled": 0.762
+                        },
+                        "x||dist_infected_log": {
+                            "mlp_scaled": 0.492
+                        },
+                        "dist||x_infected_log": {
+                            "mlp_scaled": 0.774
+                        }
+                    }
+                },
+                "intersection": {
+                    "25": {
+                        "two_sided": {
+                            "mlp_scaled": 0.856
+                        },
+                        "x||dist": {
+                            "mlp_scaled": 0.858
+                        },
+                        "dist||x": {
+                            "mlp_scaled": 0.846
+                        },
+                        "x||dist_clean": {
+                            "mlp_scaled": 0.724
+                        },
+                        "dist||x_clean": {
+                            "mlp_scaled": 0.806
+                        },
+                        "x||dist_infected": {
+                            "mlp_scaled": 0.79
+                        },
+                        "dist||x_infected": {
+                            "mlp_scaled": 0.844
+                        },
+                        "two_sided_log": {
+                            "mlp_scaled": 0.84
+                        },
+                        "x||dist_log": {
+                            "mlp_scaled": 0.84
+                        },
+                        "dist||x_log": {
+                            "mlp_scaled": 0.874
+                        },
+                        "x||dist_clean_log": {
+                            "mlp_scaled": 0.758
+                        },
+                        "dist||x_clean_log": {
+                            "mlp_scaled": 0.794
+                        },
+                        "x||dist_infected_log": {
+                            "mlp_scaled": 0.806
+                        },
+                        "dist||x_infected_log": {
+                            "mlp_scaled": 0.844
+                        }
+                    },
+                    "100": {
+                        "two_sided": {
+                            "mlp_scaled": 0.832
+                        },
+                        "x||dist": {
+                            "mlp_scaled": 0.846
+                        },
+                        "dist||x": {
+                            "mlp_scaled": 0.834
+                        },
+                        "x||dist_clean": {
+                            "mlp_scaled": 0.716
+                        },
+                        "dist||x_clean": {
+                            "mlp_scaled": 0.762
+                        },
+                        "x||dist_infected": {
+                            "mlp_scaled": 0.806
+                        },
+                        "dist||x_infected": {
+                            "mlp_scaled": 0.808
+                        },
+                        "two_sided_log": {
+                            "mlp_scaled": 0.844
+                        },
+                        "x||dist_log": {
+                            "mlp_scaled": 0.844
+                        },
+                        "dist||x_log": {
+                            "mlp_scaled": 0.818
+                        },
+                        "x||dist_clean_log": {
+                            "mlp_scaled": 0.738
+                        },
+                        "dist||x_clean_log": {
+                            "mlp_scaled": 0.762
+                        },
+                        "x||dist_infected_log": {
+                            "mlp_scaled": 0.844
+                        },
+                        "dist||x_infected_log": {
+                            "mlp_scaled": 0.808
+                        }
+                    }
+                },
+                "disjoint": {
+                    "25": {
+                        "two_sided": {
+                            "mlp_scaled": 0.84
+                        },
+                        "x||dist": {
+                            "mlp_scaled": 0.822
+                        },
+                        "dist||x": {
+                            "mlp_scaled": 0.85
+                        },
+                        "x||dist_clean": {
+                            "mlp_scaled": 0.792
+                        },
+                        "dist||x_clean": {
+                            "mlp_scaled": 0.832
+                        },
+                        "x||dist_infected": {
+                            "mlp_scaled": 0.816
+                        },
+                        "dist||x_infected": {
+                            "mlp_scaled": 0.818
+                        },
+                        "two_sided_log": {
+                            "mlp_scaled": 0.828
+                        },
+                        "x||dist_log": {
+                            "mlp_scaled": 0.828
+                        },
+                        "dist||x_log": {
+                            "mlp_scaled": 0.832
+                        },
+                        "x||dist_clean_log": {
+                            "mlp_scaled": 0.79
+                        },
+                        "dist||x_clean_log": {
+                            "mlp_scaled": 0.792
+                        },
+                        "x||dist_infected_log": {
+                            "mlp_scaled": 0.81
+                        },
+                        "dist||x_infected_log": {
+                            "mlp_scaled": 0.818
+                        }
+                    },
+                    "100": {
+                        "two_sided": {
+                            "mlp_scaled": 0.824
+                        },
+                        "x||dist": {
+                            "mlp_scaled": 0.794
+                        },
+                        "dist||x": {
+                            "mlp_scaled": 0.818
+                        },
+                        "x||dist_clean": {
+                            "mlp_scaled": 0.768
+                        },
+                        "dist||x_clean": {
+                            "mlp_scaled": 0.78
+                        },
+                        "x||dist_infected": {
+                            "mlp_scaled": 0.786
+                        },
+                        "dist||x_infected": {
+                            "mlp_scaled": 0.784
+                        },
+                        "two_sided_log": {
+                            "mlp_scaled": 0.756
+                        },
+                        "x||dist_log": {
+                            "mlp_scaled": 0.756
+                        },
+                        "dist||x_log": {
+                            "mlp_scaled": 0.774
+                        },
+                        "x||dist_clean_log": {
+                            "mlp_scaled": 0.754
+                        },
+                        "dist||x_clean_log": {
+                            "mlp_scaled": 0.78
+                        },
+                        "x||dist_infected_log": {
+                            "mlp_scaled": 0.806
+                        },
+                        "dist||x_infected_log": {
+                            "mlp_scaled": 0.784
+                        }
+                    }
+                }
+            }
+        },
+        "9": {
+            "linear": {
+                "benign": {
+                    "25": {
+                        "two_sided": {
+                            "mlp_scaled": 0.838
+                        },
+                        "x||dist": {
+                            "mlp_scaled": 0.822
+                        },
+                        "dist||x": {
+                            "mlp_scaled": 0.854
+                        },
+                        "x||dist_clean": {
+                            "mlp_scaled": 0.768
+                        },
+                        "dist||x_clean": {
+                            "mlp_scaled": 0.796
+                        },
+                        "x||dist_infected": {
+                            "mlp_scaled": 0.822
+                        },
+                        "dist||x_infected": {
+                            "mlp_scaled": 0.842
+                        },
+                        "two_sided_log": {
+                            "mlp_scaled": 0.838
+                        },
+                        "x||dist_log": {
+                            "mlp_scaled": 0.838
+                        },
+                        "dist||x_log": {
+                            "mlp_scaled": 0.864
+                        },
+                        "x||dist_clean_log": {
+                            "mlp_scaled": 0.768
+                        },
+                        "dist||x_clean_log": {
+                            "mlp_scaled": 0.74
+                        },
+                        "x||dist_infected_log": {
+                            "mlp_scaled": 0.814
+                        },
+                        "dist||x_infected_log": {
+                            "mlp_scaled": 0.842
+                        }
+                    },
+                    "100": {
+                        "two_sided": {
+                            "mlp_scaled": 0.842
+                        },
+                        "x||dist": {
+                            "mlp_scaled": 0.836
+                        },
+                        "dist||x": {
+                            "mlp_scaled": 0.86
+                        },
+                        "x||dist_clean": {
+                            "mlp_scaled": 0.734
+                        },
+                        "dist||x_clean": {
+                            "mlp_scaled": 0.78
+                        },
+                        "x||dist_infected": {
+                            "mlp_scaled": 0.816
+                        },
+                        "dist||x_infected": {
+                            "mlp_scaled": 0.834
+                        },
+                        "two_sided_log": {
+                            "mlp_scaled": 0.794
+                        },
+                        "x||dist_log": {
+                            "mlp_scaled": 0.794
+                        },
+                        "dist||x_log": {
+                            "mlp_scaled": 0.85
+                        },
+                        "x||dist_clean_log": {
+                            "mlp_scaled": 0.772
+                        },
+                        "dist||x_clean_log": {
+                            "mlp_scaled": 0.742
+                        },
+                        "x||dist_infected_log": {
+                            "mlp_scaled": 0.814
+                        },
+                        "dist||x_infected_log": {
+                            "mlp_scaled": 0.834
+                        }
+                    }
+                },
+                "infected": {
+                    "25": {
+                        "two_sided": {
+                            "mlp_scaled": 0.854
+                        },
+                        "x||dist": {
+                            "mlp_scaled": 0.846
+                        },
+                        "dist||x": {
+                            "mlp_scaled": 0.864
+                        },
+                        "x||dist_clean": {
+                            "mlp_scaled": 0.746
+                        },
+                        "dist||x_clean": {
+                            "mlp_scaled": 0.794
+                        },
+                        "x||dist_infected": {
+                            "mlp_scaled": 0.84
+                        },
+                        "dist||x_infected": {
+                            "mlp_scaled": 0.806
+                        },
+                        "two_sided_log": {
+                            "mlp_scaled": 0.8
+                        },
+                        "x||dist_log": {
+                            "mlp_scaled": 0.8
+                        },
+                        "dist||x_log": {
+                            "mlp_scaled": 0.864
+                        },
+                        "x||dist_clean_log": {
+                            "mlp_scaled": 0.794
+                        },
+                        "dist||x_clean_log": {
+                            "mlp_scaled": 0.794
+                        },
+                        "x||dist_infected_log": {
+                            "mlp_scaled": 0.798
+                        },
+                        "dist||x_infected_log": {
+                            "mlp_scaled": 0.806
+                        }
+                    },
+                    "100": {
+                        "two_sided": {
+                            "mlp_scaled": 0.848
+                        },
+                        "x||dist": {
+                            "mlp_scaled": 0.83
+                        },
+                        "dist||x": {
+                            "mlp_scaled": 0.792
+                        },
+                        "x||dist_clean": {
+                            "mlp_scaled": 0.792
+                        },
+                        "dist||x_clean": {
+                            "mlp_scaled": 0.784
+                        },
+                        "x||dist_infected": {
+                            "mlp_scaled": 0.822
+                        },
+                        "dist||x_infected": {
+                            "mlp_scaled": 0.82
+                        },
+                        "two_sided_log": {
+                            "mlp_scaled": 0.808
+                        },
+                        "x||dist_log": {
+                            "mlp_scaled": 0.808
+                        },
+                        "dist||x_log": {
+                            "mlp_scaled": 0.784
+                        },
+                        "x||dist_clean_log": {
+                            "mlp_scaled": 0.788
+                        },
+                        "dist||x_clean_log": {
+                            "mlp_scaled": 0.794
+                        },
+                        "x||dist_infected_log": {
+                            "mlp_scaled": 0.774
+                        },
+                        "dist||x_infected_log": {
+                            "mlp_scaled": 0.82
+                        }
+                    }
+                },
+                "union": {
+                    "25": {
+                        "two_sided": {
+                            "mlp_scaled": 0.788
+                        },
+                        "x||dist": {
+                            "mlp_scaled": 0.494
+                        },
+                        "dist||x": {
+                            "mlp_scaled": 0.832
+                        },
+                        "x||dist_clean": {
+                            "mlp_scaled": 0.492
+                        },
+                        "dist||x_clean": {
+                            "mlp_scaled": 0.786
+                        },
+                        "x||dist_infected": {
+                            "mlp_scaled": 0.518
+                        },
+                        "dist||x_infected": {
+                            "mlp_scaled": 0.734
+                        },
+                        "two_sided_log": {
+                            "mlp_scaled": 0.518
+                        },
+                        "x||dist_log": {
+                            "mlp_scaled": 0.518
+                        },
+                        "dist||x_log": {
+                            "mlp_scaled": 0.848
+                        },
+                        "x||dist_clean_log": {
+                            "mlp_scaled": 0.492
+                        },
+                        "dist||x_clean_log": {
+                            "mlp_scaled": 0.794
+                        },
+                        "x||dist_infected_log": {
+                            "mlp_scaled": 0.518
+                        },
+                        "dist||x_infected_log": {
+                            "mlp_scaled": 0.734
+                        }
+                    },
+                    "100": {
+                        "two_sided": {
+                            "mlp_scaled": 0.83
+                        },
+                        "x||dist": {
+                            "mlp_scaled": 0.528
+                        },
+                        "dist||x": {
+                            "mlp_scaled": 0.822
+                        },
+                        "x||dist_clean": {
+                            "mlp_scaled": 0.492
+                        },
+                        "dist||x_clean": {
+                            "mlp_scaled": 0.766
+                        },
+                        "x||dist_infected": {
+                            "mlp_scaled": 0.532
+                        },
+                        "dist||x_infected": {
+                            "mlp_scaled": 0.7
+                        },
+                        "two_sided_log": {
+                            "mlp_scaled": 0.528
+                        },
+                        "x||dist_log": {
+                            "mlp_scaled": 0.528
+                        },
+                        "dist||x_log": {
+                            "mlp_scaled": 0.798
+                        },
+                        "x||dist_clean_log": {
+                            "mlp_scaled": 0.49
+                        },
+                        "dist||x_clean_log": {
+                            "mlp_scaled": 0.744
+                        },
+                        "x||dist_infected_log": {
+                            "mlp_scaled": 0.532
+                        },
+                        "dist||x_infected_log": {
+                            "mlp_scaled": 0.7
+                        }
+                    }
+                },
+                "intersection": {
+                    "25": {
+                        "two_sided": {
+                            "mlp_scaled": 0.846
+                        },
+                        "x||dist": {
+                            "mlp_scaled": 0.846
+                        },
+                        "dist||x": {
+                            "mlp_scaled": 0.86
+                        },
+                        "x||dist_clean": {
+                            "mlp_scaled": 0.778
+                        },
+                        "dist||x_clean": {
+                            "mlp_scaled": 0.812
+                        },
+                        "x||dist_infected": {
+                            "mlp_scaled": 0.774
+                        },
+                        "dist||x_infected": {
+                            "mlp_scaled": 0.84
+                        },
+                        "two_sided_log": {
+                            "mlp_scaled": 0.842
+                        },
+                        "x||dist_log": {
+                            "mlp_scaled": 0.842
+                        },
+                        "dist||x_log": {
+                            "mlp_scaled": 0.852
+                        },
+                        "x||dist_clean_log": {
+                            "mlp_scaled": 0.786
+                        },
+                        "dist||x_clean_log": {
+                            "mlp_scaled": 0.806
+                        },
+                        "x||dist_infected_log": {
+                            "mlp_scaled": 0.818
+                        },
+                        "dist||x_infected_log": {
+                            "mlp_scaled": 0.84
+                        }
+                    },
+                    "100": {
+                        "two_sided": {
+                            "mlp_scaled": 0.844
+                        },
+                        "x||dist": {
+                            "mlp_scaled": 0.858
+                        },
+                        "dist||x": {
+                            "mlp_scaled": 0.844
+                        },
+                        "x||dist_clean": {
+                            "mlp_scaled": 0.706
+                        },
+                        "dist||x_clean": {
+                            "mlp_scaled": 0.774
+                        },
+                        "x||dist_infected": {
+                            "mlp_scaled": 0.82
+                        },
+                        "dist||x_infected": {
+                            "mlp_scaled": 0.832
+                        },
+                        "two_sided_log": {
+                            "mlp_scaled": 0.844
+                        },
+                        "x||dist_log": {
+                            "mlp_scaled": 0.844
+                        },
+                        "dist||x_log": {
+                            "mlp_scaled": 0.838
+                        },
+                        "x||dist_clean_log": {
+                            "mlp_scaled": 0.762
+                        },
+                        "dist||x_clean_log": {
+                            "mlp_scaled": 0.742
+                        },
+                        "x||dist_infected_log": {
+                            "mlp_scaled": 0.834
+                        },
+                        "dist||x_infected_log": {
+                            "mlp_scaled": 0.832
+                        }
+                    }
+                },
+                "disjoint": {
+                    "25": {
+                        "two_sided": {
+                            "mlp_scaled": 0.84
+                        },
+                        "x||dist": {
+                            "mlp_scaled": 0.838
+                        },
+                        "dist||x": {
+                            "mlp_scaled": 0.846
+                        },
+                        "x||dist_clean": {
+                            "mlp_scaled": 0.812
+                        },
+                        "dist||x_clean": {
+                            "mlp_scaled": 0.822
+                        },
+                        "x||dist_infected": {
+                            "mlp_scaled": 0.814
+                        },
+                        "dist||x_infected": {
+                            "mlp_scaled": 0.79
+                        },
+                        "two_sided_log": {
+                            "mlp_scaled": 0.836
+                        },
+                        "x||dist_log": {
+                            "mlp_scaled": 0.836
+                        },
+                        "dist||x_log": {
+                            "mlp_scaled": 0.78
+                        },
+                        "x||dist_clean_log": {
+                            "mlp_scaled": 0.792
+                        },
+                        "dist||x_clean_log": {
+                            "mlp_scaled": 0.812
+                        },
+                        "x||dist_infected_log": {
+                            "mlp_scaled": 0.818
+                        },
+                        "dist||x_infected_log": {
+                            "mlp_scaled": 0.79
+                        }
+                    },
+                    "100": {
+                        "two_sided": {
+                            "mlp_scaled": 0.766
+                        },
+                        "x||dist": {
+                            "mlp_scaled": 0.782
+                        },
+                        "dist||x": {
+                            "mlp_scaled": 0.744
+                        },
+                        "x||dist_clean": {
+                            "mlp_scaled": 0.798
+                        },
+                        "dist||x_clean": {
+                            "mlp_scaled": 0.788
+                        },
+                        "x||dist_infected": {
+                            "mlp_scaled": 0.796
+                        },
+                        "dist||x_infected": {
+                            "mlp_scaled": 0.804
+                        },
+                        "two_sided_log": {
+                            "mlp_scaled": 0.768
+                        },
+                        "x||dist_log": {
+                            "mlp_scaled": 0.768
+                        },
+                        "dist||x_log": {
+                            "mlp_scaled": 0.754
+                        },
+                        "x||dist_clean_log": {
+                            "mlp_scaled": 0.766
+                        },
+                        "dist||x_clean_log": {
+                            "mlp_scaled": 0.78
+                        },
+                        "x||dist_infected_log": {
+                            "mlp_scaled": 0.772
+                        },
+                        "dist||x_infected_log": {
+                            "mlp_scaled": 0.804
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
