@@ -1,0 +1,20 @@
+%! Author = jacobcarlson
+%! Date = 4/26/23
+
+\begin{algorithm}
+    \caption{Single Executable Distribution Algorithm}
+    \begin{algorithmic}
+%        \STATE  $\mathrm{train\_ANN} (f_i,w_i,o_j)$
+        \FOR{$op$ in opcode set}
+            \STATE $N_{op} \gets $ number of op occurrences
+            \STATE $distribution_{op} \gets 0$ vector the size of the number of bins
+            \FOR{each occurrence of $op$ in sequence = $1$ to $(N_{op}-1)$}
+                \STATE $jump_{op\_k} = op_{k+1} - op_{k}$
+                \STATE $distribution_{op}[\;\phi(jump_{op\_k})\;]$ += 1
+            \ENDFOR
+            \FOR{each bin $b$ in $distribution_{op}$ = $1$ to $B$}
+                \STATE $distribution_{op}[b]$ \textbackslash= $(N_{op}-1)$
+            \ENDFOR
+        \ENDFOR
+    \end{algorithmic}\label{alg:algorithm_single}
+\end{algorithm}

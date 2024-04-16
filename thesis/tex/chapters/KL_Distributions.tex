@@ -1,0 +1,115 @@
+%! Author = jacobcarlson
+%! Date = 4/27/23
+
+\section{Kullback-Leibler Divergence Method Selection}
+
+The Kullback-Leibler Divergence, $D_{KL} (p||q)$, measures the difference of distribution $p$ against distribution $q$
+and will be used as the basis of comparison between distributions in this paper.
+In the context of differentiating a set of distributions against a base standard, it made sense to consider the
+distribution, or set of distributions, from the given file that we want to classify as $p$ and the ground truth
+distribution sets as $q$.
+This was how all previous accuracies were determined.
+
+\subsection{Symmetric KL Divergence | Exploring Flipped Divergence}
+$D_{KL}$ is asymmetric, and flipped $D_{KL}$  can be used to provide different insights than the standard method.
+Flipping the KL Divergence, $D_{KL}(q||p)$, as well as taking the average of both options,
+$(D_{KL}(p||q)+D_{KL}(q||p)) / 2$, provides alternative values that could provide different
+and possible valuable information.
+Table \ref{tab:kl1} shows the probability of the new KL Divergence methods being more accurate than $D_{KL}(q||p)$,
+tested using the Wilcoxon Signed Rank test.
+Both options have a high probability of being more accurate than $D_{KL}(x||dist)$, but neither are conclusively
+better since they don’t meet the level of significance laid out in this test $(a=0.05)$.
+
+\begin{table}[H]
+    \begin{center}
+        \captionsetup{justification=centering}
+        \caption{Probability of KL Divergence method yielding higher accuracy than $D_{KL}(x||dist)$}
+%        \footnotesize{Z scores and Probabilities of a more accurate model when using a different KL Divergence
+%        method compared to $D_{KL}(x||dist)$, using the differences between the accuracies of samples tested on the
+%        same data under the same conditions.}
+%        \footnotesize{\\$Opcode Set: Malicious Only,$}
+        \begin{tabular}{l|S|S}
+            \textbf{KL Method} & \textbf{Z} & \textbf{p}\\
+            \hline
+            $D_{KL}(dist||x)$ & 0.98 & 0.837\\
+            Symmetric & 1.06 & 0.856\\
+        \end{tabular}
+        \label{tab:kl1}
+    \end{center}
+\end{table}
+
+\subsection{Logarithm Mapping KL Divergence Values}
+KL Divergence values range from zero, when two distributions are exactly alike, to infinity, when distributions
+share no similarity.
+While the KL divergence values derived from these distributions fall in a much smaller range with an upper bound
+near $~10$.
+Machine learning algorithms typically perform better when input data is normalized to a standard range\cite{singh}.
+To normalize and more evenly distribute the data, the KL Divergence value was mapped using $log_{10}$ to put almost
+all the data in between $-1$ and $+1$.
+
+On the lower bound, no samples were similar enough to a ground truth distribution to result in a KL Divergence
+of less than $.1$, so no samples passed the lower bound of $-1$.
+Any KL Divergence value that was greater than $10$ will pass the soft boundary of $+1$ after mapped.
+The number of upper bound outliers is minimal and these values do not range very far above $10$.
+Any outliers will be very close to $+1$ so none of these outliers are significant.
+Most data ends up within a range of $-1$ and $+1$ so outliers were not a very large concern.
+
+Table \ref{tab:mapComparisons} shows the probability of the accuracy being higher using the transformation $log_{10}$ on
+KL Divergence against the lack of a transformation.
+
+\begin{table}[H]
+    \begin{center}
+        \captionsetup{justification=centering}
+        \caption{Probability that taking the $log_{10}$ of the KL Divergence result in higher Accuracy}
+%        \footnotesize{Z scores and Probabilities of a higher accuracy when taking the $log_{10}$ of the KL Divergence
+%            before being used as input for the model, using the differences between the accuracies of samples tested
+%        on the same data under the same conditions.}
+%        \footnotesize{\\$Opcode\; Set: Malicious\; Only$}
+        \begin{tabular}{l|S|S}
+            \textbf{KL Method} & \textbf{Z} & \textbf{p}\\
+            \hline
+            $D_{KL}(x||dist)$ & -0.75 & 0.226\\
+            $D_{KL}(dist||x)$ & 0.79 & 0.786\\
+            Symmetric & 0.61 & 0.730\\
+        \end{tabular}
+        \label{tab:mapComparisons}
+
+    \end{center}
+\end{table}
+
+Taking the $log_{10}$ of KL Divergence values did not provide a significant enough increase in accuracy when
+compared to the same KL Divergence with no transformation.
+
+The flipped and symmetric accuracies had above a $84\%$ probability of being more accurate than $D_{KL}(x||dist)$
+and both methods had above a $73\%$ probability of being more accurate when used with a transformation.
+While neither parameter was significantly more accurate on its own, they were combined and tested against
+$D_{KL}(x||dist)$ in Table \ref{tab:xdistComparison}
+
+\begin{table}[H]
+    \begin{center}
+        \captionsetup{justification=centering}
+        \caption{Probability of KL transformations \\against $D_{KL}(x||dist)$}
+%        \footnotesize{Z scores and Probabilities of different KL divergence methods being more accurate than
+%            $D_{KL}(x||dist)$, using the differences between the accuracies of samples tested on the same data
+%            under the same conditions.}
+%        \footnotesize{\\$Opcode\; Set: Malicious\; Only$}
+        \begin{tabular}{l|S|S}
+            \textbf{KL Method} & \textbf{Z} & \textbf{p}\\
+            \hline
+            $log_{10}(D_{KL}(dist||x))$ & 2.18 & 0.985\\
+            $log_{10}(Symmetric)$ & 0.78 & 0.784\\
+        \end{tabular}
+        \label{tab:xdistComparison}
+    \end{center}
+\end{table}
+
+$log_{10}(D_{KL}(dist||x))$ proved to be more accurate than $D_{KL}(x||dist)$ with a high level of significance
+when compared with the Wilcoxon signed rank test in Table \ref{tab:xdistComparison}.
+$log_{10}(D_{KL}(dist||x))$ will now be the primary KL Divergence method.
+
+This did not change any findings made in the previous sections.
+While the accuracies of the opcode tests increased they did so consistently across all opcodes sets
+and did not change how they compare.
+
+
+

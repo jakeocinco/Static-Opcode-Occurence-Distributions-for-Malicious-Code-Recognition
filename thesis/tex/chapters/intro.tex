@@ -1,0 +1,28 @@
+%! Author = jacobcarlson
+%! Date = 4/26/23
+
+
+
+\section{Proposed Plan}
+
+Static malware analysis is an approach in which an executable is inspected for malware without being executed. The
+most common methods include matching common patterns or deriving a series of parameters to learn from each file,
+such as the Ember Data set\cite{ember}.
+This paper proposes a method of static malware analysis in which an executable will be translated into a set of distributions that will be compared against ground truth distributions from both
+benign and malicious code samples.
+These comparisons will then be used to determine whether a file is malicious or
+benign.
+
+All compiled code exists as a sequence of op codes, instructing the machine on what to do at the most basic level.
+While the sequence in which the opcodes are written is not the exact same order in which they will be executed, it
+is still a very strong representation of the program at hand.
+To create a set of distributions for an executable,
+the number of operations between occurrences of the same opcode will be obtained for each common opcode.
+This data is then placed into bins and divided by the total number occurrences to create an empirical
+probability distribution of the occurrences of each tracked opcode.
+
+This distribution will then be compared to ground truth distributions using the Kullback-Leibler divergence to
+assess the difference between distributions.
+These KL divergence values will then be used as input data in a machine learning model to detect the
+presence of malicious code in an executable.
+

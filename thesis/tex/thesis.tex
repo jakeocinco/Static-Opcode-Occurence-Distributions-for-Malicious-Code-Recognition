@@ -1,0 +1,61 @@
+%! Author = jacobcarlson
+%! Date = 4/25/23
+
+% Preamble
+\documentclass[]{article} %twocolumn
+% Packages
+\usepackage{amsmath}
+\usepackage{algorithm}
+\usepackage{algorithmic}
+%\usepackage{algorithmicx}
+\usepackage{graphicx}
+\usepackage[margin=1in]{geometry}
+\usepackage{siunitx} % Required for alignment
+\usepackage{caption}
+\usepackage[style=numeric,natbib=true]{biblatex}
+\usepackage{authblk}
+
+\sisetup{
+  round-mode          = places, % Rounds numbers
+  round-precision     = 2, % to 2 places
+}
+%\usepackage{biblatex}
+%\usepackage{algpseudocode}
+
+
+\graphicspath{ {./images/} }
+\addbibresource{chapters/sources.bib}
+
+\title{
+    Experiments on Recognition of Malware based on Static Opcode Occurrence Distribution\\
+}
+\author[1]{Jacob Carlson}
+\author[1]{Anca Ralescu}
+\author[2]{David Knapp}
+\author[2]{Temesguen Kebede}
+\affil[1]{University of Cincinnati}
+
+
+\affil[2]{AFRL}
+
+% Document
+\begin{document}
+
+    \maketitle
+
+%    \tableofcontents
+%    \newpage
+
+    \input{chapters/abstract}
+    \input{chapters/intro}
+    \input{chapters/DataAquisition}
+    \input{chapters/DistributionConstruction}
+%    \input{chapters/modelSelection}
+    \input{chapters/opcodes}
+    \input{chapters/KL_Distributions}
+    \input{chapters/testResults}
+
+    \appendix
+%    \bibliographystyle{plain}
+    \printbibliography
+\end{document}

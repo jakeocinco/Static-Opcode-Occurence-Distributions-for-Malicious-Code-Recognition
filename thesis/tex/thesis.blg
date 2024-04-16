@@ -1,0 +1,15 @@
+[0] Config.pm:307> INFO - This is Biber 2.19
+[0] Config.pm:310> INFO - Logfile is 'thesis.blg'
+[111] biber-darwin:340> INFO - === Mon May  1, 2023, 10:35:13
+[137] Biber.pm:419> INFO - Reading 'thesis.bcf'
+[273] Biber.pm:979> INFO - Found 8 citekeys in bib section 0
+[289] Biber.pm:4419> INFO - Processing section 0
+[311] Biber.pm:4610> INFO - Looking for bibtex file 'chapters/sources.bib' for section 0
+[313] bibtex.pm:1713> INFO - LaTeX decoding ...
+[328] bibtex.pm:1519> INFO - Found BibTeX data source 'chapters/sources.bib'
+[413] UCollate.pm:68> INFO - Overriding locale 'en-US' defaults 'normalization = NFD' with 'normalization = prenormalized'
+[413] UCollate.pm:68> INFO - Overriding locale 'en-US' defaults 'variable = shifted' with 'variable = non-ignorable'
+[413] Biber.pm:4239> INFO - Sorting list 'nty/global//global/global' of type 'entry' with template 'nty' and locale 'en-US'
+[413] Biber.pm:4245> INFO - No sort tailoring available for locale 'en-US'
+[425] bbl.pm:660> INFO - Writing 'thesis.bbl' with encoding 'UTF-8'
+[430] bbl.pm:763> INFO - Output to thesis.bbl

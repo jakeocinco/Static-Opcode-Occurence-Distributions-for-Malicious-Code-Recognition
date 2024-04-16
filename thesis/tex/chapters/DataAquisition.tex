@@ -1,0 +1,17 @@
+%! Author = jacobcarlson
+%! Date = 4/25/23
+
+\section{Data Acquisition}
+
+To train a network capable of detecting malicious code, a large dataset was needed. Most online datasets for malware
+detection do not provide raw files in their datasets, especially at scale; however, Practical Security Analytics,
+an online security blog, has released a dataset of $200,000+$ benign and malicious executables for machine learning
+purposes\cite{lester}.
+
+This analysis focuses on the instructions that a machine will execute, so Unix command $objdump\; -d$ was used to
+disassemble the executable into a human readable form that lists the instructions as they would be received by the
+operating system executing them. This form provides more than the opcode being executed, so extra information such
+as the line number and the parameters of the instruction must be removed. Each instruction follows a common form,
+so python was used to filter each entry down to its opcode. To remove the risk of the executable being used and
+simplify data access, opcode lists will then be stored and used for future operations instead of the executable form.
+

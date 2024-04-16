@@ -1,0 +1,202 @@
+% $ biblatex auxiliary file $
+% $ biblatex bbl format version 3.2 $
+% Do not modify the above lines!
+%
+% This is an auxiliary file used by the 'biblatex' package.
+% This file may safely be deleted. It will be recreated by
+% biber as required.
+%
+\begingroup
+\makeatletter
+\@ifundefined{ver@biblatex.sty}
+  {\@latex@error
+     {Missing 'biblatex' package}
+     {The bibliography requires the 'biblatex' package.}
+      \aftergroup\endinput}
+  {}
+\endgroup
+
+
+\refsection{0}
+  \datalist[entry]{nty/global//global/global}
+    \entry{bilar}{article}{}
+      \name{author}{1}{}{%
+        {{hash=779b3061b87820d03affc253d8c57589}{%
+           family={Bilar},
+           familyi={B\bibinitperiod},
+           given={Daniel},
+           giveni={D\bibinitperiod}}}%
+      }
+      \strng{namehash}{779b3061b87820d03affc253d8c57589}
+      \strng{fullhash}{779b3061b87820d03affc253d8c57589}
+      \strng{bibnamehash}{779b3061b87820d03affc253d8c57589}
+      \strng{authorbibnamehash}{779b3061b87820d03affc253d8c57589}
+      \strng{authornamehash}{779b3061b87820d03affc253d8c57589}
+      \strng{authorfullhash}{779b3061b87820d03affc253d8c57589}
+      \field{sortinit}{B}
+      \field{sortinithash}{d7095fff47cda75ca2589920aae98399}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Int. J. Electronic Security and Digital Forensics}
+      \field{title}{Opcodes as predictor for malware}
+      \field{year}{2017}
+    \endentry
+    \entry{singh}{article}{}
+      \name{author}{1}{}{%
+        {{hash=fa04ed415313b000abd79dfef83d4b1b}{%
+           family={Dalwinder\bibnamedelima Singh},
+           familyi={D\bibinitperiod\bibinitdelim S\bibinitperiod},
+           given={Birmohan\bibnamedelima Sign},
+           giveni={B\bibinitperiod\bibinitdelim S\bibinitperiod}}}%
+      }
+      \strng{namehash}{fa04ed415313b000abd79dfef83d4b1b}
+      \strng{fullhash}{fa04ed415313b000abd79dfef83d4b1b}
+      \strng{bibnamehash}{fa04ed415313b000abd79dfef83d4b1b}
+      \strng{authorbibnamehash}{fa04ed415313b000abd79dfef83d4b1b}
+      \strng{authornamehash}{fa04ed415313b000abd79dfef83d4b1b}
+      \strng{authorfullhash}{fa04ed415313b000abd79dfef83d4b1b}
+      \field{sortinit}{D}
+      \field{sortinithash}{6f385f66841fb5e82009dc833c761848}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Applied Soft Computing Journal,}
+      \field{title}{Investigating the Impact of Data Normalization on Classification Performance}
+      \field{year}{2019}
+    \endentry
+    \entry{virusShare1}{article}{}
+      \name{author}{1}{}{%
+        {{hash=bb93c4d833a217c4328c3605828249e7}{%
+           family={Forensics},
+           familyi={F\bibinitperiod},
+           given={Corvus},
+           giveni={C\bibinitperiod}}}%
+      }
+      \strng{namehash}{bb93c4d833a217c4328c3605828249e7}
+      \strng{fullhash}{bb93c4d833a217c4328c3605828249e7}
+      \strng{bibnamehash}{bb93c4d833a217c4328c3605828249e7}
+      \strng{authorbibnamehash}{bb93c4d833a217c4328c3605828249e7}
+      \strng{authornamehash}{bb93c4d833a217c4328c3605828249e7}
+      \strng{authorfullhash}{bb93c4d833a217c4328c3605828249e7}
+      \field{extraname}{1}
+      \field{sortinit}{F}
+      \field{sortinithash}{2638baaa20439f1b5a8f80c6c08a13b4}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Virus Share}
+      \field{title}{VirusShare\_00001}
+      \field{year}{2012}
+    \endentry
+    \entry{virusShare5}{article}{}
+      \name{author}{1}{}{%
+        {{hash=bb93c4d833a217c4328c3605828249e7}{%
+           family={Forensics},
+           familyi={F\bibinitperiod},
+           given={Corvus},
+           giveni={C\bibinitperiod}}}%
+      }
+      \strng{namehash}{bb93c4d833a217c4328c3605828249e7}
+      \strng{fullhash}{bb93c4d833a217c4328c3605828249e7}
+      \strng{bibnamehash}{bb93c4d833a217c4328c3605828249e7}
+      \strng{authorbibnamehash}{bb93c4d833a217c4328c3605828249e7}
+      \strng{authornamehash}{bb93c4d833a217c4328c3605828249e7}
+      \strng{authorfullhash}{bb93c4d833a217c4328c3605828249e7}
+      \field{extraname}{2}
+      \field{sortinit}{F}
+      \field{sortinithash}{2638baaa20439f1b5a8f80c6c08a13b4}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Virus Share}
+      \field{title}{VirusShare\_00005}
+      \field{year}{2012}
+    \endentry
+    \entry{virusShare451}{article}{}
+      \name{author}{1}{}{%
+        {{hash=bb93c4d833a217c4328c3605828249e7}{%
+           family={Forensics},
+           familyi={F\bibinitperiod},
+           given={Corvus},
+           giveni={C\bibinitperiod}}}%
+      }
+      \strng{namehash}{bb93c4d833a217c4328c3605828249e7}
+      \strng{fullhash}{bb93c4d833a217c4328c3605828249e7}
+      \strng{bibnamehash}{bb93c4d833a217c4328c3605828249e7}
+      \strng{authorbibnamehash}{bb93c4d833a217c4328c3605828249e7}
+      \strng{authornamehash}{bb93c4d833a217c4328c3605828249e7}
+      \strng{authorfullhash}{bb93c4d833a217c4328c3605828249e7}
+      \field{extraname}{3}
+      \field{sortinit}{F}
+      \field{sortinithash}{2638baaa20439f1b5a8f80c6c08a13b4}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Virus Share}
+      \field{title}{VirusShare\_00451}
+      \field{year}{2022}
+    \endentry
+    \entry{statcounter}{article}{}
+      \name{author}{1}{}{%
+        {{hash=c722da926d03dcd371ba62ed096d4d7a}{%
+           family={GlobalStats},
+           familyi={G\bibinitperiod},
+           prefix={statcounter},
+           prefixi={s\bibinitperiod}}}%
+      }
+      \strng{namehash}{c722da926d03dcd371ba62ed096d4d7a}
+      \strng{fullhash}{c722da926d03dcd371ba62ed096d4d7a}
+      \strng{bibnamehash}{c722da926d03dcd371ba62ed096d4d7a}
+      \strng{authorbibnamehash}{c722da926d03dcd371ba62ed096d4d7a}
+      \strng{authornamehash}{c722da926d03dcd371ba62ed096d4d7a}
+      \strng{authorfullhash}{c722da926d03dcd371ba62ed096d4d7a}
+      \field{sortinit}{G}
+      \field{sortinithash}{32d67eca0634bf53703493fb1090a2e8}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Desktop Windows Version Market Share Worldwide}
+      \field{year}{2012}
+    \endentry
+    \entry{ember}{article}{}
+      \name{author}{1}{}{%
+        {{hash=ba425a53b7e84e362cba6f47b7d7912c}{%
+           family={Hyrum\bibnamedelimb S.\bibnamedelimi Anderson},
+           familyi={H\bibinitperiod\bibinitdelim S\bibinitperiod\bibinitdelim A\bibinitperiod},
+           given={Phil\bibnamedelima Roth},
+           giveni={P\bibinitperiod\bibinitdelim R\bibinitperiod}}}%
+      }
+      \strng{namehash}{ba425a53b7e84e362cba6f47b7d7912c}
+      \strng{fullhash}{ba425a53b7e84e362cba6f47b7d7912c}
+      \strng{bibnamehash}{ba425a53b7e84e362cba6f47b7d7912c}
+      \strng{authorbibnamehash}{ba425a53b7e84e362cba6f47b7d7912c}
+      \strng{authornamehash}{ba425a53b7e84e362cba6f47b7d7912c}
+      \strng{authorfullhash}{ba425a53b7e84e362cba6f47b7d7912c}
+      \field{sortinit}{H}
+      \field{sortinithash}{23a3aa7c24e56cfa16945d55545109b5}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{EMBER: An Open Dataset for Training Static PE Malware Machine Learning Models}
+      \field{year}{2018}
+    \endentry
+    \entry{lester}{misc}{}
+      \name{author}{1}{}{%
+        {{hash=258c0a16fb995eab87676c375a2e35df}{%
+           family={Lester},
+           familyi={L\bibinitperiod},
+           given={Micheal},
+           giveni={M\bibinitperiod}}}%
+      }
+      \strng{namehash}{258c0a16fb995eab87676c375a2e35df}
+      \strng{fullhash}{258c0a16fb995eab87676c375a2e35df}
+      \strng{bibnamehash}{258c0a16fb995eab87676c375a2e35df}
+      \strng{authorbibnamehash}{258c0a16fb995eab87676c375a2e35df}
+      \strng{authornamehash}{258c0a16fb995eab87676c375a2e35df}
+      \strng{authorfullhash}{258c0a16fb995eab87676c375a2e35df}
+      \field{sortinit}{L}
+      \field{sortinithash}{7c47d417cecb1f4bd38d1825c427a61a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Practical Security Analysis}
+      \field{title}{PE Malware Machine Learning Dataset}
+      \field{year}{2021}
+    \endentry
+  \enddatalist
+\endrefsection
+\endinput
+

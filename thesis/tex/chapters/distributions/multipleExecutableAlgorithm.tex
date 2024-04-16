@@ -1,0 +1,26 @@
+%! Author = jacobcarlson
+%! Date = 4/26/23
+
+\begin{algorithm}
+    \caption{Multiple Executable Distribution Algorithm}
+    \begin{algorithmic}
+        \FOR{$op$ in opcode set}
+            \STATE $distribution_{op} \gets 0$ vector the size of the number of bins
+        \ENDFOR
+        \FOR{executable $l$ = $1$ to $L$}
+            \FOR{$op$ in opcode set}
+                \STATE $N_{l\_op} \gets $ number of op occurrences in $l$
+                \FOR{each occurrence of $op$ in sequence = $1$ to $(N_{l\_op} - 1)$}
+                    \STATE $jump_{l\_op\_k} = op_{l\_k+1} - op_{l_k}$
+                    \STATE $distribution_{op}[\;\phi(jump_{l\_op\_k})\;]$ += $1$
+                \ENDFOR
+            \ENDFOR
+        \ENDFOR
+        \FOR{$op$ in opcode set}
+            \STATE $total\_jumps_{op} \gets \sum_{b=1}^B distribution_{op}[b]$
+            \FOR{each bin $b$ in $distribution_{op}$ = $1$ to $B$}
+                \STATE $distribution_{op}[b]$ \textbackslash= $total\_jumps_{op}$
+            \ENDFOR
+        \ENDFOR
+    \end{algorithmic}\label{alg:algorithm_multiple}
+\end{algorithm}
